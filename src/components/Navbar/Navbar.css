@@ -1,0 +1,16 @@
+.Navbar {
+    display: flex;
+    border: 2px solid green;
+}
+
+.Navbar .button-section {
+    display: flex;
+    gap: 1em;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.Navbar .level-section {
+    right: 0;
+    margin-left: auto;
+}
