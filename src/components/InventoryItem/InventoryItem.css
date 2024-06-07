@@ -1,0 +1,33 @@
+.InventoryItem {
+    border: 2px solid red;
+}
+
+.InventoryItem .item-content {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 0.25em;
+}
+
+.InventoryItem .item-content .top-section {
+    display: flex;
+    gap: 1em;
+    padding: 0.25em;
+    align-items: center;
+}
+
+.InventoryItem .item-content .top-section .weight-cost-data {
+    display: flex;
+    gap: 0.5em;
+    right: 0;
+    margin-left: auto;
+}
+
+.InventoryItem .item-content .bottom-section {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 0.25em;
+}
+
+.InventoryItem .item-name {
+    font-size: 1.25rem;
+}
