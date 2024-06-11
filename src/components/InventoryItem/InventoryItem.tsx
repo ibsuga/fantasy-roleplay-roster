@@ -14,11 +14,15 @@ const InventoryItem = () => {
                 </div>
 
                 <div className='bottom-section'>
-                    <div>+SB +1</div>
-                    <div>Very Short</div>
-                    <div>Fencing</div>
-                    <div>Scarce</div>
-                    <div>Fast, Impale, Precise, Undamaging</div>
+                    <div className='top-stats'>
+                        <div className='item-stat'>+SB +1</div>
+                        <div className='item-stat'>Very Short</div>
+                        <div className='item-stat'>Fencing</div>
+                        <div className='item-stat'>Scarce</div>
+                    </div>
+                    <div className='bottom-stats'>
+                        <div className='item-stat'>Fast, Impale, Precise, Undamaging</div>
+                    </div>
                 </div>
             </div>
         </div>

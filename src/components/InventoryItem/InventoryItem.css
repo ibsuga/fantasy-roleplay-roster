@@ -1,5 +1,12 @@
 .InventoryItem {
-    border: 2px solid red;
+    background: hsla(0, 0%, 20%, 0.85);
+    border-radius: 2px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid hsla(0, 0%, 100%, 0.3);
+    font-family: 'Quicksand';
+    font-size: 14px;
 }
 
 .InventoryItem .item-content {
@@ -24,10 +31,26 @@
 
 .InventoryItem .item-content .bottom-section {
     display: grid;
-    grid-template-columns: auto auto;
     padding: 0.25em;
+    gap: 0.25em;
+}
+
+.InventoryItem .item-content .bottom-section .top-stats {
+    display: flex;
+    gap: 3em;
 }
 
 .InventoryItem .item-name {
     font-size: 1.25rem;
+}
+
+.InventoryItem .item-stat {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: hsl(0, 0%, 90%);
+    padding: 0 0.25em;
 }
