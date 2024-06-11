@@ -1,0 +1,42 @@
+.CharacterSlots {
+    display: grid;
+    grid-template-columns: auto auto;
+    height: 100%;
+}
+
+/*All Armor slots*/
+.CharacterSlots .armor-slots {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+/* Single slot in armor section*/
+.CharacterSlots .armor-slots .armor-slot {
+    display: grid;
+    justify-content: center;
+}
+
+.CharacterSlots .armor-slots .armor-slot div {
+    display: flex;
+    align-items: center;
+    outline: 2px solid blueviolet;
+    width: 3em;
+    height: 3em;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.CharacterSlots .consumable-slots .consumable-slot {
+    display: grid;
+    justify-content: center;
+}
+
+.CharacterSlots .consumable-slots .consumable-slot div {
+    display: flex;
+    align-items: center;
+    outline: 2px solid blueviolet;
+    width: 3em;
+    height: 3em;
+    text-align: center;
+    margin-bottom: 1em;
+}
