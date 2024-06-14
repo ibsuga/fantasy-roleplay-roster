@@ -1,0 +1,36 @@
+.Characteristics {
+    margin: 1em;
+}
+
+.Characteristics .characteristics-table {
+    outline: 2px solid red;
+    padding: 0.5em;
+
+    table-layout: fixed;
+    width: 30vw;
+}
+
+.Characteristics table.characteristics-table td,
+.Characteristics table.characteristics-table th {
+    border: 1px solid red;
+    width: 2em;
+}
+
+.Characteristics table.characteristics-table td input {
+    width: 100%;
+    box-sizing: border-box;
+    outline: 1px solid tomato;
+    text-align: center;
+}
+
+.Characteristics table tr>*:first-child {
+    border: none;
+    width: 3.5em;
+    text-align: center;
+}
+
+.Characteristics .table-title {
+    display: grid;
+    place-content: center;
+    margin: 0.5em;
+}

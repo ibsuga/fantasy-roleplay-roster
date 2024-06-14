@@ -1,0 +1,18 @@
+.Stats .player-points {
+    display: flex;
+    gap: 1em;
+    margin: 1em;
+}
+
+.Stats .player-points div {
+    display: grid;
+    width: 3em;
+    height: 3em;
+    outline: 2px solid green;
+}
+
+.Stats .player-points input {
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+}

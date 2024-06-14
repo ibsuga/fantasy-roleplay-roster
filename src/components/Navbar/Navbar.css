@@ -1,6 +1,7 @@
 .Navbar {
     display: flex;
     border: 2px solid green;
+    height: 3em;
 }
 
 .Navbar .button-section {
