@@ -4,7 +4,10 @@ import './Navbar.css';
 const Navbar = () => {
     return (
         <div className='Navbar'>
-            <div className='character-name'>Epic Adventurer</div>
+            <div className='character-name'>
+                <div className="character-name-shadow">William Hodwall</div>
+                <span>William Hodwall</span>
+            </div>
             <div className='button-section'>
                 <div className='navbar-button'>Character</div>
                 <div className='navbar-button'>Skills</div>

@@ -1,10 +1,19 @@
+import Character from './pages/Character/Character';
+import Navbar from './components/Navbar/Navbar';
+import background from './assets/young_rathdiin.jpg';
+import background_b from './assets/bash1.png';
 import './App.css'
-import Home from './pages/Home/Home'
+
 
 function App() {
-
   return (
-    <Home />
+    <div className="App">
+      <div className="app-bg" style={{ backgroundImage: `url(${background})` }} />
+      <div className="app-content">
+        <Navbar />
+        <Character />
+      </div>
+    </div>
   )
 }
 

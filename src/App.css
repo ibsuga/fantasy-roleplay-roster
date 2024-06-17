@@ -1,1 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Abel&family=IM+Fell+DW+Pica:ital@0;1&family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abel:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+
+#root {
+    --font-headers: 'Rowdies';
+    --font-default: 'Quicksand';
+    --font-size-default: .9rem;
+    --font-color-default: hsl(210, 5%, 75%);
+    --font-color-default-faint: hsl(210, 5%, 55%);
+    --font-color-default-highlight: hsl(210, 5%, 80%);
+    --background-color: hsl(210, 5%, 15%);
+    --highlight-color-brown: hsl(50, 25%, 45%);
+}
+
+html,
+body,
+#root,
+.App {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.App {
+    display: flex;
+    background-color: var(--background-color);
+}
+
+.app-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: cover;
+    mask-image: url(./assets/mask.png);
+    mask-repeat: no-repeat;
+    mask-size: cover;
+    mask-mode: alpha;
+    -webkit-mask-image: url(./assets/mask.png);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: cover;
+    -webkit-mask-mode: alpha;
+    filter: grayscale(70%);
+    opacity: .55;
+    pointer-events: none;
+}
+
+.app-content {
+    flex: 1;
+    padding: 20px;
+}

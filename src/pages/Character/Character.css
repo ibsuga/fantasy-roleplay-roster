@@ -1,0 +1,21 @@
+.Character {
+    display: grid;
+    grid-template-rows: min-content auto;
+}
+
+.Character .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.Character .content .equipment-section {
+    border: 2px solid blue;
+}
+
+.Character .content .character-section {
+    border: 2px solid red;
+}
+
+.Character .content .status-section {
+    border: 2px solid gold;
+}
