@@ -1,56 +1,118 @@
 .InventoryItem {
-    background: hsla(0, 0%, 20%, 0.85);
+    background: hsla(0, 0%, 0%, 0.5);
     border-radius: 2px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border: 1px solid hsla(0, 0%, 100%, 0.3);
+    border: 1px solid hsla(0, 0%, 0%, 0.5);
     font-family: 'Quicksand';
     font-size: 14px;
-}
-
-.InventoryItem .item-content {
     display: grid;
     grid-template-rows: auto auto;
-    gap: 0.25em;
+    user-select: none;
 }
 
-.InventoryItem .item-content .top-section {
+.InventoryItem:hover {
+    transform: translateY(-2px) scale(1.01);
+    transition: transform 0.3s;
+}
+
+.InventoryItem>.header {
     display: flex;
-    gap: 1em;
+    gap: 0.5em;
     padding: 0.25em;
     align-items: center;
 }
 
-.InventoryItem .item-content .top-section .weight-cost-data {
+.InventoryItem>.header .item-name {
+    font-family: var(--font-headers);
+    font-size: var(--font-size-headers-small);
+    color: var(--font-color-default);
+}
+
+.InventoryItem>.header .item-stats {
     display: flex;
     gap: 0.5em;
     right: 0;
     margin-left: auto;
+    color: var(--font-color-default);
 }
 
-.InventoryItem .item-content .bottom-section {
-    display: grid;
-    padding: 0.25em;
+.InventoryItem>.header .item-stats>* {
+    display: flex;
+    align-items: center;
     gap: 0.25em;
 }
 
-.InventoryItem .item-content .bottom-section .top-stats {
+.InventoryItem>.content {
+    display: grid;
+    grid-template-rows: min-content min-content;
+    gap: 0.5em;
+}
+
+.InventoryItem>.content .traits {
     display: flex;
-    gap: 3em;
+    gap: 0.5em;
+    width: 100%;
+    color: var(--font-color-default-faint);
+    padding: 0.25em;
+    font-style: italic;
 }
 
-.InventoryItem .item-name {
-    font-size: 1.25rem;
+.InventoryItem>.content .item-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: hsla(0, 0%, 0%, 0.3);
+    padding: 0.25em 1em;
 }
 
-.InventoryItem .item-stat {
-    background: rgba(255, 255, 255, 0.2);
+
+
+.InventoryItem>.content .item-stats .stat {
     border-radius: 2px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: hsl(0, 0%, 90%);
+    color: var(--font-color-default);
     padding: 0 0.25em;
+}
+
+.InventoryItem>.content .item-stats .stat .label {
+    font-size: 0.6em;
+    color: hsl(210, 5%, 40%);
+}
+
+/*Icons*/
+.InventoryItem>.header .item-stats {
+    font-size: 1.15em;
+}
+
+.InventoryItem>.header .item-stats>div {
+    display: flex;
+    align-items: end;
+}
+
+.InventoryItem>.header .item-stats>div.encumbrance {
+    align-items: center;
+}
+
+.InventoryItem>.header .item-stats svg {
+    font-size: 1em;
+}
+
+.InventoryItem>.header .item-stats .encumbrance svg {
+    color: hsl(0, 0%, 40%);
+    font-size: 0.9em;
+}
+
+.InventoryItem>.header .item-stats .gold svg {
+    color: hsl(50, 50%, 40%);
+}
+
+.InventoryItem>.header .item-stats .silver svg {
+    color: hsl(0, 0%, 65%);
+}
+
+.InventoryItem>.header .item-stats .bronze svg {
+    color: hsl(34, 56%, 34%);
 }

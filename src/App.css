@@ -8,6 +8,7 @@
     --font-headers: 'Rowdies';
     --font-default: 'Quicksand';
     --font-size-default: .9rem;
+    --font-size-headers-small: 1rem;
     --font-color-default: hsl(210, 5%, 75%);
     --font-color-default-faint: hsl(210, 5%, 55%);
     --font-color-default-highlight: hsl(210, 5%, 80%);
@@ -50,4 +51,8 @@ body,
 .app-content {
     flex: 1;
     padding: 20px;
+}
+
+.spaced {
+    margin-right: .5em;
 }

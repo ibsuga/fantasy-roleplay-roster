@@ -3,19 +3,17 @@
     grid-template-rows: min-content auto;
 }
 
-.Character .content {
+.Character>.content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 1em;
 }
 
-.Character .content .equipment-section {
-    border: 2px solid blue;
-}
 
-.Character .content .character-section {
+.Character>.content .character-section {
     border: 2px solid red;
 }
 
-.Character .content .status-section {
+.Character>.content .status-section {
     border: 2px solid gold;
 }

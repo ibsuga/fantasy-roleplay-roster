@@ -21,6 +21,7 @@
     transform: rotateZ(-10deg);
     opacity: .15;
     user-select: none;
+    pointer-events: none;
 }
 
 .Navbar .button-section {
@@ -36,7 +37,6 @@
     /* color: var(--font-color-default-highlight); */
     transition: color .3s;
     cursor: pointer;
-
 }
 
 .Navbar .level-section {

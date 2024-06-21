@@ -1,5 +1,4 @@
 .Inventory {
-    margin: 1em;
     display: grid;
     grid-template-columns: min-content auto;
     grid-template-rows: auto auto;
@@ -11,36 +10,38 @@
     flex-direction: column;
     grid-column-start: 1;
     grid-row-start: 2;
-    gap: 0.2em;
+    gap: 0.5em;
 }
 
 .Inventory .filter-bar span {
-    background: rgba(30, 30, 30, 0.80);
-    border-radius: 2px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: hsl(0, 0%, 90%);
-
-    padding: 0.15em 0.5em;
+    font-size: 2em;
+    color: var(--font-color-default-highlight);
+    transition: 0.3s;
+    cursor: pointer;
+    user-select: none;
 }
 
-.Inventory .add-item-button span {
-    background: rgba(30, 30, 30, 0.80);
-    border-radius: 2px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: hsl(0, 0%, 90%);
-
-    padding: 0.15em 0.5em;
+.Inventory .filter-bar span:hover {
+    color: var(--highlight-color-brown);
 }
 
-.Inventory .add-item-button {
+.Inventory .tools-bar span {
+    color: var(--font-color-default-faint);
+    font-family: var(--font-default);
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.Inventory .tools-bar span:hover {
+    color: var(--highlight-color-brown);
+}
+
+.Inventory .tools-bar {
     grid-column-start: 2;
     grid-row-start: 1;
+    text-align: end;
 }
 
 .Inventory .items {
