@@ -7,6 +7,7 @@
 #root {
     --font-headers: 'Rowdies';
     --font-default: 'Quicksand';
+    --font-labels: 'Homemade Apple';
     --font-size-default: .9rem;
     --font-size-headers-small: 1rem;
     --font-color-default: hsl(210, 5%, 75%);
@@ -49,8 +50,11 @@ body,
 }
 
 .app-content {
+    display: flex;
+    flex-direction: column;
     flex: 1;
     padding: 20px;
+    z-index: 1;
 }
 
 .spaced {

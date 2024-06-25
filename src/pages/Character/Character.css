@@ -1,19 +1,14 @@
 .Character {
     display: grid;
-    grid-template-rows: min-content auto;
-}
-
-.Character>.content {
-    display: grid;
+    flex: 1;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1em;
 }
 
-
-.Character>.content .character-section {
+/* .Character .character-section {
     border: 2px solid red;
-}
+} */
 
-.Character>.content .status-section {
+.Character .status-section {
     border: 2px solid gold;
 }

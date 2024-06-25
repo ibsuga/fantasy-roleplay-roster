@@ -1,22 +1,124 @@
 .CharacterSlots {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 2fr 3fr;
     height: 100%;
+    font-size: 1.2em;
 }
 
 /*All Armor slots*/
 .CharacterSlots .armor-slots {
-    display: grid;
-    grid-template-columns: auto auto;
+    position: relative;
 }
 
-/* Single slot in armor section*/
+.CharacterSlots .armor-slots img.silhouette {
+    display: flex;
+    opacity: 0.6;
+    position: absolute;
+    max-height: 35em;
+    padding-left: 2em;
+    padding-top: 1em;
+}
+
+.CharacterSlots .armor-slots .armor-slot.head {
+    top: 1em;
+    left: 8em;
+}
+
+.CharacterSlots .armor-slots .armor-slot.right-arm {
+    top: 14em;
+    left: 1em;
+}
+
+.CharacterSlots .armor-slots .armor-slot.left-leg {
+    top: 27em;
+    left: 13em;
+}
+
+.CharacterSlots .armor-slots .armor-slot.body {
+    top: 9em;
+    left: 8em;
+}
+
+.CharacterSlots .armor-slots .armor-slot.left-arm {
+    top: 14em;
+    left: 15em;
+}
+
+.CharacterSlots .armor-slots .armor-slot.right-leg {
+    top: 27em;
+    left: 3em;
+}
+
+.CharacterSlots .armor-slots .armor-slot.shield {
+    top: 5em;
+    left: 15em;
+}
+
+
 .CharacterSlots .armor-slots .armor-slot {
+    position: absolute;
+    color: var(--font-color-default-faint);
+    font-family: var(--font-default);
+    width: min-content;
     display: grid;
-    justify-content: center;
+    grid-template-rows: min-content min-content;
+    gap: 0.25em;
 }
 
-.CharacterSlots .armor-slots .armor-slot div {
+.CharacterSlots .armor-slots .armor-slot::after {
+    content: "";
+    display: inline-block;
+    justify-self: center;
+    position: absolute;
+    width: 3.1em;
+    height: 3.1em;
+    background-color: hsla(0, 0%, 0%, 0.65);
+    border: 2px solid hsl(213, 5%, 30%);
+    /* background-color: hsla(0, 0%, 25%, 0.5); */
+    transform: rotateZ(45deg);
+    /* border: 1px solid var(--font-color-default-faint); */
+    /* box-shadow: 0 0 10px 0 hsla(213, 5%, 55%, 0.2); */
+}
+
+.CharacterSlots .armor-slots .armor-slot input {
+    background-color: transparent;
+    border: unset;
+    outline: none;
+    caret-color: transparent;
+    color: var(--font-color-default);
+    font-family: var(--font-labels);
+    font-size: 2.5em;
+    height: 1.4em;
+    justify-self: center;
+    overflow: hidden;
+    width: 1.15em;
+    z-index: 1;
+    text-align: center;
+}
+
+.CharacterSlots .armor-slots .armor-slot input:focus {
+    color: var(--highlight-color-brown);
+}
+
+.CharacterSlots .armor-slots .armor-slot .label {
+    white-space: nowrap;
+    text-align: center;
+    font-size: var(--font-size-headers-small);
+}
+
+
+
+
+
+
+/* Single slot in armor section */
+/* .CharacterSlots .armor-slots .armor-slot {
+    display: grid;
+    position: absolute;
+    justify-content: center;
+} */
+
+/* .CharacterSlots .armor-slots .armor-slot div {
     display: flex;
     align-items: center;
     outline: 2px solid blueviolet;
@@ -24,7 +126,7 @@
     height: 3em;
     text-align: center;
     margin-bottom: 1em;
-}
+}  */
 
 .CharacterSlots .consumable-slots .consumable-slot {
     display: grid;
