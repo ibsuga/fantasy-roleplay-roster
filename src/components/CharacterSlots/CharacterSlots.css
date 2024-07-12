@@ -59,13 +59,15 @@
     position: absolute;
     color: var(--font-color-default-faint);
     font-family: var(--font-default);
-    width: min-content;
+    width: 4em;
+    height: min-content;
     display: grid;
     grid-template-rows: min-content min-content;
     gap: 0.25em;
+    font-size: 1.15rem;
 }
 
-.CharacterSlots .armor-slots .armor-slot::after {
+.CharacterSlots .armor-slots .armor-slot::before {
     content: "";
     display: inline-block;
     justify-self: center;
@@ -87,13 +89,19 @@
     caret-color: transparent;
     color: var(--font-color-default);
     font-family: var(--font-labels);
-    font-size: 2.5em;
-    height: 1.4em;
+    font-size: 2.25em;
+    height: 1.2em;
     justify-self: center;
     overflow: hidden;
     width: 1.15em;
     z-index: 1;
     text-align: center;
+    text-shadow: 1px 1px 4px rgb(0, 0, 0), 1px 1px 8px rgb(0, 0, 0);
+
+    padding-top: 0.6em;
+    /* background: tomato; */
+
+    /* outline: 1px solid blue; */
 }
 
 .CharacterSlots .armor-slots .armor-slot input:focus {
@@ -105,6 +113,33 @@
     text-align: center;
     font-size: var(--font-size-headers-small);
 }
+
+.CharacterSlots .armor-slots .armor-slot .slot-image {
+    position: absolute;
+    width: 6.5em;
+    height: min-content;
+    top: -1.6em;
+    left: -1.2em;
+    clip-path: polygon(16.67% 1px, 81.61% 1px, 82.44% 55.67%, 48.84% 92.95%, 16.33% 55.67%);
+}
+
+.CharacterSlots .armor-slots .armor-slot .slot-image img {
+    width: 5.5em;
+    opacity: .35;
+}
+
+.CharacterSlots .armor-slots .armor-slot .slot-image .slot-image-input-bg {
+    background-color: hsla(0, 0%, 20%, 0.8);
+    /* background-color: rgba(0, 0, 0, 0.7); */
+    /* box-shadow: 0 -6px 5px 0 rgba(0, 0, 0, 0.75); */
+    box-shadow: 0 -5px 7px 0 hsl(0, 0%, 20%);
+    height: 2.2em;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+
 
 
 
