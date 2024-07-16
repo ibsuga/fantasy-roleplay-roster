@@ -1,3 +1,4 @@
+import Banner from '../Banner/Banner';
 import './Stats.css';
 
 const Stats = () => {
@@ -9,22 +10,32 @@ const Stats = () => {
             </div>
 
             <div className='player-points'>
-                <div>
-                    <input type="text" maxLength={2} />
-                    <span>FATE</span>
-                </div>
-                <div>
-                    <input type="text" maxLength={2} />
-                    <span>FORTUNE</span>
-                </div>
-            </div>
-            <div className='player-points'>
+                <div>Fate</div>
+                <div>Fortune</div>
                 <div>RESILIENCE</div>
                 <div>RESOLVE</div>
             </div>
 
             <div className='player-status'>
-                <input type="text" />
+                <div className='status-psychology'>
+                    <span>PSYCHOLOGY</span>
+                    <div>
+                        <Banner />
+                        <Banner />
+                        <Banner />
+                        <Banner />
+                        <Banner />
+                        <Banner />
+                        <Banner />
+                        <Banner />
+                        <Banner />
+                        <Banner />
+                        <Banner />
+                        <Banner />
+                    </div>
+                </div>
+                <div>Corruption & Mutations</div>
+                <div>Conditions</div>
             </div>
         </div>
     )

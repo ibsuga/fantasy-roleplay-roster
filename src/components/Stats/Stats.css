@@ -1,18 +1,36 @@
-.Stats .player-points {
-    display: flex;
-    gap: 1em;
-    margin: 1em;
-}
-
-.Stats .player-points div {
-    display: grid;
-    width: 3em;
-    height: 3em;
-    outline: 2px solid green;
-}
-
-.Stats .player-points input {
-    box-sizing: border-box;
-    width: 100%;
+.Stats {
+    color: white;
     text-align: center;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100%;
+}
+
+.Stats .player-health {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.Stats .player-points {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.Stats .player-status {
+    display: grid;
+    grid-template-rows: min-content 1fr 1fr;
+}
+
+.Stats .player-status .status-psychology {
+    display: grid;
+    grid-template-rows: min-content auto;
+}
+
+.Stats .player-status .status-psychology>div {
+    padding: 0.5em;
+    padding-bottom: 1em;
+    display: flex;
+    overflow-x: scroll;
+    gap: 0.5em;
 }
