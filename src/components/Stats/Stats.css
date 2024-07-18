@@ -3,13 +3,78 @@
     text-align: center;
 
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr min-content;
+
     height: 100%;
 }
 
 .Stats .player-health {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+/*Wounds Section*/
+
+.Stats .player-health .player-wounds {
+    display: grid;
+    /* grid-template-rows: min-content 2fr 1fr; */
+    grid-template-rows: min-content auto 4em;
+}
+
+.Stats .player-health .player-wounds>span {
+    font-family: var(--font-headers);
+    align-self: center;
+}
+
+.Stats .player-health .player-wounds>input {
+    text-align: center;
+    font-family: var(--font-labels);
+    color: firebrick;
+    width: 90%;
+    font-size: 7em;
+    height: 0.9em;
+    justify-self: center;
+    padding-top: 26px;
+    background: none;
+    border: none;
+}
+
+.Stats .player-health .player-wounds>input:focus {
+    outline: none;
+    color: var(--highlight-color-brown);
+    caret-color: transparent;
+}
+
+/*Wounds table*/
+.Stats .player-health .player-wounds .wounds-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.Stats .player-health .player-wounds .wounds-table>span {
+    font-family: var(--font-default);
+    align-self: center;
+    font-size: 0.9em;
+}
+
+.Stats .player-health .player-wounds .wounds-table>input {
+    text-align: center;
+    font-family: var(--font-labels);
+    color: var(--font-color-default);
+    width: 90%;
+    height: 60%;
+    font-size: 2em;
+    justify-self: center;
+    padding-top: 6px;
+    background: none;
+    border: none;
+}
+
+.Stats .player-health .player-wounds .wounds-table>input:focus {
+    outline: none;
+    color: var(--highlight-color-brown);
+    caret-color: transparent;
 }
 
 .Stats .player-points {
@@ -22,14 +87,31 @@
     grid-template-rows: min-content 1fr 1fr;
 }
 
-.Stats .player-status .status-psychology {
-    display: grid;
-    grid-template-rows: min-content auto;
+/* Banner section titles*/
+.Stats .player-status .status-psychology>span,
+.Stats .player-status .status-corruption>span,
+.Stats .player-status .status-conditions>span {
+    font-family: var(--font-headers);
+    color: var(--font-color-default);
+    padding-bottom: 0.25em;
 }
 
-.Stats .player-status .status-psychology>div {
-    padding: 0.5em;
+/*Banner section containers*/
+.Stats .player-status .status-psychology,
+.Stats .player-status .status-corruption,
+.Stats .player-status .status-conditions {
+    display: grid;
+    grid-template-rows: min-content auto;
+    width: 100%;
+}
+
+/*Banner section banners*/
+.Stats .player-status .status-psychology>div,
+.Stats .player-status .status-corruption>div,
+.Stats .player-status .status-conditions>div {
     padding-bottom: 1em;
+    padding-left: 1em;
+    justify-content: space-evenly;
     display: flex;
     overflow-x: scroll;
     gap: 0.5em;
