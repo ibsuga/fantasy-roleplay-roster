@@ -51,8 +51,7 @@
 .Banner input {
     font-family: var(--font-labels);
     font-size: 4em;
-    width: 90%;
-    height: 90%;
+
     background: none;
     border: none;
     text-align: center;

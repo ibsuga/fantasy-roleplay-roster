@@ -9,7 +9,6 @@ import ItemSlot from '../ItemSlot/ItemSlot';
 const CharacterSlots = () => {
     return (
         <div className="CharacterSlots">
-
             <div className='consumable-slots'>
                 <ItemSlot label="Item" image={LifeElixir} />
                 <ItemSlot label="Item" image={LifeElixir} />

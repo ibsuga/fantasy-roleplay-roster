@@ -7,28 +7,63 @@ const Stats = () => {
             <div className='player-health'>
                 <div className='player-wounds'>
                     <span>WOUNDS</span>
-                    <input type="text" maxLength={2} />
+                    <input type="text" maxLength={2} placeholder='-' />
                     <div className='wounds-table'>
                         <span>SB</span>
                         <span>TB+2</span>
                         <span>WPB</span>
                         <span>Hardy</span>
                         <span>Max.</span>
-                        <input type="text" maxLength={2} />
-                        <input type="text" maxLength={2} />
-                        <input type="text" maxLength={2} />
-                        <input type="text" maxLength={2} />
-                        <input type="text" maxLength={2} />
+                        <input type="text" maxLength={2} placeholder='-' />
+                        <input type="text" maxLength={2} placeholder='-' />
+                        <input type="text" maxLength={2} placeholder='-' />
+                        <input type="text" maxLength={2} placeholder='-' />
+                        <input type="text" maxLength={2} placeholder='-' />
                     </div>
                 </div>
                 <div>CRITICAL WOUNDS</div>
             </div>
 
             <div className='player-points'>
-                <div>FATE</div>
-                <div>FORTUNE</div>
-                <div>RESILIENCE</div>
-                <div>RESOLVE</div>
+                <div>
+
+                    <span>FATE</span>
+                    <div className='points-table'>
+                        <span>Max.</span>
+                        <span>Current</span>
+                        <input type="text" maxLength={2} placeholder='-' />
+                        <input type="text" maxLength={2} placeholder='-' />
+                    </div>
+
+                </div>
+                <div>
+                    <span>RESILIENCE</span>
+                    <div className='points-table'>
+                        <span>Max.</span>
+                        <span>Current</span>
+                        <input type="text" maxLength={2} placeholder='-' />
+                        <input type="text" maxLength={2} placeholder='-' />
+                    </div>
+                </div>
+                <div>
+                    <span>FORTUNE</span>
+                    <div className='points-table'>
+                        <span>Max.</span>
+                        <span>Current</span>
+                        <input type="text" maxLength={2} placeholder='-' />
+                        <input type="text" maxLength={2} placeholder='-' />
+                    </div>
+                </div>
+                <div>
+                    <span>RESOLVE</span>
+                    <div className='points-table'>
+                        <span>Max.</span>
+                        <span>Current</span>
+                        <input type="text" maxLength={2} placeholder='-' />
+                        <input type="text" maxLength={2} placeholder='-' />
+                    </div>
+                </div>
+
             </div>
 
 
@@ -65,6 +100,7 @@ const Stats = () => {
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }

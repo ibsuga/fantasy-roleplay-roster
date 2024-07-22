@@ -18,6 +18,8 @@ const Inventory = () => {
                 <InventoryItem />
                 <InventoryItem />
                 <InventoryItem />
+                <InventoryItem />
+                <InventoryItem />
             </div>
         </div>
     )

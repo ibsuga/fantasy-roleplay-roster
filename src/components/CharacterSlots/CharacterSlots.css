@@ -1,84 +1,83 @@
 .CharacterSlots {
     display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: 35% auto;
     height: 100%;
     font-size: 1.2em;
+    /* border-left: 2px solid hsl(0, 0%, 55%); */
+    border-left: 4px dotted hsla(0, 0%, 55%, 0.35);
+    border-right: 4px dotted hsla(0, 0%, 55%, 0.35);
+
+    box-shadow: 0px 20px 20px 0 hsla(0, 0%, 0%, 0.55);
+
+
+    justify-items: center;
 }
 
+/*CONSUMABLES*/
+.CharacterSlots .consumable-slots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75em 0em;
+    height: min-content;
+    user-select: none;
+    margin-top: 2em;
+    padding: 1em;
+}
 
+.CharacterSlots .consumable-slots .ItemSlot {
+    font-size: 0.9rem;
+}
 
-/*All Armor slots*/
+/*ARMOR*/
 .CharacterSlots .armor-slots {
     user-select: none;
+    font-size: 0.88rem;
+    width: 20em;
     position: relative;
-    border-right: 2px solid rgb(143, 143, 143);
-
 }
 
-.CharacterSlots .armor-slots img.silhouette {
-    display: flex;
+.CharacterSlots .armor-slots .silhouette {
     opacity: 0.6;
+    width: 100%;
     position: absolute;
-    max-height: 35em;
-    padding-left: 2em;
-    padding-top: 1em;
 }
 
 .CharacterSlots .armor-slots .ItemSlot {
     position: absolute;
+    font-size: 1.2em;
 }
 
 .CharacterSlots .armor-slots .ItemSlot:nth-child(2) {
-    top: 1em;
-    left: 8em;
+    top: 1.5em;
+    left: 6em;
 }
 
 .CharacterSlots .armor-slots .ItemSlot:nth-child(3) {
     top: 9em;
-    left: 8em;
+    left: 6em;
 }
 
 .CharacterSlots .armor-slots .ItemSlot:nth-child(4) {
     top: 14em;
-    left: 15em;
+    left: 12em;
 }
 
 .CharacterSlots .armor-slots .ItemSlot:nth-child(5) {
     top: 14em;
-    left: 1em;
+    left: -0.5em;
 }
 
 .CharacterSlots .armor-slots .ItemSlot:nth-child(6) {
-    top: 27em;
-    left: 13em;
+    top: 29em;
+    left: 10em;
 }
 
 .CharacterSlots .armor-slots .ItemSlot:nth-child(7) {
-    top: 27em;
-    left: 3em;
+    top: 29em;
+    left: 2em;
 }
 
 .CharacterSlots .armor-slots .ItemSlot:nth-child(8) {
     top: 5em;
-    left: 15em;
-}
-
-
-.CharacterSlots .consumable-slots {
-    user-select: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75em;
-    height: min-content;
-    margin-top: 2em;
-    width: 5em;
-    padding: 1em;
-    border-left: 2px solid rgb(143, 143, 143);
-    /* box-shadow: inset 140px 0px 50px 10px rgba(0, 0, 0, 0.25);
-     */
-}
-
-
-.CharacterSlots .consumable-slots .ItemSlot {
-    font-size: 0.9rem;
+    left: 12em;
 }
