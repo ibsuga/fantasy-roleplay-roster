@@ -1,15 +1,76 @@
 .Stats {
     display: grid;
-    grid-template-rows: 1fr 1fr min-content;
+    grid-template-rows: min-content min-content auto;
     height: 100%;
     text-align: center;
 
-    color: white;
+    color: var(--font-color-default);
 }
 
 .Stats .player-health {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+
+
+.Stats .stats-table input:last-of-type {
+    border-left: 2px dotted hsla(213, 5%, 40%);
+    color: var(--font-color-default);
+}
+
+.Stats .stats-table {
+    display: grid;
+    grid-template-rows: min-content auto;
+}
+
+.Stats .stats-table>span {
+    font-family: var(--font-default);
+    align-self: center;
+    font-size: 0.9em;
+    color: var(--font-color-default-faint);
+}
+
+.Stats .stats-table>input,
+.Stats .player-points .stats-table input {
+    text-align: center;
+    font-family: var(--font-labels);
+    color: hsl(210, 5%, 45%);
+    width: 90%;
+    height: 1em;
+    font-size: 2em;
+    justify-self: center;
+    padding-top: 6px;
+    background: none;
+    border: none;
+}
+
+.Stats .stats-table>input:focus,
+.Stats .player-points .stats-table input:focus {
+    outline: none;
+    color: var(--highlight-color-brown);
+    caret-color: transparent;
+}
+
+.Stats .stats-table.wounds {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.Stats .stats-table.fate-resilience {
+    grid-template-columns: 1fr 1fr;
+}
+
+.Stats .stats-value {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+}
+
+.Stats .stats-value svg {
+    font-size: 2em;
+    color: var(--font-color-default-faint);
 }
 
 /*Wounds Section*/
@@ -24,10 +85,10 @@
     box-shadow: inset 0px 0px 138px 0 hsla(0, 0%, 0%, 0.15);
 }
 
-.Stats .player-health .player-wounds .wounds-table input:last-of-type {
+/* .Stats .player-health .player-wounds .wounds-table input:last-of-type {
     border-left: 2px dotted hsla(213, 5%, 40%);
     color: var(--font-color-default);
-}
+} */
 
 .Stats .player-health .player-wounds>input {
     text-align: center;
@@ -49,7 +110,7 @@
 }
 
 /*Wounds table*/
-.Stats .player-health .player-wounds .wounds-table {
+/* .Stats .player-health .player-wounds .wounds-table {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: min-content auto;
@@ -63,7 +124,7 @@
 }
 
 .Stats .player-health .player-wounds .wounds-table>input,
-.Stats .player-points .points-table input {
+.Stats .player-points .stats-table input {
     text-align: center;
     font-family: var(--font-labels);
     color: hsl(210, 5%, 45%);
@@ -77,11 +138,11 @@
 }
 
 .Stats .player-health .player-wounds .wounds-table>input:focus,
-.Stats .player-points .points-table input:focus {
+.Stats .player-points .stats-table input:focus {
     outline: none;
     color: var(--highlight-color-brown);
     caret-color: transparent;
-}
+} */
 
 .Stats .player-points {
     display: grid;
@@ -97,21 +158,14 @@
     font-family: var(--font-headers);
 }
 
-.Stats .player-points .points-table {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
+/* .Stats .player-points .stats-table {
+    display: flex;
+    justify-content: space-evenly;
+} */
 
-.Stats .player-points .points-table span {
-    font-family: var(--font-default);
-    color: var(--font-color-default-faint);
-}
 
-.Stats .player-points .points-table input {
-    color: white;
-    /* background: none; */
-    /* border: none; */
-}
+
+
 
 .Stats .player-status {
     display: grid;
@@ -145,4 +199,19 @@
     overflow-x: scroll;
     padding-bottom: 1em;
     padding-left: 1em;
+}
+
+
+
+
+.Stats>div>div>span {
+    background-color: hsla(0, 0%, 0%, 0.2);
+}
+
+.Stats>div>div {
+    margin: 0.25em;
+    border-radius: 4px;
+    background: hsla(0, 0%, 0%, 0.2);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(5px);
 }

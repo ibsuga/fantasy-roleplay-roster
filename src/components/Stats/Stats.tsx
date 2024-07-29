@@ -1,4 +1,6 @@
 import Banner from '../Banner/Banner';
+import { FaRegCircle, FaCircle } from "react-icons/fa";
+import { LuCircleDashed } from "react-icons/lu";
 import './Stats.css';
 
 const Stats = () => {
@@ -8,7 +10,7 @@ const Stats = () => {
                 <div className='player-wounds'>
                     <span>WOUNDS</span>
                     <input type="text" maxLength={2} placeholder='-' />
-                    <div className='wounds-table'>
+                    <div className='stats-table wounds'>
                         <span>SB</span>
                         <span>TB+2</span>
                         <span>WPB</span>
@@ -26,26 +28,39 @@ const Stats = () => {
 
             <div className='player-points'>
                 <div>
-
                     <span>FATE</span>
-                    <div className='points-table'>
-                        <span>Max.</span>
-                        <span>Current</span>
-                        <input type="text" maxLength={2} placeholder='-' />
-                        <input type="text" maxLength={2} placeholder='-' />
+                    <div className='stats-value'>
+                        <FaCircle />
+                        <FaCircle />
+                        <FaRegCircle />
+                        <FaRegCircle />
+                        <LuCircleDashed />
+                    </div>
+                    <div className='stats-table fate-resilience'>
+                        <span>FATE</span>
+                        <span>FORTUNE</span>
+                        <input type="text" />
+                        <input type="text" />
                     </div>
 
                 </div>
                 <div>
                     <span>RESILIENCE</span>
-                    <div className='points-table'>
-                        <span>Max.</span>
-                        <span>Current</span>
-                        <input type="text" maxLength={2} placeholder='-' />
-                        <input type="text" maxLength={2} placeholder='-' />
+                    <div className='stats-value'>
+                        <FaCircle />
+                        <FaCircle />
+                        <FaRegCircle />
+                        <FaRegCircle />
+                        <LuCircleDashed />
+                    </div>
+                    <div className='stats-table fate-resilience'>
+                        <span>RESICIENCE</span>
+                        <span>RESOLVE</span>
+                        <input type="text" />
+                        <input type="text" />
                     </div>
                 </div>
-                <div>
+                {/* <div>
                     <span>FORTUNE</span>
                     <div className='points-table'>
                         <span>Max.</span>
@@ -62,7 +77,7 @@ const Stats = () => {
                         <input type="text" maxLength={2} placeholder='-' />
                         <input type="text" maxLength={2} placeholder='-' />
                     </div>
-                </div>
+                </div> */}
 
             </div>
 
