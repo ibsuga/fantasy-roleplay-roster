@@ -7,13 +7,13 @@ import './Character.css'
 const Character = () => {
     return (
         <div className="Character">
-            <div className='equipment-section'>
+            <div className='section'>
                 <Inventory />
             </div>
-            <div className='character-section'>
+            <div className='section'>
                 <CharacterSlots />
             </div>
-            <div className='status-section'>
+            <div className='section'>
                 <Stats />
             </div>
         </div>

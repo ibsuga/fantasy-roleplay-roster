@@ -1,15 +1,30 @@
 .Inventory {
     display: grid;
-    grid-template-columns: min-content auto;
-    grid-template-rows: min-content auto;
+    grid-template-columns: 2rem auto;
+    grid-template-rows: min-content min-content auto min-content;
     gap: 0.5em;
+    width: 100%;
+}
+
+.Inventory .title {
+    display: grid;
+    grid-column: 1/3;
+    grid-row-start: 1;
+    justify-content: center;
+    padding-bottom: 0.5em;
+}
+
+.Inventory .title span {
+    font-family: var(--font-headers);
+    color: var(--font-color-default);
+    font-size: 1.5em;
 }
 
 .Inventory .filter-bar {
     display: flex;
     flex-direction: column;
     grid-column-start: 1;
-    grid-row-start: 2;
+    grid-row-start: 3;
     gap: 0.5em;
 }
 
@@ -40,8 +55,17 @@
 
 .Inventory .tools-bar {
     grid-column-start: 2;
-    grid-row-start: 1;
+    grid-row-start: 2;
     text-align: end;
+}
+
+.Inventory .tools-bar input {
+    background: var(--background-color);
+    color: white;
+    border-radius: 5px;
+    border-color: black;
+    margin-right: 1em;
+    width: 80%;
 }
 
 .Inventory .items {
@@ -49,5 +73,50 @@
     flex-direction: column;
     gap: 0.5em;
     grid-column-start: 2;
-    grid-row-start: 2;
+    grid-row-start: 3;
+}
+
+.Inventory .inventory-bottom {
+    display: grid;
+    grid-template-rows: min-content auto;
+    grid-column: 1/3;
+    grid-row-start: 4;
+
+    outline: 2px solid red;
+}
+
+.Inventory .inventory-bottom .encumbrance {
+    height: 3em;
+}
+
+.Inventory .inventory-bottom .encumbrance svg {
+    color: white;
+    font-size: 2em;
+}
+
+.Inventory .inventory-bottom .wealth {
+    display: flex;
+}
+
+.Inventory .inventory-bottom .wealth div {
+    display: flex;
+    flex-direction: column;
+    height: 9em;
+    outline: 2px solid yellow;
+}
+
+.Inventory .inventory-bottom .wealth svg {
+    color: white;
+    font-size: 2em;
+}
+
+.Inventory .inventory-bottom .wealth input {
+    height: 100%;
+    width: 100%;
+    font-size: 3em;
+    box-sizing: border-box;
+    font-family: var(--font-labels);
+    color: var(--font-color-default);
+    background-color: var(--background-color);
+    border: none;
 }
