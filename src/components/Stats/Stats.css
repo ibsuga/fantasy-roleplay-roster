@@ -3,16 +3,14 @@
     grid-template-rows: min-content min-content auto;
     height: 100%;
     text-align: center;
-
     color: var(--font-color-default);
+
 }
 
 .Stats .player-health {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-
-
 
 .Stats .stats-table input:last-of-type {
     border-left: 2px dotted hsla(213, 5%, 40%);
