@@ -154,3 +154,42 @@
     caret-color: transparent;
     color: var(--highlight-color-brown);
 }
+
+
+/* CREATE ITEM DIALOG */
+.createItemDialog {
+    width: 40rem;
+    background-color: hsla(0, 0%, 10%, 0.75);
+    color: hsl(210, 5%, 75%);
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.createItemDialog .p-dialog-title {
+    font-size: 2rem;
+    font-family: 'Rowdies'
+}
+
+.createItemDialog .p-dialog-header-icons button {
+    color: hsl(210, 5%, 75%);
+}
+
+.createItemDialog .p-dialog-content {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Quicksand';
+    padding: 1rem 0;
+}
+
+.createItemDialog .p-dialog-content input {
+    background-color: transparent;
+    border: 1px solid hsl(210, 5%, 50%);
+    border-radius: 4px;
+    padding: 0.5rem;
+    color: hsl(210, 5%, 75%);
+}
+
+.createItemDialog .p-dialog-content input:focus {
+    outline: none;
+    border-color: white;
+}

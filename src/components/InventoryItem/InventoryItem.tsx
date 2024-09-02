@@ -1,18 +1,22 @@
 import './InventoryItem.css';
 import { FaWeightHanging } from "react-icons/fa";
-import { BiSolidCoin } from "react-icons/bi";
 
 
-const InventoryItem = () => {
+const InventoryItem = (props: {
+    name: string,
+    encumbrance: number,
+    traits?: string[],
+    damage: string,
+    range: string,
+    category: string,
+    availability: string,
+}) => {
     return (
         <div className="InventoryItem">
             <div className='header'>
-                <div className='item-name'>MILITARY FLAIL 2H</div>
+                <div className='item-name'>{props.name}</div>
                 <div className='item-stats'>
-                    <div className='encumbrance spaced'> 1 <FaWeightHanging /> </div>
-                    <div className='gold'> 1<BiSolidCoin /> </div>
-                    <div className='silver'> 2<BiSolidCoin /> </div>
-                    <div className='bronze'> 3<BiSolidCoin /> </div>
+                    <button>X</button>
                 </div>
             </div>
 
@@ -26,19 +30,19 @@ const InventoryItem = () => {
                 <div className='item-stats'>
                     <div className='stat'>
                         <div className="label">DAMAGE</div>
-                        <span>+SB +1</span>
+                        <span>{props.damage}</span>
                     </div>
                     <div className='stat'>
                         <div className="label">RANGE</div>
-                        <span>Very Short</span>
+                        <span>{props.range}</span>
                     </div>
                     <div className='stat'>
                         <div className="label">CATEGORY</div>
-                        <span>Fencing</span>
+                        <span>{props.range}</span>
                     </div>
                     <div className='stat'>
-                        <div className="label">AVAILABILITY</div>
-                        <span>Scarce</span>
+                        <div className="label">ENCUMBRANCE</div>
+                        <div className='encumbrance spaced'> {props.encumbrance} <FaWeightHanging /></div>
                     </div>
                 </div>
             </div>
