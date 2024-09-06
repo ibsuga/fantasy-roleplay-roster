@@ -6,7 +6,7 @@ const InventoryItem = (props: {
     name: string,
     encumbrance: number,
     traits?: string[],
-    damage: string,
+    damage: { value: number, useSB: boolean },
     range: string,
     category: string,
     availability: string,
@@ -30,7 +30,11 @@ const InventoryItem = (props: {
                 <div className='item-stats'>
                     <div className='stat'>
                         <div className="label">DAMAGE</div>
-                        <span>{props.damage}</span>
+
+                        {/* {props.damage.useSB && <span>+SB+{props.damage.value}</span>} */}
+
+                        <span>{props.damage.useSB ? '+SB+' : ''}</span>
+                        <span>{props.damage.value}</span>
                     </div>
                     <div className='stat'>
                         <div className="label">RANGE</div>
@@ -38,7 +42,7 @@ const InventoryItem = (props: {
                     </div>
                     <div className='stat'>
                         <div className="label">CATEGORY</div>
-                        <span>{props.range}</span>
+                        <span>{props.category}</span>
                     </div>
                     <div className='stat'>
                         <div className="label">ENCUMBRANCE</div>
