@@ -195,13 +195,16 @@
     border-color: white;
 }
 
-.p-dropdown {
+.p-dropdown,
+.p-multiselect {
     border: 1px solid hsl(210, 5%, 50%);
     border-radius: 4px;
     padding: 0.5rem;
 }
 
-.p-dropdown-items-wrapper {
+
+.p-dropdown-items-wrapper,
+.p-multiselect-items-wrapper {
     color: hsl(210, 5%, 75%);
     background-color: hsla(0, 0%, 10%, 0.75);
     font-family: 'Quicksand';
@@ -210,12 +213,18 @@
     border-top: none;
 }
 
-.p-dropdown-item {
+.p-dropdown-item,
+.p-multiselect-item {
     padding: 0.1rem 0.3rem;
 }
 
-.p-dropdown-item:hover {
+.p-dropdown-item:hover,
+.p-multiselect-item:hover {
     background-color: hsl(50, 25%, 45%);
     color: black;
+}
 
+.p-multiselect-close-icon,
+.p-checkbox-icon {
+    display: none;
 }

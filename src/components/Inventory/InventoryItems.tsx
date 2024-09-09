@@ -1,8 +1,9 @@
-import { GiCrocSword, GiChestArmor, GiPotionBall, GiPocketBow } from "react-icons/gi";
-import { useState } from "react";
 import { Dialog } from 'primereact/dialog';
 import { Dropdown } from 'primereact/dropdown';
+import { useState, useMemo } from "react";
+import { GiChestArmor, GiCrocSword, GiPocketBow, GiPotionBall } from "react-icons/gi";
 import InventoryItem from '../InventoryItem/InventoryItem';
+import { MultiSelect } from 'primereact/multiselect';
 
 
 export const InventoryItems = () => {
@@ -13,9 +14,39 @@ export const InventoryItems = () => {
     const [itemDamage, setItemDamage] = useState('');
     const [itemDamageSb, setItemDamageSb] = useState(false);
     const [itemRange, setItemRange] = useState('');
-    const [itemCategory, setItemCategory] = useState(null);
+    const [itemCategory, setItemCategory] = useState<any>(null);
     const [itemAvailability, setItemAvailability] = useState('');
+    const [itemQualities, setItemQualities] = useState('');
+    const [itemFlaws, setItemFlaws] = useState('');
     const [categoryFilter, setCategoryFilter] = useState('');
+    const [searchText, setSearchText] = useState('');
+
+
+    //Item qualities & flaws.
+    const { qualities_options, flaws_options } = useMemo(() => {
+        const qualities = {
+            'weapon': ['damaging', 'fast', 'impale', 'precise'],
+            'armor': ['shoddy', 'bulk'],
+            'items': ['improvised'],
+        }
+        const flaws = {
+            'weapon': ['undamaging', 'unfast', 'unimpale', 'unprecise'],
+            'armor': ['unshoddy', 'unbulk'],
+            'items': ['unimprovised'],
+        }
+        switch (itemCategory) {
+            case 'melee':
+            case 'ranged':
+                return { 'qualities_options': qualities.weapon, 'flaws_options': flaws.weapon };
+            case 'armor':
+                return { 'qualities_options': qualities.armor, 'flaws_options': flaws.armor };
+            case 'consumable':
+                return { 'qualities_options': qualities.items, 'flaws_options': flaws.items };
+            default:
+                return { 'qualities_options': [], 'flaws_options': [] };
+        }
+    }, [itemCategory])
+
 
     const handleCreateItem = () => {
         if (itemName !== '') {
@@ -30,7 +61,6 @@ export const InventoryItems = () => {
                 category: itemCategory,
                 availability: itemAvailability,
 
-
             }, ...items]);
             setItemName('');
             setItemEncumbrance('');
@@ -44,7 +74,7 @@ export const InventoryItems = () => {
     }
 
     //Dropdown options.
-    const itemCategories = ['Melee', 'Ranged', 'Armor', 'Consumable'];
+    const itemCategories = ['melee', 'ranged', 'armor', 'consumable'];
 
     // Filter Items by category.
     let filtered_items;
@@ -52,6 +82,19 @@ export const InventoryItems = () => {
         filtered_items = [...items]
     } else {
         filtered_items = items.filter((item: any) => item.category === categoryFilter);
+    }
+
+    // Further filter items by SearchBar string.
+    const handleChangeSearchtext = (event: any) => {
+        setSearchText(event.target.value);
+    }
+
+    if (searchText) {
+        filtered_items = filtered_items.filter((item: any) => {
+            const item_name = item.name.toLowerCase();
+            const search_string = searchText.toLowerCase();
+            return item_name.includes(search_string);
+        })
     }
 
     return (
@@ -65,8 +108,11 @@ export const InventoryItems = () => {
                 <span> <GiPotionBall onClick={() => setCategoryFilter('Consumable')} /></span>
             </div>
             <div className="tools-bar">
-                <input type="text" placeholder='SEARCH BAR' />
-                <button onClick={() => setCreateItemDialogOpen(true)}>ADD ITEM</button>
+                <input onChange={handleChangeSearchtext} value={searchText} type="text" placeholder='Find items...' />
+                <button onClick={() => {
+                    setCreateItemDialogOpen(true);
+                    setSearchText('');
+                }}>ADD ITEM</button>
             </div>
             <div className='items'>
                 {
@@ -126,6 +172,40 @@ export const InventoryItems = () => {
                     optionLabel="name"
                     placeholder="Select a Category"
                 />
+
+
+                <label>ITEM QUALITIES</label>
+                <MultiSelect
+                    value={itemQualities}
+                    onChange={(e: any) => setItemQualities(e.value)}
+                    options={qualities_options}
+                    showSelectAll={false}
+                // optionLabel="name"
+                // placeholder="Select Cities"
+                />
+                <label>ITEM FLAWS</label>
+
+                <MultiSelect
+                    value={itemFlaws}
+                    onChange={(e: any) => setItemFlaws(e.value)}
+                    options={flaws_options}
+                    showSelectAll={false}
+                />
+                {/* <Dropdown
+                    value={itemQualities}
+                    onChange={(e: any) => setItemQualities(e.value)}
+                    options={qualities_options}
+                    optionLabel="name"
+                    placeholder="Select item traits"
+                /> */}
+                {/* <label>ITEM flaws</label>
+                <Dropdown
+                    value={itemFlaws}
+                    onChange={(e: any) => setItemFlaws(e.value)}
+                    options={flaws_options}
+                    optionLabel="name"
+                    placeholder="Select item traits"
+                /> */}
             </Dialog>
         </>
     )
