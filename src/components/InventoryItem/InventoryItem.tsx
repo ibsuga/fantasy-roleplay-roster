@@ -5,11 +5,12 @@ import { FaWeightHanging } from "react-icons/fa";
 const InventoryItem = (props: {
     name: string,
     encumbrance: number,
-    traits?: string[],
     damage: { value: number, useSB: boolean },
     range: string,
     category: string,
     availability: string,
+    qualities?: string[],
+    flaws?: string[],
 }) => {
     return (
         <div className="InventoryItem">
@@ -22,17 +23,28 @@ const InventoryItem = (props: {
 
             <div className='content'>
                 <div className='traits'>
-                    <span>Fast </span>
-                    <span>Impale </span>
-                    <span>Precise </span>
-                    <span>Undamaging </span>
+                    {props.qualities && props.qualities.length > 0 &&
+                        <span className='trait-qualities'>
+                            {
+                                props.qualities?.map((quality: string) => {
+                                    return <span className='quality'>{quality}</span>
+                                })
+                            }
+                        </span>
+                    }
+                    {props.flaws && props.flaws.length > 0 &&
+                        <span className='trait-flaws'>
+                            {
+                                props.flaws && props.flaws?.length > 0 && props.flaws?.map((flaw: string) => {
+                                    return <span className='flaw'>{flaw}</span>
+                                })
+                            }
+                        </span>
+                    }
                 </div>
                 <div className='item-stats'>
                     <div className='stat'>
                         <div className="label">DAMAGE</div>
-
-                        {/* {props.damage.useSB && <span>+SB+{props.damage.value}</span>} */}
-
                         <span>{props.damage.useSB ? '+SB+' : ''}</span>
                         <span>{props.damage.value}</span>
                     </div>

@@ -224,7 +224,23 @@
     color: black;
 }
 
+.p-multiselect {
+    width: 15rem;
+}
+
 .p-multiselect-close-icon,
 .p-checkbox-icon {
     display: none;
+}
+
+.createItemDialog .item-traits {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+.createItemDialog .item-traits div {
+    display: flex;
+    flex-direction: column;
 }

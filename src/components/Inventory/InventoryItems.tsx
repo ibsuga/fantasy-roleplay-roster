@@ -16,14 +16,16 @@ export const InventoryItems = () => {
     const [itemRange, setItemRange] = useState('');
     const [itemCategory, setItemCategory] = useState<any>(null);
     const [itemAvailability, setItemAvailability] = useState('');
-    const [itemQualities, setItemQualities] = useState('');
-    const [itemFlaws, setItemFlaws] = useState('');
+    const [itemQualities, setItemQualities] = useState([]);
+    const [itemFlaws, setItemFlaws] = useState([]);
     const [categoryFilter, setCategoryFilter] = useState('');
     const [searchText, setSearchText] = useState('');
 
 
     //Item qualities & flaws.
     const { qualities_options, flaws_options } = useMemo(() => {
+        setItemQualities([]);
+        setItemFlaws([]);
         const qualities = {
             'weapon': ['damaging', 'fast', 'impale', 'precise'],
             'armor': ['shoddy', 'bulk'],
@@ -34,6 +36,7 @@ export const InventoryItems = () => {
             'armor': ['unshoddy', 'unbulk'],
             'items': ['unimprovised'],
         }
+
         switch (itemCategory) {
             case 'melee':
             case 'ranged':
@@ -47,7 +50,6 @@ export const InventoryItems = () => {
         }
     }, [itemCategory])
 
-
     const handleCreateItem = () => {
         if (itemName !== '') {
             setItems([{
@@ -60,6 +62,8 @@ export const InventoryItems = () => {
                 range: itemRange,
                 category: itemCategory,
                 availability: itemAvailability,
+                qualities: itemQualities,
+                flaws: itemFlaws,
 
             }, ...items]);
             setItemName('');
@@ -69,11 +73,13 @@ export const InventoryItems = () => {
             setItemRange('');
             setItemCategory(null);
             setItemAvailability('');
+            setItemQualities([]);
+            setItemFlaws([]);
             setCreateItemDialogOpen(false);
         }
     }
 
-    //Dropdown options.
+    //Category Dropdown options.
     const itemCategories = ['melee', 'ranged', 'armor', 'consumable'];
 
     // Filter Items by category.
@@ -95,6 +101,19 @@ export const InventoryItems = () => {
             const search_string = searchText.toLowerCase();
             return item_name.includes(search_string);
         })
+    }
+
+    //Empty parameters if Create Item Dialog is closed without saving.
+    const handleClose = () => {
+        setItemName('');
+        setItemEncumbrance('');
+        setItemDamage('');
+        setItemRange('');
+        setItemCategory(null);
+        setItemAvailability('');
+        setItemQualities([]);
+        setItemFlaws([]);
+        setCreateItemDialogOpen(false);
     }
 
     return (
@@ -125,6 +144,8 @@ export const InventoryItems = () => {
                             range={item.range}
                             category={item.category}
                             availability={item.availability}
+                            qualities={item.qualities}
+                            flaws={item.flaws}
                         />
                     )
                 }
@@ -133,19 +154,16 @@ export const InventoryItems = () => {
             <Dialog
                 className={'createItemDialog'}
                 header="Create Item"
-                visible={createItemDialogOpen} onHide={() => { if (!createItemDialogOpen) return; setCreateItemDialogOpen(false); }}
+                visible={createItemDialogOpen}
+                onHide={() => {
+                    if (!createItemDialogOpen) return;
+                    setCreateItemDialogOpen(false);
+                    handleClose();
+                }}
                 footer={
                     <>
                         <button onClick={handleCreateItem} disabled={!itemName}>SAVE ITEM</button>
-                        <button onClick={() => {
-                            setItemName('');
-                            setItemEncumbrance('');
-                            setItemDamage('');
-                            setItemRange('');
-                            setItemCategory(null);
-                            setItemAvailability('');
-                            setCreateItemDialogOpen(false);
-                        }}>
+                        <button onClick={handleClose}>
                             CLOSE
                         </button>
                     </>
@@ -173,39 +191,27 @@ export const InventoryItems = () => {
                     placeholder="Select a Category"
                 />
 
+                <div className='item-traits'>
+                    <div>
+                        <label>ITEM QUALITIES</label>
+                        <MultiSelect
+                            value={itemQualities}
+                            onChange={(e: any) => setItemQualities(e.value)}
+                            options={qualities_options}
+                            showSelectAll={false}
+                        />
+                    </div>
+                    <div>
+                        <label>ITEM FLAWS</label>
+                        <MultiSelect
+                            value={itemFlaws}
+                            onChange={(e: any) => setItemFlaws(e.value)}
+                            options={flaws_options}
+                            showSelectAll={false}
+                        />
+                    </div>
+                </div>
 
-                <label>ITEM QUALITIES</label>
-                <MultiSelect
-                    value={itemQualities}
-                    onChange={(e: any) => setItemQualities(e.value)}
-                    options={qualities_options}
-                    showSelectAll={false}
-                // optionLabel="name"
-                // placeholder="Select Cities"
-                />
-                <label>ITEM FLAWS</label>
-
-                <MultiSelect
-                    value={itemFlaws}
-                    onChange={(e: any) => setItemFlaws(e.value)}
-                    options={flaws_options}
-                    showSelectAll={false}
-                />
-                {/* <Dropdown
-                    value={itemQualities}
-                    onChange={(e: any) => setItemQualities(e.value)}
-                    options={qualities_options}
-                    optionLabel="name"
-                    placeholder="Select item traits"
-                /> */}
-                {/* <label>ITEM flaws</label>
-                <Dropdown
-                    value={itemFlaws}
-                    onChange={(e: any) => setItemFlaws(e.value)}
-                    options={flaws_options}
-                    optionLabel="name"
-                    placeholder="Select item traits"
-                /> */}
             </Dialog>
         </>
     )
