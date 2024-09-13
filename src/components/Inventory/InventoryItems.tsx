@@ -22,8 +22,8 @@ export const InventoryItems = () => {
     const [categoryFilter, setCategoryFilter] = useState('');
     const [searchText, setSearchText] = useState('');
 
-    const addItem = useItemStore((state) => state.addItem);
     const items = useItemStore((state) => state.items);
+    const addItem = useItemStore((state) => state.addItem);
 
     //Item qualities & flaws.
     const { qualities_options, flaws_options } = useMemo(() => {
@@ -131,6 +131,7 @@ export const InventoryItems = () => {
                     filtered_items.map((item: any, index: number) =>
                         <InventoryItem
                             key={index}
+                            id={item.id}
                             name={item.name}
                             encumbrance={item.encumbrance}
                             damage={item.damage}

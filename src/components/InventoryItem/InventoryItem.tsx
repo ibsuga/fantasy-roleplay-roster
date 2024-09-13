@@ -1,8 +1,10 @@
 import './InventoryItem.css';
 import { FaWeightHanging } from "react-icons/fa";
+import useItemStore from '../../store/InventoryStore';
 
 
 const InventoryItem = (props: {
+    id: number,
     name: string,
     encumbrance: number,
     damage: { value: number, useSB: boolean },
@@ -12,12 +14,13 @@ const InventoryItem = (props: {
     qualities?: string[],
     flaws?: string[],
 }) => {
+    const deleteItem = useItemStore((state) => state.deleteItem);
     return (
         <div className="InventoryItem">
             <div className='header'>
                 <div className='item-name'>{props.name}</div>
                 <div className='item-stats'>
-                    <button>X</button>
+                    <button onClick={() => deleteItem(props.id)}>X</button>
                 </div>
             </div>
 

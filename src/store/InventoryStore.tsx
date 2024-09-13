@@ -15,14 +15,22 @@ export type itemType = {
 type itemStore = {
     items: itemType[] | [],
     addItem: (item: itemType) => void,
+    deleteItem: (id: number) => void,
 }
 
 
 const useItemStore = create<itemStore>()((set) => ({
-    items: [],
+    items: JSON.parse(localStorage.getItem('InventoryItems') || '[]'),
     addItem: (item) => set((state) => {
         let items = [...state.items];
         items.push(item);
+        localStorage.setItem('InventoryItems', JSON.stringify(items));
+        return { items: items };
+    }),
+    deleteItem: (id) => set((state) => {
+        let items = [...state.items];
+        items = items.filter((item: itemType) => item.id !== id);
+        localStorage.setItem('InventoryItems', JSON.stringify(items));
         return { items: items };
     })
 
