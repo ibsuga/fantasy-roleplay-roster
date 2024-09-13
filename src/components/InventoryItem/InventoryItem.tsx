@@ -45,8 +45,8 @@ const InventoryItem = (props: {
                 <div className='item-stats'>
                     <div className='stat'>
                         <div className="label">DAMAGE</div>
-                        <span>{props.damage.useSB ? '+SB+' : ''}</span>
-                        <span>{props.damage.value}</span>
+                        <span>{props.damage?.useSB ? '+SB+' : ''}</span>
+                        <span>{props.damage?.value}</span>
                     </div>
                     <div className='stat'>
                         <div className="label">RANGE</div>

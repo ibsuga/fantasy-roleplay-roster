@@ -4,14 +4,15 @@ import { useState, useMemo } from "react";
 import { GiChestArmor, GiCrocSword, GiPocketBow, GiPotionBall } from "react-icons/gi";
 import InventoryItem from '../InventoryItem/InventoryItem';
 import { MultiSelect } from 'primereact/multiselect';
+import useItemStore from '../../store/InventoryStore';
 
 
 export const InventoryItems = () => {
-    const [items, setItems] = useState<any[]>([]);
+    // const [items, setItems] = useState<any[]>([]);
     const [createItemDialogOpen, setCreateItemDialogOpen] = useState(false);
     const [itemName, setItemName] = useState('');
-    const [itemEncumbrance, setItemEncumbrance] = useState('');
-    const [itemDamage, setItemDamage] = useState('');
+    const [itemEncumbrance, setItemEncumbrance] = useState();
+    const [itemDamage, setItemDamage] = useState();
     const [itemDamageSb, setItemDamageSb] = useState(false);
     const [itemRange, setItemRange] = useState('');
     const [itemCategory, setItemCategory] = useState<any>(null);
@@ -21,6 +22,8 @@ export const InventoryItems = () => {
     const [categoryFilter, setCategoryFilter] = useState('');
     const [searchText, setSearchText] = useState('');
 
+    const addItem = useItemStore((state) => state.addItem);
+    const items = useItemStore((state) => state.items);
 
     //Item qualities & flaws.
     const { qualities_options, flaws_options } = useMemo(() => {
@@ -52,29 +55,19 @@ export const InventoryItems = () => {
 
     const handleCreateItem = () => {
         if (itemName !== '') {
-            setItems([{
-                name: itemName,
-                encumbrance: itemEncumbrance,
-                damage: {
-                    value: itemDamage,
-                    useSB: itemDamageSb
-                },
-                range: itemRange,
-                category: itemCategory,
-                availability: itemAvailability,
-                qualities: itemQualities,
-                flaws: itemFlaws,
-
-            }, ...items]);
-            setItemName('');
-            setItemEncumbrance('');
-            setItemDamage('');
-            setItemDamageSb(false);
-            setItemRange('');
-            setItemCategory(null);
-            setItemAvailability('');
-            setItemQualities([]);
-            setItemFlaws([]);
+            let new_item = {
+                'id': Date.now(),
+                'name': itemName,
+                'encumbrance': itemEncumbrance,
+                'damage': itemDamage ? { value: itemDamage, useSB: itemDamageSb } : undefined,
+                'range': itemRange,
+                'category': itemCategory,
+                'availability': itemAvailability,
+                'qualities': itemQualities,
+                'flaws': itemFlaws,
+            }
+            addItem(new_item);
+            handleClose();
             setCreateItemDialogOpen(false);
         }
     }
@@ -106,8 +99,8 @@ export const InventoryItems = () => {
     //Empty parameters if Create Item Dialog is closed without saving.
     const handleClose = () => {
         setItemName('');
-        setItemEncumbrance('');
-        setItemDamage('');
+        setItemEncumbrance(undefined);
+        setItemDamage(undefined);
         setItemRange('');
         setItemCategory(null);
         setItemAvailability('');
