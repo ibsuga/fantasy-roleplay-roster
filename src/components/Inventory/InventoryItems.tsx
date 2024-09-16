@@ -22,6 +22,8 @@ export const InventoryItems = () => {
     const [categoryFilter, setCategoryFilter] = useState('');
     const [searchText, setSearchText] = useState('');
 
+    const [showDialogContent, setShowDialogContent] = useState('');
+
     const items = useItemStore((state) => state.items);
     const addItem = useItemStore((state) => state.addItem);
 
@@ -107,6 +109,74 @@ export const InventoryItems = () => {
         setItemQualities([]);
         setItemFlaws([]);
         setCreateItemDialogOpen(false);
+        setTimeout(() => {
+            setShowDialogContent('');
+        }, 300)
+    }
+
+    const handleDialogFields = () => {
+        switch (showDialogContent) {
+            case 'weapon':
+                return <>
+                    <button onClick={() => setShowDialogContent('')}>Back</button>
+
+                    <label>ITEM NAME</label>
+                    <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
+                    <label>ITEM ENCUMBRANCE</label>
+                    <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+                    <div>
+                        <label>ITEM DAMAGE</label>
+                        <input type="number" value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
+                        <input type="checkbox" checked={itemDamageSb} onChange={(e: any) => setItemDamageSb(e.target.checked)} />
+                        <label>Use SB</label>
+                    </div>
+
+                    <label>ITEM RANGE</label>
+                    <input type="text" value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
+                    <label>ITEM CATEGORY</label>
+                    <Dropdown
+                        value={itemCategory}
+                        onChange={(e: any) => setItemCategory(e.value)}
+                        options={itemCategories}
+                        optionLabel="name"
+                        placeholder="Select a Category"
+                    />
+
+                    <div className='item-traits'>
+                        <div>
+                            <label>ITEM QUALITIES</label>
+                            <MultiSelect
+                                value={itemQualities}
+                                onChange={(e: any) => setItemQualities(e.value)}
+                                options={qualities_options}
+                                showSelectAll={false}
+                            />
+                        </div>
+                        <div>
+                            <label>ITEM FLAWS</label>
+                            <MultiSelect
+                                value={itemFlaws}
+                                onChange={(e: any) => setItemFlaws(e.value)}
+                                options={flaws_options}
+                                showSelectAll={false}
+                            />
+                        </div>
+                    </div>
+                </>
+            case 'armor':
+                return <>
+                    <button onClick={() => setShowDialogContent('')}>Back</button>
+                    <label>ITEM NAME</label>
+                    <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
+                </>
+            case 'consumable':
+                return <>
+                    <button onClick={() => setShowDialogContent('')}>Back</button>
+                    <label>ITEM NAME</label>
+                    <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
+                </>
+            default: return <span>No fields</span>
+        }
     }
 
     return (
@@ -163,49 +233,14 @@ export const InventoryItems = () => {
                     </>
                 }
             >
-                <label>ITEM NAME</label>
-                <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
-                <label>ITEM ENCUMBRANCE</label>
-                <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
-                <div>
-                    <label>ITEM DAMAGE</label>
-                    <input type="number" value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
-                    <input type="checkbox" checked={itemDamageSb} onChange={(e: any) => setItemDamageSb(e.target.checked)} />
-                    <label>Use SB</label>
-                </div>
-
-                <label>ITEM RANGE</label>
-                <input type="text" value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
-                <label>ITEM CATEGORY</label>
-                <Dropdown
-                    value={itemCategory}
-                    onChange={(e: any) => setItemCategory(e.value)}
-                    options={itemCategories}
-                    optionLabel="name"
-                    placeholder="Select a Category"
-                />
-
-                <div className='item-traits'>
-                    <div>
-                        <label>ITEM QUALITIES</label>
-                        <MultiSelect
-                            value={itemQualities}
-                            onChange={(e: any) => setItemQualities(e.value)}
-                            options={qualities_options}
-                            showSelectAll={false}
-                        />
-                    </div>
-                    <div>
-                        <label>ITEM FLAWS</label>
-                        <MultiSelect
-                            value={itemFlaws}
-                            onChange={(e: any) => setItemFlaws(e.value)}
-                            options={flaws_options}
-                            showSelectAll={false}
-                        />
-                    </div>
-                </div>
-
+                {showDialogContent === '' &&
+                    <>
+                        <button onClick={() => setShowDialogContent('weapon')}>Weapon</button>
+                        <button onClick={() => setShowDialogContent('armor')}>Armor</button>
+                        <button onClick={() => setShowDialogContent('consumable')}>Consumable</button>
+                    </>
+                }
+                {handleDialogFields()}
             </Dialog>
         </>
     )
