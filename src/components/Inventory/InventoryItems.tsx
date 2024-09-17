@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { GiChestArmor, GiCrocSword, GiPocketBow, GiPotionBall } from "react-icons/gi";
 import InventoryItem from '../InventoryItem/InventoryItem';
 import { MultiSelect } from 'primereact/multiselect';
-import useItemStore from '../../store/InventoryStore';
+import useItemStore, { itemType } from '../../store/InventoryStore';
 
 
 export const InventoryItems = () => {
@@ -21,7 +21,6 @@ export const InventoryItems = () => {
     const [itemFlaws, setItemFlaws] = useState([]);
     const [categoryFilter, setCategoryFilter] = useState('');
     const [searchText, setSearchText] = useState('');
-
     const [showDialogContent, setShowDialogContent] = useState('');
 
     const items = useItemStore((state) => state.items);
@@ -101,6 +100,7 @@ export const InventoryItems = () => {
     //Empty parameters if Create Item Dialog is closed without saving.
     const handleClose = () => {
         setItemName('');
+        setCreateItemDialogOpen(false);
         setItemEncumbrance(undefined);
         setItemDamage(undefined);
         setItemRange('');
@@ -108,13 +108,12 @@ export const InventoryItems = () => {
         setItemAvailability('');
         setItemQualities([]);
         setItemFlaws([]);
-        setCreateItemDialogOpen(false);
         setTimeout(() => {
             setShowDialogContent('');
         }, 300)
     }
 
-    const handleDialogFields = () => {
+    const getDialogContent = () => {
         switch (showDialogContent) {
             case 'weapon':
                 return <>
@@ -175,7 +174,12 @@ export const InventoryItems = () => {
                     <label>ITEM NAME</label>
                     <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
                 </>
-            default: return <span>No fields</span>
+            default:
+                return <>
+                    <button onClick={() => setShowDialogContent('weapon')}>Weapon</button>
+                    <button onClick={() => setShowDialogContent('armor')}>Armor</button>
+                    <button onClick={() => setShowDialogContent('consumable')}>Consumable</button>
+                </>
         }
     }
 
@@ -210,6 +214,9 @@ export const InventoryItems = () => {
                             availability={item.availability}
                             qualities={item.qualities}
                             flaws={item.flaws}
+                            createItemDialogOpen={createItemDialogOpen}
+                            setCreateItemDialogOpen={setCreateItemDialogOpen}
+
                         />
                     )
                 }
@@ -219,28 +226,15 @@ export const InventoryItems = () => {
                 className={'createItemDialog'}
                 header="Create Item"
                 visible={createItemDialogOpen}
-                onHide={() => {
-                    if (!createItemDialogOpen) return;
-                    setCreateItemDialogOpen(false);
-                    handleClose();
-                }}
+                onHide={handleClose}
                 footer={
                     <>
-                        <button onClick={handleCreateItem} disabled={!itemName}>SAVE ITEM</button>
-                        <button onClick={handleClose}>
-                            CLOSE
-                        </button>
+                        <button onClick={handleCreateItem} disabled={!itemName}> SAVE ITEM </button>
+                        <button onClick={handleClose}> CLOSE </button>
                     </>
                 }
             >
-                {showDialogContent === '' &&
-                    <>
-                        <button onClick={() => setShowDialogContent('weapon')}>Weapon</button>
-                        <button onClick={() => setShowDialogContent('armor')}>Armor</button>
-                        <button onClick={() => setShowDialogContent('consumable')}>Consumable</button>
-                    </>
-                }
-                {handleDialogFields()}
+                {getDialogContent()}
             </Dialog>
         </>
     )

@@ -13,13 +13,18 @@ const InventoryItem = (props: {
     availability: string,
     qualities?: string[],
     flaws?: string[],
+    createItemDialogOpen: boolean,
+    setCreateItemDialogOpen: any
 }) => {
     const deleteItem = useItemStore((state) => state.deleteItem);
+
+
     return (
         <div className="InventoryItem">
             <div className='header'>
                 <div className='item-name'>{props.name}</div>
                 <div className='item-stats'>
+                    <button onClick={() => props.setCreateItemDialogOpen(true)}>Edit</button>
                     <button onClick={() => deleteItem(props.id)}>X</button>
                 </div>
             </div>

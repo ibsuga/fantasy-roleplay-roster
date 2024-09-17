@@ -16,6 +16,7 @@ type itemStore = {
     items: itemType[] | [],
     addItem: (item: itemType) => void,
     deleteItem: (id: number) => void,
+    updateItem: (item: itemType) => void,
 }
 
 
@@ -32,8 +33,16 @@ const useItemStore = create<itemStore>()((set) => ({
         items = items.filter((item: itemType) => item.id !== id);
         localStorage.setItem('InventoryItems', JSON.stringify(items));
         return { items: items };
-    })
-
+    }),
+    updateItem: (item) => set((state) => {
+        let items = [...state.items];
+        const item_index = items.findIndex((i: itemType) => i.id === item.id);
+        if (item_index !== -1) {
+            items[item_index] = { ...item };
+        }
+        localStorage.setItem('InventoryItems', JSON.stringify(items));
+        return { items: [...items] }
+    }),
 }))
 
 export default useItemStore;
