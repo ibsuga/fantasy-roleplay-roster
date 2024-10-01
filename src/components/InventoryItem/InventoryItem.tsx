@@ -1,6 +1,7 @@
 import './InventoryItem.css';
-import { FaWeightHanging } from "react-icons/fa";
 import useItemStore from '../../store/InventoryStore';
+import EditItemButton from '../Inventory/EditItemButton';
+import { FaRegWindowClose } from "react-icons/fa";
 
 
 const InventoryItem = (props: {
@@ -13,8 +14,7 @@ const InventoryItem = (props: {
     availability: string,
     qualities?: string[],
     flaws?: string[],
-    createItemDialogOpen: boolean,
-    setCreateItemDialogOpen: any
+
 }) => {
     const deleteItem = useItemStore((state) => state.deleteItem);
 
@@ -22,10 +22,14 @@ const InventoryItem = (props: {
     return (
         <div className="InventoryItem">
             <div className='header'>
+
                 <div className='item-name'>{props.name}</div>
+
                 <div className='item-stats'>
-                    <button onClick={() => props.setCreateItemDialogOpen(true)}>Edit</button>
-                    <button onClick={() => deleteItem(props.id)}>X</button>
+                    <EditItemButton id={props.id} />
+                    <div className='delete-button'>
+                        <FaRegWindowClose onClick={() => deleteItem(props.id)} />
+                    </div>
                 </div>
             </div>
 
@@ -66,7 +70,7 @@ const InventoryItem = (props: {
                     </div>
                     <div className='stat'>
                         <div className="label">ENCUMBRANCE</div>
-                        <div className='encumbrance spaced'> {props.encumbrance} <FaWeightHanging /></div>
+                        <div className='encumbrance spaced'> {props.encumbrance} </div>
                     </div>
                 </div>
             </div>

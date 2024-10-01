@@ -69,6 +69,27 @@
     width: 80%;
 }
 
+.Inventory .edit-button {
+    font-size: 1.25em;
+    transition: 0.5s;
+}
+
+.Inventory .edit-button:hover {
+    color: hsl(50, 25%, 45%);
+    cursor: pointer;
+}
+
+.Inventory .delete-button {
+    font-size: 1.25em;
+    transition: 0.5s;
+}
+
+.Inventory .delete-button:hover {
+    color: hsl(0, 60%, 40%);
+    cursor: pointer;
+}
+
+
 .Inventory .items {
     display: flex;
     flex-direction: column;
@@ -79,6 +100,7 @@
     overflow-x: hidden;
 }
 
+/*INVENTORY BOTTOM SECTION*/
 .Inventory .inventory-bottom {
     display: grid;
     grid-template-rows: min-content auto;
@@ -88,7 +110,6 @@
     border-radius: 4px;
     background: hsla(0, 0%, 0%, 0.2);
     backdrop-filter: blur(4px);
-    /* outline: 2px solid red; */
 }
 
 .Inventory .inventory-bottom .encumbrance {
@@ -96,18 +117,41 @@
     grid-template-columns: min-content auto;
 }
 
-.Inventory .inventory-bottom .encumbrance .encumbrance-table {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    grid-template-rows: min-content auto;
-    height: 3em;
-    border-bottom: 2px dotted white;
-    border-color: var(--font-color-default-faint);
-}
-
 .Inventory .inventory-bottom .encumbrance svg {
     color: white;
-    font-size: 2em;
+    font-size: 1.5em;
+    align-self: center;
+    padding-left: 0.2em;
+}
+
+.Inventory .inventory-bottom .encumbrance .encumbrance-table {
+    display: grid;
+    grid-template-columns: auto auto auto auto min-content;
+    align-content: center;
+    height: 2.5em;
+    border-bottom: 2px dotted white;
+    border-color: var(--font-color-default-faint);
+    padding: 0 0.5em;
+}
+
+.Inventory .inventory-bottom .encumbrance .encumbrance-table>* {
+    display: flex;
+    align-items: center;
+}
+
+.Inventory .inventory-bottom .encumbrance .encumbrance-table input {
+    /* justify-self: center; */
+    text-align: center;
+    font-family: 'Comforter Brush';
+    width: 1em;
+    font-size: 2.5em;
+    color: white;
+    background: none;
+    border: none;
+}
+
+.encumbrance-table input:focus {
+    outline: none;
 }
 
 .Inventory .inventory-bottom .encumbrance .encumbrance-table span {
@@ -115,9 +159,59 @@
     color: var(--font-color-default-faint);
 }
 
-.Inventory .inventory-bottom .encumbrance .encumbrance-table .label {
+.Inventory .inventory-bottom .encumbrance .encumbrance-table span.encumbered {
+    color: rgb(218, 104, 104);
+    text-shadow: 0px 0px 5px hsl(0, 85%, 45%);
+    font-family: 'Comforter Brush';
+    font-size: 2.5em;
+    transition: 0.5s;
+}
+
+.Inventory .inventory-bottom .encumbrance .encumbrance-table span.not-encumbered {
+    font-family: 'Comforter Brush';
+    color: hsl(0, 0%, 80%);
+    font-size: 2.5em;
+    transition: 0.5s;
+}
+
+.Inventory .inventory-bottom .encumbrance .encumbrance-table .label,
+.encumbrance-tooltip .label {
     font-family: var(--font-default);
     color: var(--font-color-default);
+}
+
+.encumbrance-tooltip {
+    user-select: none;
+}
+
+.encumbrance-tooltip .header {
+    font-family: var(--font-headers);
+    text-transform: uppercase;
+    color: hsl(0, 0%, 10%);
+}
+
+.encumbrance-tooltip .label {
+    color: hsl(0, 0%, 10%);
+}
+
+.encumbrance-tooltip .encumbrance-value {
+    font-family: var(--font-headers);
+    color: hsl(50, 25%, 30%);
+}
+
+
+
+.Inventory .inventory-bottom .encumbrance .encumbrance-table .info-button {
+    grid-row: 1/3;
+    grid-column: 3/4;
+    color: var(--font-color-default-highlight);
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.Inventory .inventory-bottom .encumbrance .encumbrance-table .info-button:hover {
+    color: hsl(50, 25%, 45%);
 }
 
 .Inventory .inventory-bottom .wealth {
@@ -138,15 +232,18 @@
 
 .Inventory .inventory-bottom .wealth input {
     height: 50%;
-    width: 100%;
+    width: 60%;
     text-align: center;
-    font-size: 3em;
+    font-size: 2.5em;
     box-sizing: border-box;
-    font-family: var(--font-labels);
+    /* font-family: var(--font-labels); */
+
+    font-family: 'Comforter Brush';
+
     color: var(--font-color-default);
     border: none;
     background: none;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 .Inventory .inventory-bottom .wealth input:focus {
@@ -154,7 +251,6 @@
     caret-color: transparent;
     color: var(--highlight-color-brown);
 }
-
 
 /* CREATE ITEM DIALOG */
 .createItemDialog {
@@ -243,4 +339,125 @@
 .createItemDialog .item-traits div {
     display: flex;
     flex-direction: column;
+}
+
+.createItemDialog .item-category-select {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    gap: 2em;
+    height: 5em;
+}
+
+/*DIALOG HEADER*/
+
+.createItemDialog .dialog-header {
+    display: grid;
+    grid-template-columns: min-content auto;
+}
+
+.createItemDialog .back-button {
+    font-size: 1.25em;
+    color: hsl(0, 0%, 80%);
+    height: 1em;
+    background: none;
+    border: none;
+    transition: 0.25s;
+}
+
+.createItemDialog .back-button svg {
+    align-self: center;
+    cursor: pointer;
+}
+
+.createItemDialog span {
+    justify-self: center;
+}
+
+.createItemDialog .back-button:hover {
+    color: var(--highlight-color-brown);
+}
+
+
+/*DIALOG FOOTER*/
+.createItemDialog .dialog-footer {
+    display: flex;
+    /* grid-template-columns: auto auto; */
+    /* justify-content: center; */
+    gap: 1em;
+    padding-top: 2em;
+}
+
+.createItemDialog .footer-button {
+    background-color: hsl(0, 0%, 8%, 0.9);
+    color: hsl(0, 0%, 80%);
+    border: 1px solid hsla(0, 0%, 50%, 0.5);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: var(--font-default);
+    font-weight: bold;
+    height: 2em;
+    transition: 0.25s;
+    font-size: 18px;
+    flex: 1;
+}
+
+.createItemDialog .footer-button:hover {
+    color: var(--highlight-color-brown);
+}
+
+.createItemDialog .footer-button:disabled {
+    color: hsl(0, 0%, 30%);
+
+}
+
+/*ITEM CATEGORY SELECTION*/
+.createItemDialog .category-button {
+
+    display: grid;
+    color: hsl(0, 0%, 80%);
+    background-color: hsl(0, 0%, 8%, 0.9);
+    border: 1px solid hsl(0, 0%, 20%, 0.9);
+    height: 4em;
+    width: 6em;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    justify-content: center;
+    align-content: center;
+    transition: 0.25s;
+}
+
+.createItemDialog .item-category-select .category-button svg {
+    color: hsl(0, 0%, 100%, 0.6);
+    font-size: 3.25em;
+    position: absolute;
+    left: 0.4em;
+    top: 6px;
+    transition: 0.25s;
+}
+
+.createItemDialog .item-category-select .category-button .category-label {
+    height: 100%;
+    width: 100%;
+    font-size: 46px;
+    opacity: 0;
+    transition: 0.25s;
+    font-family: var(--font-labels);
+}
+
+.createItemDialog .item-category-select .category-button:hover {
+    border-color: hsl(0, 0%, 20%);
+
+}
+
+.createItemDialog .item-category-select .category-button:hover svg {
+    opacity: 25%;
+}
+
+.createItemDialog .item-category-select .category-button:hover .category-label {
+    opacity: 1;
+    font-size: 36px;
+    color: var(--highlight-color-brown);
+    font-weight: bold;
 }

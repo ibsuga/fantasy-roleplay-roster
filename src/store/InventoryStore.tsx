@@ -3,25 +3,33 @@ import { create } from "zustand";
 export type itemType = {
     id: number,
     name: string,
-    encumbrance?: number,
-    damage?: { value: number, useSB: boolean },
+    encumbrance?: string,
+    damage?: { value: string, useSB: boolean },
     range: string,
     category: string,
     availability: string,
     qualities?: string[],
     flaws?: string[],
+    amount?: string,
 }
+
 
 type itemStore = {
     items: itemType[] | [],
+    encumbrance: number,
+    wealth: { copper: number, silver: number, gold: number },
     addItem: (item: itemType) => void,
     deleteItem: (id: number) => void,
     updateItem: (item: itemType) => void,
+    updateMaxEncumbrance: (encumbrance: number) => void,
+    updateWealth: (wealth: number, currency: string) => void,
 }
 
 
 const useItemStore = create<itemStore>()((set) => ({
     items: JSON.parse(localStorage.getItem('InventoryItems') || '[]'),
+    encumbrance: JSON.parse(localStorage.getItem('MaxEncumbrance') || '-1'),
+    wealth: JSON.parse(localStorage.getItem('PlayerWealth') || ''),
     addItem: (item) => set((state) => {
         let items = [...state.items];
         items.push(item);
@@ -43,6 +51,22 @@ const useItemStore = create<itemStore>()((set) => ({
         localStorage.setItem('InventoryItems', JSON.stringify(items));
         return { items: [...items] }
     }),
+    updateMaxEncumbrance: (encumbrance) => set(() => {
+        localStorage.setItem('MaxEncumbrance', JSON.stringify(encumbrance));
+        return { encumbrance: encumbrance }
+    }),
+    updateWealth: (amount, currency) => set((state) => {
+        let wealth = { ...state.wealth };
+        if (currency === 'copper') {
+            wealth.copper = amount;
+        } else if (currency === 'silver') {
+            wealth.silver = amount;
+        } else if (currency === 'gold') {
+            wealth.gold = amount;
+        }
+        localStorage.setItem('PlayerWealth', JSON.stringify(wealth));
+        return { wealth: { ...wealth } }
+    })
 }))
 
 export default useItemStore;
