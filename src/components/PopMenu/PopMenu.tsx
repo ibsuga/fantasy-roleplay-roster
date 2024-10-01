@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { useState } from 'react';
 import { PopMenuContext } from './PopMenuContext';
 import { Popover, PopoverAlign, PopoverPosition } from 'react-tiny-popover';
 import PopMenuAnimation from './PopMenuAnimation';
@@ -29,7 +29,7 @@ const PopMenu = (props: {
         padding={5} // adjust padding here!
         reposition={false} // prevents automatic readjustment of content position that keeps your popover content within its parent's bounds
         onClickOutside={() => setIsPopoverOpen(false)} // handle click events outside of the popover/target here!
-        content={({ childRect, position, nudgedLeft, nudgedTop }) => ( // you can also provide a render function that injects some useful stuff!
+        content={({ childRect }) => ( // you can also provide a render function that injects some useful stuff!
           <div className={props.className} >
             <PopMenuContext.Provider value={{ handlePopover }}>
               <PopMenuAnimation >
