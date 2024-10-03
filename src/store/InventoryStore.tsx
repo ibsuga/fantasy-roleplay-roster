@@ -31,7 +31,11 @@ type itemStore = {
 const useItemStore = create<itemStore>()((set) => ({
     items: JSON.parse(localStorage.getItem('InventoryItems') || '[]'),
     encumbrance: JSON.parse(localStorage.getItem('MaxEncumbrance') || '-1'),
-    wealth: JSON.parse(localStorage.getItem('PlayerWealth') || ''),
+    wealth: {
+        copper: localStorage.getItem('PlayerWealth') ? JSON.parse(localStorage.getItem('PlayerWealth') || '').copper || 0 : 0,
+        silver: localStorage.getItem('PlayerWealth') ? JSON.parse(localStorage.getItem('PlayerWealth') || '').silver || 0 : 0,
+        gold: localStorage.getItem('PlayerWealth') ? JSON.parse(localStorage.getItem('PlayerWealth') || '').gold || 0 : 0,
+    },
     addItem: (item) => set((state) => {
         let items = [...state.items];
         items.push(item);
