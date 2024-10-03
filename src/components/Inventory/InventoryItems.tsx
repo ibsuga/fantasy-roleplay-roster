@@ -3,6 +3,7 @@ import useItemStore from '../../store/InventoryStore';
 import CreateItemButton from './CreateItemButton';
 import { useState } from "react";
 import { GiChestArmor, GiCrocSword, GiPocketBow, GiPotionBall } from "react-icons/gi";
+import { FaSearch } from "react-icons/fa";
 
 
 export const InventoryItems = () => {
@@ -42,7 +43,10 @@ export const InventoryItems = () => {
                 <span> <GiPotionBall onClick={() => setCategoryFilter('consumable')} /></span>
             </div>
             <div className="tools-bar">
-                <input onChange={handleChangeSearchtext} value={searchText} type="text" placeholder='Find items...' />
+                <div className='inventory-search-bar'>
+                    <FaSearch />
+                    <input onChange={handleChangeSearchtext} value={searchText} type="text" placeholder='Find items...' />
+                </div>
                 <CreateItemButton />
             </div>
             <div className='items'>
@@ -59,6 +63,7 @@ export const InventoryItems = () => {
                             availability={item.availability}
                             qualities={item.qualities}
                             flaws={item.flaws}
+                            description={item.description}
                         />
                     )
                 }

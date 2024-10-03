@@ -8,8 +8,9 @@
     font-family: 'Quicksand';
     font-size: 14px;
     display: grid;
-    grid-template-rows: auto auto;
+    grid-template-rows: min-content auto;
     user-select: none;
+    height: 7em;
 }
 
 .InventoryItem>.header {
@@ -41,7 +42,7 @@
 
 .InventoryItem>.content {
     display: grid;
-    grid-template-rows: min-content min-content;
+    grid-template-rows: auto min-content;
     gap: 0.5em;
 }
 
@@ -136,4 +137,25 @@
 
 .InventoryItem>.header .item-stats .bronze svg {
     color: hsl(34, 56%, 34%);
+}
+
+
+/*DESCRIPTION*/
+
+.InventoryItem .content .item-description {
+    width: 100%;
+}
+
+.InventoryItem .content .item-description textarea {
+    background-color: transparent;
+    width: 100%;
+    color: hsl(0, 0%, 50%);
+    font-family: 'Caveat';
+    resize: none;
+    border: none;
+    font-size: 18px;
+}
+
+.InventoryItem .content .item-description textarea:focus {
+    outline: none;
 }

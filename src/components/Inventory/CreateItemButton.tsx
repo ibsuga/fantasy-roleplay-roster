@@ -66,7 +66,6 @@ const CreateItemButton = () => {
             setCreateItemDialogOpen(false);
         }
     }
-
     //Item qualities & flaws.
     const { qualities_options, flaws_options } = useMemo(() => {
         setItemQualities([]);
@@ -100,35 +99,15 @@ const CreateItemButton = () => {
     const getDialogContent = () => {
         switch (showDialogContent) {
             case 'weapon':
-                return <>
-                    <label>ITEM NAME</label>
-                    <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
-
-                    <label>ITEM ENCUMBRANCE</label>
-                    <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
-
-                    <div>
-                        <label>ITEM DAMAGE</label>
-                        <input type="number" value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
-                        <input type="checkbox" checked={itemDamageSb} onChange={(e: any) => setItemDamageSb(e.target.checked)} />
-                        <label>Use SB</label>
+                return <div className="create-weapon-dialog">
+                    <div className="item-name">
+                        <label>NAME</label>
+                        <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
                     </div>
-
-                    <label>ITEM RANGE</label>
-                    <input type="text" value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
-
-                    <label>ITEM CATEGORY</label>
-                    {/* <Dropdown
-                        value={itemCategory}
-                        onChange={(e: any) => setItemCategory(e.target.value)}
-                        options={itemCategories}
-                        optionLabel="name"
-                        placeholder="Select a Category"
-                    /> */}
 
                     <div className='item-traits'>
                         <div>
-                            <label>ITEM QUALITIES</label>
+                            <label>QUALITIES</label>
                             <MultiSelect
                                 value={itemQualities}
                                 onChange={(e: any) => setItemQualities(e.value)}
@@ -137,7 +116,7 @@ const CreateItemButton = () => {
                             />
                         </div>
                         <div>
-                            <label>ITEM FLAWS</label>
+                            <label>FLAWS</label>
                             <MultiSelect
                                 value={itemFlaws}
                                 onChange={(e: any) => setItemFlaws(e.value)}
@@ -146,7 +125,37 @@ const CreateItemButton = () => {
                             />
                         </div>
                     </div>
-                </>
+
+                    <div className="item-bottom-section">
+                        <div>
+                            <label>DAMAGE</label>
+                            <input type="number" value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
+                            <div>
+                                <input type="checkbox" checked={itemDamageSb} onChange={(e: any) => setItemDamageSb(e.target.checked)} />
+                                <label>Use SB</label>
+                            </div>
+                        </div>
+                        <div>
+                            <label>RANGE</label>
+                            <input type="text" value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>ENCUMBRANCE</label>
+                            <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+                        </div>
+                    </div>
+
+                    {/* 
+                    <label>ITEM CATEGORY</label>
+                    <Dropdown
+                        value={itemCategory}
+                        onChange={(e: any) => setItemCategory(e.target.value)}
+                        options={itemCategories}
+                        optionLabel="name"
+                        placeholder="Select a Category"
+                    /> */}
+
+                </div>
             case 'armor':
                 return <>
                     <label>ITEM NAME</label>
@@ -210,26 +219,29 @@ const CreateItemButton = () => {
                 </>
             default:
                 return <div className="item-category-select">
-                    <div className="category-button">
-                        <GiAxeSword onClick={() => {
-                            setShowDialogContent('weapon')
-                            setItemCategory('weapon');
-                        }} />
+                    <div className="category-button" onClick={() => {
+                        setShowDialogContent('weapon')
+                        setItemCategory('weapon');
+                    }}>
+                        <div className="category-background"></div>
+                        <GiAxeSword />
                         <span className="category-label">Weapon</span>
                     </div>
-                    <div className="category-button">
-                        <GiLeatherArmor onClick={() => {
-                            setShowDialogContent('armor');
-                            setItemCategory('armor');
-                        }} />
+
+                    <div className="category-button" onClick={() => {
+                        setShowDialogContent('armor');
+                        setItemCategory('armor');
+                    }} >
+                        <div className="category-background"></div>
+                        <GiLeatherArmor />
                         <span className="category-label">Armor</span>
                     </div>
-
-                    <div className="category-button">
-                        <GiStandingPotion onClick={() => {
-                            setShowDialogContent('consumable');
-                            setItemCategory('consumable');
-                        }} />
+                    <div className="category-button" onClick={() => {
+                        setShowDialogContent('consumable');
+                        setItemCategory('consumable');
+                    }}>
+                        <div className="category-background"></div>
+                        <GiStandingPotion />
                         <span className="category-label">Items</span>
                     </div>
                 </div>
@@ -248,7 +260,7 @@ const CreateItemButton = () => {
 
     return (
         <>
-            <button onClick={() => setCreateItemDialogOpen(true)}> New Item </button>
+            <button className='create-item-button' onClick={() => setCreateItemDialogOpen(true)}> ADD ITEM </button>
             <Dialog
                 className={'createItemDialog'}
                 header={

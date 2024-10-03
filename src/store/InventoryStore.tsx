@@ -11,6 +11,7 @@ export type itemType = {
     qualities?: string[],
     flaws?: string[],
     amount?: string,
+    description?: string,
 }
 
 
@@ -21,6 +22,7 @@ type itemStore = {
     addItem: (item: itemType) => void,
     deleteItem: (id: number) => void,
     updateItem: (item: itemType) => void,
+    updateItemDescription: (id: number, description: string) => void,
     updateMaxEncumbrance: (encumbrance: number) => void,
     updateWealth: (wealth: number, currency: string) => void,
 }
@@ -47,6 +49,15 @@ const useItemStore = create<itemStore>()((set) => ({
         const item_index = items.findIndex((i: itemType) => i.id === item.id);
         if (item_index !== -1) {
             items[item_index] = { ...item };
+        }
+        localStorage.setItem('InventoryItems', JSON.stringify(items));
+        return { items: [...items] }
+    }),
+    updateItemDescription: (id, description) => set((state) => {
+        let items = [...state.items];
+        const item_index = items.findIndex((item: itemType) => item.id === id);
+        if (item_index !== -1) {
+            items[item_index].description = description;
         }
         localStorage.setItem('InventoryItems', JSON.stringify(items));
         return { items: [...items] }
