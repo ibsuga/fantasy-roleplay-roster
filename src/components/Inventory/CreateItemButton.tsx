@@ -99,7 +99,7 @@ const CreateItemButton = () => {
     const getDialogContent = () => {
         switch (showDialogContent) {
             case 'weapon':
-                return <div className="create-weapon-dialog">
+                return <div className="weapon-dialog">
                     <div className="item-name">
                         <label>NAME</label>
                         <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
@@ -128,12 +128,14 @@ const CreateItemButton = () => {
 
                     <div className="item-bottom-section">
                         <div>
-                            <label>DAMAGE</label>
-                            <input type="number" value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
-                            <div>
-                                <input type="checkbox" checked={itemDamageSb} onChange={(e: any) => setItemDamageSb(e.target.checked)} />
-                                <label>Use SB</label>
+                            <div className="item-damage">
+                                <label>DAMAGE</label>
+                                <div>
+                                    <input type="checkbox" checked={itemDamageSb} onChange={(e: any) => setItemDamageSb(e.target.checked)} />
+                                    <label>Use SB</label>
+                                </div>
                             </div>
+                            <input type="number" value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
                         </div>
                         <div>
                             <label>RANGE</label>
@@ -144,26 +146,13 @@ const CreateItemButton = () => {
                             <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
                         </div>
                     </div>
-
-                    {/* 
-                    <label>ITEM CATEGORY</label>
-                    <Dropdown
-                        value={itemCategory}
-                        onChange={(e: any) => setItemCategory(e.target.value)}
-                        options={itemCategories}
-                        optionLabel="name"
-                        placeholder="Select a Category"
-                    /> */}
-
                 </div>
             case 'armor':
-                return <>
-                    <label>ITEM NAME</label>
-                    <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
-
-                    <label>ITEM ENCUMBRANCE</label>
-                    <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
-
+                return <div className="armor-dialog">
+                    <div className="item-name">
+                        <label>ITEM NAME</label>
+                        <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
+                    </div>
                     <div className='item-traits'>
                         <div>
                             <label>ITEM QUALITIES</label>
@@ -184,18 +173,19 @@ const CreateItemButton = () => {
                             />
                         </div>
                     </div>
-                </>
+                    <div className="item-bottom-section">
+                        <div>
+                            <label>ITEM ENCUMBRANCE</label>
+                            <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+                        </div>
+                    </div>
+                </div>
             case 'consumable':
-                return <>
-                    <label>ITEM NAME</label>
-                    <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
-
-                    <label>ITEM ENCUMBRANCE</label>
-                    <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
-
-                    <label>AMOUNT</label>
-                    <input type="text" value={itemAmount} onChange={(e: any) => setItemAmount(e.target.value)} />
-
+                return <div className="consumable-dialog">
+                    <div className="item-name">
+                        <label>ITEM NAME</label>
+                        <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
+                    </div>
                     <div className='item-traits'>
                         <div>
                             <label>ITEM QUALITIES</label>
@@ -216,7 +206,17 @@ const CreateItemButton = () => {
                             />
                         </div>
                     </div>
-                </>
+                    <div className="item-bottom-section">
+                        <div>
+                            <label>ITEM ENCUMBRANCE</label>
+                            <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>AMOUNT</label>
+                            <input type="text" value={itemAmount} onChange={(e: any) => setItemAmount(e.target.value)} />
+                        </div>
+                    </div>
+                </div>
             default:
                 return <div className="item-category-select">
                     <div className="category-button" onClick={() => {

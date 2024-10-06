@@ -44,7 +44,8 @@
 
 /*TOOL BAR*/
 .Inventory .tools-bar {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto min-content;
     grid-column-start: 2;
     grid-row-start: 2;
     text-align: end;
@@ -60,6 +61,7 @@
 }
 
 .Inventory .tools-bar .inventory-search-bar input {
+    width: 100%;
     background: none;
     color: hsl(0, 0%, 80%);
     font-family: var(--font-default);
@@ -70,7 +72,6 @@
     border-left: none;
     border-right: none;
     margin-right: 1em;
-    width: 22em;
     height: 2em;
     transition: 0.25s;
 }
@@ -87,10 +88,6 @@
 
 /*CREATE ITEM BUTTON*/
 .Inventory .tools-bar .create-item-button {
-    /* width: 6em;
-    height: 3em; */
-    /* border: 2px solid hsl(0, 0%, 60%); */
-    /* background-color: hsla(0, 0%, 0%, 0.5); */
     text-wrap: nowrap;
     font-family: var(--font-default);
     font-weight: bold;
@@ -108,28 +105,6 @@
 .Inventory .tools-bar .create-item-button:hover {
     color: var(--highlight-color-brown);
     border-color: var(--highlight-color-brown);
-}
-
-/*ITEM EDIT BUTTON*/
-.Inventory .edit-button {
-    font-size: 1.25em;
-    transition: 0.5s;
-}
-
-.Inventory .edit-button:hover {
-    color: var(--highlight-color-brown);
-    cursor: pointer;
-}
-
-/*ITEM DELETE BUTTON*/
-.Inventory .delete-button {
-    font-size: 1.25em;
-    transition: 0.5s;
-}
-
-.Inventory .delete-button:hover {
-    color: hsl(0, 60%, 40%);
-    cursor: pointer;
 }
 
 .Inventory .items {
@@ -319,6 +294,7 @@
     border-radius: 2px;
     padding: 0.5rem;
     color: hsl(210, 5%, 75%);
+    max-height: 2.5em;
 }
 
 .createItemDialog .p-dialog-content input:focus {
@@ -333,14 +309,15 @@
     padding: 0.5rem;
 }
 
-.createItemDialog .create-weapon-dialog {
+.createItemDialog .weapon-dialog,
+.createItemDialog .armor-dialog,
+.createItemDialog .consumable-dialog {
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-template-rows: auto auto auto;
 }
 
 .createItemDialog .item-name {
-    /* width: 10em; */
     display: grid;
     grid-column-start: 1;
     grid-column-end: 4;
@@ -362,11 +339,25 @@
     grid-row-start: 3;
     gap: 1em;
     text-align: center;
+    justify-content: center;
     background-color: hsl(0, 0%, 0%, 0.3);
 }
 
+.createItemDialog .item-bottom-section div {
+    display: grid;
+}
 
+.createItemDialog .item-bottom-section .item-damage {
+    display: grid;
+    grid-template-columns: min-content auto;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
 
+.createItemDialog .item-bottom-section .item-damage div {
+    display: flex;
+}
 
 .p-dropdown-items-wrapper,
 .p-multiselect-items-wrapper {
@@ -451,18 +442,13 @@
 /*DIALOG FOOTER*/
 .createItemDialog .dialog-footer {
     display: flex;
-    /* grid-template-columns: auto auto; */
-    /* justify-content: center; */
     gap: 1em;
-    /* padding-top: 2em; */
 }
 
 .createItemDialog .footer-button {
-    /* background-color: hsl(0, 0%, 5%, 0.9); */
     background-color: hsl(0, 0%, 30%, 0.4);
     color: hsl(0, 0%, 80%);
     border: 1px solid hsla(0, 0%, 50%, 0.5);
-    /* border-radius: 2px; */
     cursor: pointer;
     font-family: var(--font-default);
     font-weight: bold;

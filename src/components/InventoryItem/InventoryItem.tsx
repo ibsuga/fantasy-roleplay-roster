@@ -1,8 +1,9 @@
 import './InventoryItem.css';
 import useItemStore from '../../store/InventoryStore';
 import EditItemButton from '../Inventory/EditItemButton';
-import { FaRegWindowClose } from "react-icons/fa";
 import { useState } from 'react';
+import { FaRegWindowClose } from "react-icons/fa";
+import { GoNote } from "react-icons/go";
 
 
 const InventoryItem = (props: {
@@ -27,11 +28,10 @@ const InventoryItem = (props: {
     return (
         <div className="InventoryItem">
             <div className='header'>
-
                 <div className='item-name'>{props.name}</div>
 
-                <div className='item-stats'>
-                    <button onClick={() => setShowDescription(!showDescription)}>Desc.</button>
+                <div className='item-tools'>
+                    <GoNote onClick={() => setShowDescription(!showDescription)} />
                     <EditItemButton id={props.id} />
                     <div className='delete-button'>
                         <FaRegWindowClose onClick={() => deleteItem(props.id)} />

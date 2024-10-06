@@ -1,6 +1,6 @@
 .InventoryItem {
     background: hsla(0, 0%, 0%, 0.5);
-    border-radius: 2px;
+    border-radius: 5px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -10,34 +10,52 @@
     display: grid;
     grid-template-rows: min-content auto;
     user-select: none;
-    height: 7em;
+    /* height: 8em; */
+    width: 100%;
 }
 
 .InventoryItem>.header {
-    display: flex;
-    gap: 0.5em;
-    padding: 0.25em;
+    display: grid;
+    grid-template-columns: auto min-content;
     align-items: center;
 }
 
 .InventoryItem>.header .item-name {
     font-family: var(--font-headers);
-    font-size: var(--font-size-headers-small);
     color: var(--font-color-default);
+    font-size: 20px;
+    padding-left: 0.25em;
 }
 
-.InventoryItem>.header .item-stats {
-    display: flex;
-    gap: 0.5em;
-    right: 0;
-    margin-left: auto;
-    color: var(--font-color-default);
-}
-
-.InventoryItem>.header .item-stats>* {
+.InventoryItem>.header .item-tools {
     display: flex;
     align-items: center;
-    gap: 0.25em;
+    height: 100%;
+    border-radius: 2px;
+    color: hsl(210, 5%, 35%);
+    border-radius: 0px 5px 0px 5px;
+    background-color: hsla(0, 0%, 0%, 0.3);
+}
+
+.InventoryItem>.header .item-tools>* {
+    display: flex;
+    padding: 0.25em;
+    border-radius: 5px;
+    padding: 0em 1.5em;
+}
+
+.InventoryItem .header .item-tools svg {
+    font-size: 20px;
+    transition: 0.25s;
+}
+
+.InventoryItem .header .item-tools svg:hover {
+    cursor: pointer;
+    color: var(--highlight-color-brown);
+}
+
+.InventoryItem .header .item-tools svg:active {
+    transform: scale(0.9);
 }
 
 .InventoryItem>.content {
@@ -48,12 +66,14 @@
 
 .InventoryItem>.content .traits {
     display: flex;
-    gap: 1em;
+    min-height: 1.5em;
     width: 100%;
     color: var(--font-color-default-faint);
     padding: 0.25em;
+    gap: 1em;
     font-style: italic;
     text-transform: capitalize;
+    flex-wrap: wrap;
 }
 
 .InventoryItem .content .traits .trait-qualities,

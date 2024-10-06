@@ -56,26 +56,16 @@ const EditItemButton = (props: {
     const getDialogContent = () => {
         switch (selectedItem?.category) {
             case 'weapon':
-                return <>
-                    <label>ITEM NAME</label>
-                    <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
+                return <div className="weapon-dialog">
 
-                    <label>ITEM ENCUMBRANCE</label>
-                    <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
-
-                    <div>
-                        <label>ITEM DAMAGE</label>
-                        <input type="number" value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
-                        <input type="checkbox" checked={itemDamageSb} onChange={(e: any) => setItemDamageSb(e.target.checked)} />
-                        <label>Use SB</label>
+                    <div className="item-name">
+                        <label>NAME</label>
+                        <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
                     </div>
-
-                    <label>ITEM RANGE</label>
-                    <input type="text" value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
 
                     <div className='item-traits'>
                         <div>
-                            <label>ITEM QUALITIES</label>
+                            <label>QUALITIES</label>
                             <MultiSelect
                                 value={itemQualities}
                                 onChange={(e: any) => setItemQualities(e.value)}
@@ -84,7 +74,7 @@ const EditItemButton = (props: {
                             />
                         </div>
                         <div>
-                            <label>ITEM FLAWS</label>
+                            <label>FLAWS</label>
                             <MultiSelect
                                 value={itemFlaws}
                                 onChange={(e: any) => setItemFlaws(e.value)}
@@ -93,15 +83,34 @@ const EditItemButton = (props: {
                             />
                         </div>
                     </div>
-                </>
+
+                    <div className="item-bottom-section">
+                        <div>
+                            <div className="item-damage">
+                                <label>DAMAGE</label>
+                                <div>
+                                    <input type="checkbox" checked={itemDamageSb} onChange={(e: any) => setItemDamageSb(e.target.checked)} />
+                                    <label>Use SB</label>
+                                </div>
+                            </div>
+                            <input type="number" value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>RANGE</label>
+                            <input type="text" value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>ENCUMBRANCE</label>
+                            <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+                        </div>
+                    </div>
+                </div>
             case 'armor':
-                return <>
-                    <label>ITEM NAME</label>
-                    <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
-
-                    <label>ITEM ENCUMBRANCE</label>
-                    <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
-
+                return <div className="armor-dialog">
+                    <div className="item-name">
+                        <label>ITEM NAME</label>
+                        <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
+                    </div>
                     <div className='item-traits'>
                         <div>
                             <label>ITEM QUALITIES</label>
@@ -122,18 +131,19 @@ const EditItemButton = (props: {
                             />
                         </div>
                     </div>
-                </>
+                    <div className="item-bottom-section">
+                        <div>
+                            <label>ITEM ENCUMBRANCE</label>
+                            <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+                        </div>
+                    </div>
+                </div>
             case 'consumable':
-                return <>
-                    <label>ITEM NAME</label>
-                    <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
-
-                    <label>ITEM ENCUMBRANCE</label>
-                    <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
-
-                    <label>AMOUNT</label>
-                    <input type="text" value={itemAmount} onChange={(e: any) => setItemAmount(e.target.value)} />
-
+                return <div className="consumable-dialog">
+                    <div className="item-name">
+                        <label>ITEM NAME</label>
+                        <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
+                    </div>
                     <div className='item-traits'>
                         <div>
                             <label>ITEM QUALITIES</label>
@@ -154,7 +164,17 @@ const EditItemButton = (props: {
                             />
                         </div>
                     </div>
-                </>
+                    <div className="item-bottom-section">
+                        <div>
+                            <label>ITEM ENCUMBRANCE</label>
+                            <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>AMOUNT</label>
+                            <input type="text" value={itemAmount} onChange={(e: any) => setItemAmount(e.target.value)} />
+                        </div>
+                    </div>
+                </div>
         }
     }
 
@@ -170,10 +190,21 @@ const EditItemButton = (props: {
                 'flaws': itemFlaws,
                 'category': selectedItem.category,
                 'availability': selectedItem.availability,
-                'amount': selectedItem.amount
+                'amount': selectedItem.amount,
+                'description': selectedItem.description
             }
             updateItem(edited_item);
             setEditItemDialogOpen(false);
+        }
+    }
+
+    //Edit Item Dialog Header content depending on selected category.
+    const getDialogHeader = () => {
+        switch (selectedItem?.category) {
+            case 'weapon': return <span>Editing Weapon</span>
+            case 'armor': return <span>Editing Armor</span>
+            case 'consumable': return <span>Editing Item</span>
+            default: return <span></span>
         }
     }
 
@@ -185,7 +216,7 @@ const EditItemButton = (props: {
 
             <Dialog
                 className={'createItemDialog'}
-                header="Edit Item"
+                header={getDialogHeader}
                 visible={editItemDialogOpen}
                 onHide={() => setEditItemDialogOpen(false)}
                 onShow={() => {
@@ -199,10 +230,10 @@ const EditItemButton = (props: {
                     setItemAmount(selectedItem?.amount);
                 }}
                 footer={
-                    <>
-                        <button onClick={handleUpdateItem}> SAVE </button>
-                        <button onClick={() => setEditItemDialogOpen(false)}> CLOSE </button>
-                    </>
+                    <div className="dialog-footer">
+                        <button className='footer-button' onClick={handleUpdateItem}> SAVE </button>
+                        <button className='footer-button' onClick={() => setEditItemDialogOpen(false)}> CLOSE </button>
+                    </div>
                 }
             >
                 {getDialogContent()}
