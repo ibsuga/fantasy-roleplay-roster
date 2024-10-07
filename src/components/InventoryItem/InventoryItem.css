@@ -179,3 +179,7 @@
 .InventoryItem .content .item-description textarea:focus {
     outline: none;
 }
+
+.InventoryItem .content .item-description textarea::placeholder {
+    color: hsl(0, 0%, 40%);
+}

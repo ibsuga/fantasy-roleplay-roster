@@ -44,8 +44,10 @@ const InventoryItem = (props: {
                     <>
                         <div className='item-description'>
                             <textarea
+                                placeholder='Add item description.'
                                 value={props.description}
                                 spellCheck={false}
+                                rows={2}
                                 onChange={(e) => updateItemDescription(props.id, e.target.value)}></textarea>
                         </div>
                     </>

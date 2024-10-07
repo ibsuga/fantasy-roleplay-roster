@@ -29,23 +29,6 @@ const CreateItemButton = () => {
     //Store
     const addItem = useItemStore((state) => state.addItem);
 
-    //Handles closing dialog without saving item.
-    const handleClose = () => {
-        setCreateItemDialogOpen(false);
-        setItemName('');
-        setItemEncumbrance('');
-        setItemDamage('');
-        setItemRange('');
-        setItemCategory(null);
-        setItemAvailability('');
-        setItemQualities([]);
-        setItemFlaws([]);
-        setItemAmount('');
-        setTimeout(() => {
-            setShowDialogContent('');
-        }, 300)
-    }
-
     //Handles item creation.
     const handleCreateItem = () => {
         if (itemName !== '') {
@@ -66,6 +49,24 @@ const CreateItemButton = () => {
             setCreateItemDialogOpen(false);
         }
     }
+
+    //Handles closing dialog without saving item.
+    const handleClose = () => {
+        setCreateItemDialogOpen(false);
+        setItemName('');
+        setItemEncumbrance('');
+        setItemDamage('');
+        setItemRange('');
+        setItemCategory(null);
+        setItemAvailability('');
+        setItemQualities([]);
+        setItemFlaws([]);
+        setItemAmount('');
+        setTimeout(() => {
+            setShowDialogContent('');
+        }, 300)
+    }
+
     //Item qualities & flaws.
     const { qualities_options, flaws_options } = useMemo(() => {
         setItemQualities([]);
@@ -93,40 +94,45 @@ const CreateItemButton = () => {
         }
     }, [itemCategory])
 
-
-
     //Create Item Dialog content depending on selected item category.
     const getDialogContent = () => {
         switch (showDialogContent) {
             case 'weapon':
                 return <div className="weapon-dialog">
-                    <div className="item-name">
-                        <label>NAME</label>
-                        <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
-                    </div>
 
-                    <div className='item-traits'>
-                        <div>
-                            <label>QUALITIES</label>
-                            <MultiSelect
-                                value={itemQualities}
-                                onChange={(e: any) => setItemQualities(e.value)}
-                                options={qualities_options}
-                                showSelectAll={false}
-                            />
-                        </div>
-                        <div>
-                            <label>FLAWS</label>
-                            <MultiSelect
-                                value={itemFlaws}
-                                onChange={(e: any) => setItemFlaws(e.value)}
-                                options={flaws_options}
-                                showSelectAll={false}
-                            />
+                    <div className="top-section">
+                        <div className="item-name">
+                            <label>NAME</label>
+                            <input type="text" placeholder='Item name' value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
                         </div>
                     </div>
 
-                    <div className="item-bottom-section">
+                    <div className="mid-section">
+                        <div className='item-traits'>
+                            <div>
+                                <label className="qualities">QUALITIES</label>
+                                <MultiSelect
+                                    placeholder="Select qualities"
+                                    value={itemQualities}
+                                    onChange={(e: any) => setItemQualities(e.value)}
+                                    options={qualities_options}
+                                    showSelectAll={false}
+                                />
+                            </div>
+                            <div>
+                                <label className="flaws">FLAWS</label>
+                                <MultiSelect
+                                    placeholder="Select flaws"
+                                    value={itemFlaws}
+                                    onChange={(e: any) => setItemFlaws(e.value)}
+                                    options={flaws_options}
+                                    showSelectAll={false}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bottom-section">
                         <div>
                             <div className="item-damage">
                                 <label>DAMAGE</label>
@@ -135,85 +141,103 @@ const CreateItemButton = () => {
                                     <label>Use SB</label>
                                 </div>
                             </div>
-                            <input type="number" value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
+                            <input type="number" placeholder='Item Damage' value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
                         </div>
                         <div>
                             <label>RANGE</label>
-                            <input type="text" value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
+                            <input type="text" placeholder='Item Range' value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
                         </div>
                         <div>
                             <label>ENCUMBRANCE</label>
-                            <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+                            <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
                         </div>
                     </div>
                 </div>
             case 'armor':
                 return <div className="armor-dialog">
-                    <div className="item-name">
-                        <label>ITEM NAME</label>
-                        <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
-                    </div>
-                    <div className='item-traits'>
-                        <div>
-                            <label>ITEM QUALITIES</label>
-                            <MultiSelect
-                                value={itemQualities}
-                                onChange={(e: any) => setItemQualities(e.value)}
-                                options={qualities_options}
-                                showSelectAll={false}
-                            />
-                        </div>
-                        <div>
-                            <label>ITEM FLAWS</label>
-                            <MultiSelect
-                                value={itemFlaws}
-                                onChange={(e: any) => setItemFlaws(e.value)}
-                                options={flaws_options}
-                                showSelectAll={false}
-                            />
+
+                    <div className="top-section">
+                        <div className="item-name">
+                            <label>NAME</label>
+                            <input type="text" placeholder='Item name' value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
                         </div>
                     </div>
-                    <div className="item-bottom-section">
+
+                    <div className="mid-section">
+                        <div className='item-traits'>
+                            <div>
+                                <label className="qualities">QUALITIES</label>
+                                <MultiSelect
+                                    placeholder="Select qualities"
+                                    value={itemQualities}
+                                    onChange={(e: any) => setItemQualities(e.value)}
+                                    options={qualities_options}
+                                    showSelectAll={false}
+                                />
+                            </div>
+                            <div>
+                                <label className="flaws">FLAWS</label>
+                                <MultiSelect
+                                    placeholder="Select flaws"
+                                    value={itemFlaws}
+                                    onChange={(e: any) => setItemFlaws(e.value)}
+                                    options={flaws_options}
+                                    showSelectAll={false}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bottom-section">
                         <div>
-                            <label>ITEM ENCUMBRANCE</label>
-                            <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+                            <label>ENCUMBRANCE</label>
+                            <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
                         </div>
                     </div>
                 </div>
             case 'consumable':
                 return <div className="consumable-dialog">
-                    <div className="item-name">
-                        <label>ITEM NAME</label>
-                        <input type="text" value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
-                    </div>
-                    <div className='item-traits'>
-                        <div>
-                            <label>ITEM QUALITIES</label>
-                            <MultiSelect
-                                value={itemQualities}
-                                onChange={(e: any) => setItemQualities(e.value)}
-                                options={qualities_options}
-                                showSelectAll={false}
-                            />
-                        </div>
-                        <div>
-                            <label>ITEM FLAWS</label>
-                            <MultiSelect
-                                value={itemFlaws}
-                                onChange={(e: any) => setItemFlaws(e.value)}
-                                options={flaws_options}
-                                showSelectAll={false}
-                            />
+
+                    <div className="top-section">
+                        <div className="item-name">
+                            <label>NAME</label>
+                            <input type="text" placeholder='Item name' value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
                         </div>
                     </div>
-                    <div className="item-bottom-section">
+
+                    <div className="mid-section">
+                        <div className='item-traits'>
+                            <div>
+                                <label className="qualities">QUALITIES</label>
+                                <MultiSelect
+                                    placeholder="Select qualities"
+                                    value={itemQualities}
+                                    onChange={(e: any) => setItemQualities(e.value)}
+                                    options={qualities_options}
+                                    showSelectAll={false}
+                                />
+                            </div>
+                            <div>
+                                <label className="flaws">FLAWS</label>
+                                <MultiSelect
+                                    placeholder="Select flaws"
+                                    value={itemFlaws}
+                                    onChange={(e: any) => setItemFlaws(e.value)}
+                                    options={flaws_options}
+                                    showSelectAll={false}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bottom-section">
                         <div>
-                            <label>ITEM ENCUMBRANCE</label>
-                            <input type="text" value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+                            <label>ENCUMBRANCE</label>
+                            <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
                         </div>
                         <div>
                             <label>AMOUNT</label>
-                            <input type="text" value={itemAmount} onChange={(e: any) => setItemAmount(e.target.value)} />
+                            <input type="text" placeholder='Item Amount' value={itemAmount} onChange={(e: any) => setItemAmount(e.target.value)} />
                         </div>
                     </div>
                 </div>
@@ -248,7 +272,7 @@ const CreateItemButton = () => {
         }
     }
 
-    //Create Item Dialog Header content depending on selected category.
+    //Create Item Dialog HEADER content depending on selected category.
     const getDialogHeader = () => {
         switch (showDialogContent) {
             case 'weapon': return <span>New Weapon</span>
@@ -287,6 +311,7 @@ const CreateItemButton = () => {
                 }
                 closable={false}
                 draggable={false}
+                resizable={false}
             >
                 {getDialogContent()}
             </Dialog>
