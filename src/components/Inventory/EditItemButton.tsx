@@ -21,7 +21,10 @@ const EditItemButton = (props: {
     const [itemQualities, setItemQualities] = useState<string[] | undefined>([]);
     const [itemFlaws, setItemFlaws] = useState<string[] | undefined>([]);
     const [itemAmount, setItemAmount] = useState<string | undefined>('');
-
+    const [itemLocations, setItemLocations] = useState<string[] | undefined>([]);
+    const [itemArmourPoints, setItemArmourPoints] = useState<number | undefined>(0);
+    const [itemCategory, setItemCategory] = useState<string | any>('');
+    const [itemSubCategory, setItemSubCategory] = useState<string[] | undefined>([]);
     const [editItemDialogOpen, setEditItemDialogOpen] = useState(false);
 
     //Item qualities & flaws.
@@ -51,6 +54,8 @@ const EditItemButton = (props: {
         }
     }, [selectedItem?.category])
 
+    //Armor Item Locations
+    const armorLocations = ['Head', 'Body', 'Arms', 'Legs'];
 
     //Finds item by id.
     const getDialogContent = () => {
@@ -106,6 +111,16 @@ const EditItemButton = (props: {
                             <input type="text" placeholder='Item Range' value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
                         </div>
                         <div>
+                            <label>SUB-CATEGORY</label>
+                            <MultiSelect
+                                placeholder="Select Sub-Category"
+                                value={itemSubCategory}
+                                onChange={(e) => setItemSubCategory(e.value)}
+                                options={subCategoryOptions}
+                                showSelectAll={false}
+                            />
+                        </div>
+                        <div>
                             <label>ENCUMBRANCE</label>
                             <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
                         </div>
@@ -147,6 +162,30 @@ const EditItemButton = (props: {
                     </div>
 
                     <div className="bottom-section">
+                        <div>
+                            <label>LOCATIONS</label>
+                            <MultiSelect
+                                placeholder="Select locations"
+                                value={itemLocations}
+                                onChange={(e) => setItemLocations(e.value)}
+                                options={armorLocations}
+                                showSelectAll={false}
+                            />
+                        </div>
+                        <div>
+                            <label>ARMOUR POINTS</label>
+                            <input type="number" placeholder="Set Armour Points" value={itemArmourPoints} onChange={(e: any) => setItemArmourPoints(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>SUB-CATEGORY</label>
+                            <MultiSelect
+                                placeholder="Select Sub-Category"
+                                value={itemSubCategory}
+                                onChange={(e) => setItemSubCategory(e.value)}
+                                options={subCategoryOptions}
+                                showSelectAll={false}
+                            />
+                        </div>
                         <div>
                             <label>ENCUMBRANCE</label>
                             <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
@@ -213,8 +252,11 @@ const EditItemButton = (props: {
                 'qualities': itemQualities,
                 'flaws': itemFlaws,
                 'category': selectedItem.category,
+                'subCategory': itemSubCategory,
                 'availability': selectedItem.availability,
                 'amount': selectedItem.amount,
+                'locations': itemLocations,
+                'armourPoints': itemArmourPoints,
                 'description': selectedItem.description
             }
             updateItem(edited_item);
@@ -231,6 +273,15 @@ const EditItemButton = (props: {
             default: return <span></span>
         }
     }
+
+    //Item Sub Category options
+    const subCategory: any = {
+        'weapon': ['Polearm', 'One-Handed'],
+        'armor': ['Leather', 'Plate'],
+        'items': ['Consumable', 'Container']
+    }
+    let subCategoryOptions = subCategory[itemCategory] || [];
+
 
     return (
         <>
@@ -252,6 +303,10 @@ const EditItemButton = (props: {
                     setItemQualities(selectedItem?.qualities);
                     setItemFlaws(selectedItem?.flaws);
                     setItemAmount(selectedItem?.amount);
+                    setItemLocations(selectedItem?.locations);
+                    setItemArmourPoints(selectedItem?.armourPoints);
+                    setItemCategory(selectedItem?.category);
+                    setItemSubCategory(selectedItem?.subCategory);
                 }}
                 footer={
                     <div className="dialog-footer">

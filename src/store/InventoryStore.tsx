@@ -7,9 +7,12 @@ export type itemType = {
     damage?: { value: string, useSB: boolean },
     range: string,
     category: string,
+    subCategory?: string[],
     availability: string,
     qualities?: string[],
     flaws?: string[],
+    locations?: string[],
+    armourPoints?: number,
     amount?: string,
     description?: string,
 }

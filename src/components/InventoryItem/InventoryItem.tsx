@@ -4,6 +4,7 @@ import EditItemButton from '../Inventory/EditItemButton';
 import { useState } from 'react';
 import { FaRegWindowClose } from "react-icons/fa";
 import { GoNote } from "react-icons/go";
+import { GiCrocSword, GiChestArmor, GiPotionBall } from "react-icons/gi";
 
 
 const InventoryItem = (props: {
@@ -13,9 +14,12 @@ const InventoryItem = (props: {
     damage: { value: number, useSB: boolean },
     range: string,
     category: string,
+    subCategory: string[],
     availability: string,
     qualities?: string[],
     flaws?: string[],
+    locations?: string[],
+    armourPoints?: number,
     description?: string,
 
 }) => {
@@ -24,9 +28,69 @@ const InventoryItem = (props: {
 
     const [showDescription, setShowDescription] = useState(false);
 
+    //Sets item stats depending on item category.
+    const getItemStatsContent = () => {
+        switch (props.category) {
+            case 'weapon':
+                return <div className='item-stats'>
+                    <div className='stat'>
+                        <div className="label">DAMAGE</div>
+                        <span>{props.damage?.useSB ? '+SB+' : ''}</span>
+                        <span>{props.damage?.value}</span>
+                    </div>
+                    <div className='stat'>
+                        <div className="label">RANGE</div>
+                        <span>{props.range}</span>
+                    </div>
+                    <div className='stat'>
+                        <div className="label">CATEGORY</div>
+                        <span>{props.subCategory}</span>
+                    </div>
+                    <div className='stat'>
+                        <div className="label">ENCUMBRANCE</div>
+                        <div className='encumbrance spaced'> {props.encumbrance} </div>
+                    </div>
+                </div>
+            case 'armor':
+                return <div className='item-stats'>
+                    <div className='stat'>
+                        <div className='label'>LOCATIONS</div>
+                        <span className='locations'>
+                            {
+                                props.locations?.map((locations: string) => {
+                                    return <span>{locations}</span>
+
+                                })
+                            }
+                        </span>
+                    </div>
+                    <div className='stat'>
+                        <div className='label'>ARMOUR POINTS</div>
+                        <span>{props.armourPoints}</span>
+                    </div>
+                    <div className='stat'>
+                        <div className='label'>CATEGORY</div>
+                        <span>{props.subCategory}</span>
+                    </div>
+                    <div className='stat'>
+                        <div className='label'>ENCUMBRANCE</div>
+                        <span>{props.encumbrance}</span>
+                    </div>
+                </div>
+            default: return <span>test</span>
+        }
+    }
+
+    //Sets background icon for each category.
+    const itemBackgroundIcons: any = {
+        'weapon': <GiCrocSword />,
+        'armor': <GiChestArmor />,
+        'consumable': <GiPotionBall />,
+    }
 
     return (
         <div className="InventoryItem">
+            <div className="background-icon"> {itemBackgroundIcons[props.category]} </div>
             <div className='header'>
                 <div className='item-name'>{props.name}</div>
 
@@ -73,25 +137,7 @@ const InventoryItem = (props: {
                                 </span>
                             }
                         </div>
-                        <div className='item-stats'>
-                            <div className='stat'>
-                                <div className="label">DAMAGE</div>
-                                <span>{props.damage?.useSB ? '+SB+' : ''}</span>
-                                <span>{props.damage?.value}</span>
-                            </div>
-                            <div className='stat'>
-                                <div className="label">RANGE</div>
-                                <span>{props.range}</span>
-                            </div>
-                            <div className='stat'>
-                                <div className="label">CATEGORY</div>
-                                <span>{props.category}</span>
-                            </div>
-                            <div className='stat'>
-                                <div className="label">ENCUMBRANCE</div>
-                                <div className='encumbrance spaced'> {props.encumbrance} </div>
-                            </div>
-                        </div>
+                        {getItemStatsContent()}
                     </>
                 }
             </div>

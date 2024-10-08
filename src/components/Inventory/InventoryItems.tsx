@@ -50,23 +50,28 @@ export const InventoryItems = () => {
                 <CreateItemButton />
             </div>
             <div className='items'>
-                {
-                    filtered_items.map((item: any, index: number) =>
-                        <InventoryItem
-                            key={index}
-                            id={item.id}
-                            name={item.name}
-                            encumbrance={item.encumbrance}
-                            damage={item.damage}
-                            range={item.range}
-                            category={item.category}
-                            availability={item.availability}
-                            qualities={item.qualities}
-                            flaws={item.flaws}
-                            description={item.description}
-                        />
-                    )
-                }
+                <div>
+                    {
+                        filtered_items.map((item: any, index: number) =>
+                            <InventoryItem
+                                key={index}
+                                id={item.id}
+                                name={item.name}
+                                encumbrance={item.encumbrance}
+                                damage={item.damage}
+                                range={item.range}
+                                category={item.category}
+                                subCategory={item.subCategory}
+                                availability={item.availability}
+                                qualities={item.qualities}
+                                flaws={item.flaws}
+                                description={item.description}
+                                locations={item.locations}
+                                armourPoints={item.armourPoints}
+                            />
+                        )
+                    }
+                </div>
             </div>
         </>
     )

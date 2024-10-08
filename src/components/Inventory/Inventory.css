@@ -108,13 +108,16 @@
 }
 
 .Inventory .items {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
     grid-column-start: 2;
     grid-row-start: 3;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.Inventory .items>div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 /*INVENTORY BOTTOM SECTION*/

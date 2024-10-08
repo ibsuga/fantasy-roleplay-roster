@@ -19,10 +19,13 @@ const CreateItemButton = () => {
     const [itemDamageSb, setItemDamageSb] = useState(false);
     const [itemRange, setItemRange] = useState('');
     const [itemCategory, setItemCategory] = useState<any>(null);
+    const [itemSubCategory, setItemSubCategory] = useState<any>([]);
     const [itemAvailability, setItemAvailability] = useState('');
     const [itemQualities, setItemQualities] = useState([]);
     const [itemFlaws, setItemFlaws] = useState([]);
     const [itemAmount, setItemAmount] = useState('');
+    const [itemLocations, setItemLocations] = useState([]);
+    const [itemArmourPoints, setItemArmourPoints] = useState<any>(null);
 
     const [showDialogContent, setShowDialogContent] = useState('');
 
@@ -39,10 +42,13 @@ const CreateItemButton = () => {
                 'damage': itemDamage ? { value: itemDamage, useSB: itemDamageSb } : undefined,
                 'range': itemRange,
                 'category': itemCategory,
+                'subCategory': itemSubCategory,
                 'availability': itemAvailability,
                 'qualities': itemQualities,
                 'flaws': itemFlaws,
                 'amount': itemAmount,
+                'locations': itemLocations,
+                'armourPoints': itemArmourPoints,
             }
             addItem(new_item);
             handleClose();
@@ -62,6 +68,7 @@ const CreateItemButton = () => {
         setItemQualities([]);
         setItemFlaws([]);
         setItemAmount('');
+        setItemSubCategory([]);
         setTimeout(() => {
             setShowDialogContent('');
         }, 300)
@@ -93,6 +100,17 @@ const CreateItemButton = () => {
                 return { 'qualities_options': [], 'flaws_options': [] };
         }
     }, [itemCategory])
+
+    //Item Sub Category options
+    const subCategory: any = {
+        'weapon': ['Polearm', 'One-Handed'],
+        'armor': ['Leather', 'Plate'],
+        'items': ['Consumable', 'Container']
+    }
+    let subCategoryOptions = subCategory[itemCategory] || [];
+
+    //Armor Item Locations
+    const armorLocations = ['Head', 'Body', 'Arms', 'Legs'];
 
     //Create Item Dialog content depending on selected item category.
     const getDialogContent = () => {
@@ -148,6 +166,16 @@ const CreateItemButton = () => {
                             <input type="text" placeholder='Item Range' value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
                         </div>
                         <div>
+                            <label>SUB-CATEGORY</label>
+                            <MultiSelect
+                                placeholder="Select Sub-Category"
+                                value={itemSubCategory}
+                                onChange={(e) => setItemSubCategory(e.value)}
+                                options={subCategoryOptions}
+                                showSelectAll={false}
+                            />
+                        </div>
+                        <div>
                             <label>ENCUMBRANCE</label>
                             <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
                         </div>
@@ -189,6 +217,30 @@ const CreateItemButton = () => {
                     </div>
 
                     <div className="bottom-section">
+                        <div>
+                            <label>LOCATIONS</label>
+                            <MultiSelect
+                                placeholder="Select locations"
+                                value={itemLocations}
+                                onChange={(e) => setItemLocations(e.value)}
+                                options={armorLocations}
+                                showSelectAll={false}
+                            />
+                        </div>
+                        <div>
+                            <label>ARMOUR POINTS</label>
+                            <input type="number" placeholder="Set Armour Points" value={itemArmourPoints} onChange={(e) => setItemArmourPoints(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>SUB-CATEGORY</label>
+                            <MultiSelect
+                                placeholder="Select Sub-Category"
+                                value={itemSubCategory}
+                                onChange={(e) => setItemSubCategory(e.value)}
+                                options={subCategoryOptions}
+                                showSelectAll={false}
+                            />
+                        </div>
                         <div>
                             <label>ENCUMBRANCE</label>
                             <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />

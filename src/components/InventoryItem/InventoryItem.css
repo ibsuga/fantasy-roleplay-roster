@@ -10,8 +10,21 @@
     display: grid;
     grid-template-rows: min-content auto;
     user-select: none;
-    /* height: 8em; */
     width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.InventoryItem .background-icon {
+    position: absolute;
+    color: hsl(0, 0%, 100%, 0.1);
+    font-size: 13em;
+    top: -30%;
+    z-index: -1;
+
+
+    right: 0%;
+    transform: scaleX(-1);
 }
 
 .InventoryItem>.header {
@@ -106,23 +119,27 @@
     grid-template-columns: repeat(4, 1fr);
     background: hsla(0, 0%, 0%, 0.3);
     padding: 0.25em 1em;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
-
-
 
 .InventoryItem>.content .item-stats .stat {
     border-radius: 2px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
     color: var(--font-color-default);
-    padding: 0 0.25em;
+    text-transform: capitalize;
 }
 
 .InventoryItem>.content .item-stats .stat .label {
     font-size: 0.6em;
     color: hsl(210, 5%, 40%);
 }
+
+.InventoryItem>.content .item-stats .stat .locations {
+    display: flex;
+    width: min-content;
+    gap: 0.5em;
+}
+
 
 /*Icons*/
 .InventoryItem>.header .item-stats {
