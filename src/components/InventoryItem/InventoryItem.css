@@ -92,6 +92,7 @@
 .InventoryItem .content .traits .trait-qualities,
 .InventoryItem .content .traits .trait-flaws {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5em;
 }
 
@@ -105,14 +106,73 @@
     color: hsl(210, 5%, 75%);
     text-shadow: 0px 0px 5px hsl(135, 50%, 50%);
     padding: 1px 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.InventoryItem .content .traits .quality:hover {
+    color: hsl(0, 0%, 90%);
+    text-shadow: 0px 0px 10px hsl(135, 50%, 50%), 0px 0px 15px hsl(135, 50%, 50%), 0px 0px 20px hsl(135, 50%, 50%);
 }
 
 .InventoryItem .content .traits .flaw {
     color: hsl(210, 5%, 75%);
     text-shadow: 0px 0px 5px hsl(0, 50%, 50%);
-
     padding: 1px 5px;
+    cursor: pointer;
+    transition: 0.5s;
 }
+
+.InventoryItem .content .traits .flaw:hover {
+    color: hsl(0, 0%, 90%);
+    text-shadow: 0px 0px 10px hsl(0, 50%, 50%), 0px 0px 15px hsl(0, 50%, 50%), 0px 0px 20px hsl(0, 50%, 50%);
+}
+
+/*QUALITIES & FLAWS TOOLTIP*/
+
+.quality-tooltip {
+    display: grid;
+    user-select: none;
+}
+
+.quality-tooltip .header,
+.flaw-tooltip .header {
+    align-content: center;
+}
+
+.quality-tooltip .header span,
+.flaw-tooltip .header span {
+    font-weight: bold;
+    font-size: 88px;
+    font-style: italic;
+    font-family: 'Homemade Apple';
+    position: absolute;
+    right: 0em;
+    bottom: -60px;
+    transform: rotate(10deg);
+}
+
+.quality-tooltip .header div,
+.flaw-tooltip .header div {
+    font-weight: bolder;
+    align-self: center;
+    font-style: italic;
+}
+
+.quality-tooltip .header span {
+    color: hsl(210, 5%, 15%, 0.15);
+    text-shadow: 0px 0px 5px hsl(135, 50%, 50%, 0.15);
+
+}
+
+.flaw-tooltip .header span {
+    color: hsl(210, 5%, 15%, 0.15);
+    text-shadow: 0px 0px 5px hsl(0, 50%, 25%, 0.15);
+
+}
+
+
+
 
 .InventoryItem>.content .item-stats {
     display: grid;

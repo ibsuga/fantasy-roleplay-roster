@@ -4,7 +4,8 @@ import EditItemButton from '../Inventory/EditItemButton';
 import { useState } from 'react';
 import { FaRegWindowClose } from "react-icons/fa";
 import { GoNote } from "react-icons/go";
-import { GiCrocSword, GiChestArmor, GiPotionBall } from "react-icons/gi";
+import { GiCrocSword, GiChestArmor, GiPotionBall, GiPocketBow } from "react-icons/gi";
+import PopMenu from '../PopMenu/PopMenu';
 
 
 const InventoryItem = (props: {
@@ -16,12 +17,13 @@ const InventoryItem = (props: {
     category: string,
     subCategory: string[],
     availability: string,
-    qualities?: string[],
-    flaws?: string[],
+    qualities?: { name: string, description: string }[],
+    flaws?: { name: string, description: string }[],
     locations?: string[],
     armourPoints?: number,
     amount?: number,
     carry?: number,
+    isRanged?: boolean,
     description?: string,
 
 }) => {
@@ -105,7 +107,7 @@ const InventoryItem = (props: {
 
     //Sets background icon for each category.
     const itemBackgroundIcons: any = {
-        'weapon': <GiCrocSword />,
+        'weapon': props.isRanged ? <GiPocketBow /> : <GiCrocSword />,
         'armor': <GiChestArmor />,
         'items': <GiPotionBall />,
     }
@@ -143,8 +145,26 @@ const InventoryItem = (props: {
                             {props.qualities && props.qualities.length > 0 &&
                                 <span className='trait-qualities'>
                                     {
-                                        props.qualities?.map((quality: string) => {
-                                            return <span className='quality'>{quality}</span>
+                                        props.qualities?.map((quality) => {
+                                            return <span className='quality'>
+                                                <PopMenu
+                                                    label={quality.name}
+                                                    content={
+                                                        <div className="quality-tooltip">
+                                                            <div className="header">
+                                                                <span>Quality</span>
+                                                                <div>{quality.name}</div>
+                                                                <hr />
+                                                            </div>
+                                                            <div className="description">
+                                                                <div>{quality.description}</div>
+                                                            </div>
+                                                        </div>}
+
+                                                    positions={['top']}
+                                                    align="center"
+                                                />
+                                            </span>
                                         })
                                     }
                                 </span>
@@ -152,8 +172,26 @@ const InventoryItem = (props: {
                             {props.flaws && props.flaws.length > 0 &&
                                 <span className='trait-flaws'>
                                     {
-                                        props.flaws && props.flaws?.length > 0 && props.flaws?.map((flaw: string) => {
-                                            return <span className='flaw'>{flaw}</span>
+                                        props.flaws && props.flaws?.length > 0 && props.flaws?.map((flaw) => {
+                                            return <span className='flaw'>
+                                                <PopMenu
+                                                    label={flaw.name}
+                                                    content={
+                                                        <div className="flaw-tooltip">
+                                                            <div className="header">
+                                                                <span>Flaw</span>
+                                                                <div>{flaw.name}</div>
+                                                                <hr />
+                                                            </div>
+                                                            <div className="description">
+                                                                <div>{flaw.description}</div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    positions={['top']}
+                                                    align="center"
+                                                />
+                                            </span>
                                         })
                                     }
                                 </span>

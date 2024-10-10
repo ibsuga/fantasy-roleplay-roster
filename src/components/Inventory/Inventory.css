@@ -435,6 +435,36 @@
     display: flex;
 }
 
+.createItemDialog .bottom-section .item-sub-category {
+    display: grid;
+    /* align-content: center; */
+}
+
+.createItemDialog .bottom-section .item-sub-category>div {
+    word-break: keep-all;
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+}
+
+.createItemDialog .bottom-section .item-sub-category>div span {
+    justify-self: center;
+    font-family: 'Caveat';
+    height: 80%;
+    color: white;
+    border-radius: 5px;
+    background: none;
+    line-height: 1em;
+    align-self: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.createItemDialog .bottom-section .item-sub-category>div span:hover {
+    color: var(--highlight-color-brown);
+}
+
 .p-dropdown-items-wrapper,
 .p-multiselect-items-wrapper {
     color: hsl(210, 5%, 75%);

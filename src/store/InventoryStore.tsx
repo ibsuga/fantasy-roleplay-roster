@@ -9,12 +9,13 @@ export type itemType = {
     category: string,
     subCategory?: string[],
     availability: string,
-    qualities?: string[],
-    flaws?: string[],
+    qualities?: { name: string, description: string }[],
+    flaws?: { name: string, description: string }[],
     locations?: string[],
     armourPoints?: number,
     amount?: number,
     carry?: number,
+    isRanged?: boolean,
     description?: string,
 }
 

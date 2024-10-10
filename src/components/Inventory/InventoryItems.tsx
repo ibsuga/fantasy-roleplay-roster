@@ -69,6 +69,7 @@ export const InventoryItems = () => {
                                 locations={item.locations}
                                 carry={item.carry}
                                 amount={item.amount}
+                                isRanged={item.isRanged}
                                 armourPoints={item.armourPoints}
                             />
                         )

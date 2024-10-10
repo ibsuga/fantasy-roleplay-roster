@@ -9,6 +9,7 @@
   flex-direction: column;
   overflow: hidden;
   padding: 0.1em 0;
+  width: 30em;
 }
 
 .popmenu-button {
@@ -34,10 +35,12 @@
   min-width: 10em;
   overflow-y: auto;
   color: hsl(30, 10%, 80%);
-  font-family: 'Asul';
+  font-family: var(--font-default);
   font-size: 0.9em;
   padding: 0.5em;
   box-sizing: border-box;
+  color: hsl(0, 0%, 10%);
+  line-break: auto;
 }
 
 .react-tiny-popover-container {
