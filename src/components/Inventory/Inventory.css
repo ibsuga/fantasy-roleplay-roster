@@ -272,12 +272,12 @@
 
 /* CREATE ITEM DIALOG */
 .createItemDialog {
+    display: grid;
     background-color: hsla(0, 0%, 10%, 0.80);
     backdrop-filter: blur(4px);
     color: hsl(210, 5%, 75%);
     padding: 1rem;
     border-radius: 4px;
-    justify-content: center;
 
     -webkit-mask-image: url(../../assets/mask_rough_edges.png);
     -webkit-mask-mode: alpha;
@@ -292,8 +292,10 @@
 }
 
 .createItemDialog .p-dialog-title {
+    display: flex;
     font-size: 2rem;
-    font-family: 'Rowdies'
+    font-family: 'Rowdies';
+    justify-content: center;
 }
 
 .createItemDialog .p-dialog-content {
@@ -304,7 +306,6 @@
 
 .createItemDialog .p-dialog-content input {
     background-color: transparent;
-    /* border-bottom: 2px solid hsl(210, 5%, 30%); */
     font-size: 16px;
     border-bottom: none;
     border-top: none;
@@ -341,7 +342,7 @@
 /*DIALOG CONTENT*/
 .createItemDialog .weapon-dialog,
 .createItemDialog .armor-dialog,
-.createItemDialog .consumable-dialog {
+.createItemDialog .items-dialog {
     display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto auto;
@@ -351,7 +352,6 @@
     margin: 0em 2em;
     background-color: hsla(0, 0%, 10%, 0.90);
 }
-
 
 .createItemDialog .top-section {
     display: grid;
@@ -503,6 +503,8 @@
 .createItemDialog .dialog-header {
     display: grid;
     grid-template-columns: min-content auto;
+    justify-self: center;
+    width: 95%;
 }
 
 .createItemDialog .back-button {
@@ -517,9 +519,12 @@
 .createItemDialog .back-button svg {
     align-self: center;
     cursor: pointer;
+    position: absolute;
+    left: 1.5em;
+    top: 0.5em;
 }
 
-.createItemDialog span {
+.createItemDialog .dialog-header span {
     justify-self: center;
 }
 

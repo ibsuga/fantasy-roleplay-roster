@@ -20,6 +20,8 @@ const InventoryItem = (props: {
     flaws?: string[],
     locations?: string[],
     armourPoints?: number,
+    amount?: number,
+    carry?: number,
     description?: string,
 
 }) => {
@@ -77,6 +79,26 @@ const InventoryItem = (props: {
                         <span>{props.encumbrance}</span>
                     </div>
                 </div>
+            case 'items':
+                return <div className='item-stats'>
+                    <div className="stat">
+                        <div className="label">CARRY</div>
+                        <span>{props.carry}</span>
+                    </div>
+
+                    <div className='stat'>
+                        <div className="label">AMOUNT</div>
+                        <div>{props.amount}</div>
+                    </div>
+                    <div className='stat'>
+                        <div className="label">CATEGORY</div>
+                        <span>{props.subCategory}</span>
+                    </div>
+                    <div className='stat'>
+                        <div className="label">ENCUMBRANCE</div>
+                        <div> {props.encumbrance} </div>
+                    </div>
+                </div>
             default: return <span>test</span>
         }
     }
@@ -85,7 +107,7 @@ const InventoryItem = (props: {
     const itemBackgroundIcons: any = {
         'weapon': <GiCrocSword />,
         'armor': <GiChestArmor />,
-        'consumable': <GiPotionBall />,
+        'items': <GiPotionBall />,
     }
 
     return (

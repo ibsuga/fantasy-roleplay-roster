@@ -2,7 +2,6 @@ import { Dialog } from "primereact/dialog";
 import { useMemo, useState } from "react";
 import useItemStore from "../../store/InventoryStore";
 import { MultiSelect } from "primereact/multiselect";
-
 import { FaEdit } from "react-icons/fa";
 
 const EditItemButton = (props: {
@@ -20,12 +19,13 @@ const EditItemButton = (props: {
     const [itemRange, setItemRange] = useState<string>('');
     const [itemQualities, setItemQualities] = useState<string[] | undefined>([]);
     const [itemFlaws, setItemFlaws] = useState<string[] | undefined>([]);
-    const [itemAmount, setItemAmount] = useState<string | undefined>('');
+    const [itemAmount, setItemAmount] = useState<number | undefined>(0);
     const [itemLocations, setItemLocations] = useState<string[] | undefined>([]);
     const [itemArmourPoints, setItemArmourPoints] = useState<number | undefined>(0);
     const [itemCategory, setItemCategory] = useState<string | any>('');
     const [itemSubCategory, setItemSubCategory] = useState<string[] | undefined>([]);
     const [editItemDialogOpen, setEditItemDialogOpen] = useState(false);
+    const [itemCarry, setItemCarry] = useState<number | undefined>(0);
 
     //Item qualities & flaws.
     const { qualities_options, flaws_options } = useMemo(() => {
@@ -47,7 +47,7 @@ const EditItemButton = (props: {
                 return { 'qualities_options': qualities.weapon, 'flaws_options': flaws.weapon };
             case 'armor':
                 return { 'qualities_options': qualities.armor, 'flaws_options': flaws.armor };
-            case 'consumable':
+            case 'items':
                 return { 'qualities_options': qualities.items, 'flaws_options': flaws.items };
             default:
                 return { 'qualities_options': [], 'flaws_options': [] };
@@ -192,8 +192,8 @@ const EditItemButton = (props: {
                         </div>
                     </div>
                 </div>
-            case 'consumable':
-                return <div className="consumable-dialog">
+            case 'items':
+                return <div className="items-dialog">
 
                     <div className="top-section">
                         <div className="item-name">
@@ -229,12 +229,26 @@ const EditItemButton = (props: {
 
                     <div className="bottom-section">
                         <div>
-                            <label>ENCUMBRANCE</label>
-                            <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
-                        </div>
-                        <div>
                             <label>AMOUNT</label>
                             <input type="text" placeholder='Item Amount' value={itemAmount} onChange={(e: any) => setItemAmount(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>CARRY</label>
+                            <input type="text" placeholder="Carry Amount" value={itemCarry} onChange={(e: any) => setItemCarry(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>SUB-CATEGORY</label>
+                            <MultiSelect
+                                placeholder="Select Sub-Category"
+                                value={itemSubCategory}
+                                onChange={(e) => setItemSubCategory(e.value)}
+                                options={subCategoryOptions}
+                                showSelectAll={false}
+                            />
+                        </div>
+                        <div>
+                            <label>ENCUMBRANCE</label>
+                            <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
                         </div>
                     </div>
                 </div>
@@ -257,6 +271,7 @@ const EditItemButton = (props: {
                 'amount': selectedItem.amount,
                 'locations': itemLocations,
                 'armourPoints': itemArmourPoints,
+                'carry': itemCarry,
                 'description': selectedItem.description
             }
             updateItem(edited_item);
@@ -269,7 +284,7 @@ const EditItemButton = (props: {
         switch (selectedItem?.category) {
             case 'weapon': return <span>Editing Weapon</span>
             case 'armor': return <span>Editing Armor</span>
-            case 'consumable': return <span>Editing Item</span>
+            case 'items': return <span>Editing Item</span>
             default: return <span></span>
         }
     }
@@ -291,7 +306,13 @@ const EditItemButton = (props: {
 
             <Dialog
                 className={'createItemDialog'}
-                header={getDialogHeader}
+                header=
+                {
+                    <div className="dialog-header">
+                        <div></div>
+                        <span>{getDialogHeader()}</span>
+                    </div>
+                }
                 visible={editItemDialogOpen}
                 onHide={() => setEditItemDialogOpen(false)}
                 onShow={() => {
@@ -307,6 +328,7 @@ const EditItemButton = (props: {
                     setItemArmourPoints(selectedItem?.armourPoints);
                     setItemCategory(selectedItem?.category);
                     setItemSubCategory(selectedItem?.subCategory);
+                    setItemCarry(selectedItem?.carry);
                 }}
                 footer={
                     <div className="dialog-footer">

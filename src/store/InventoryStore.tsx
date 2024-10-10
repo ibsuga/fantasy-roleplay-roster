@@ -13,7 +13,8 @@ export type itemType = {
     flaws?: string[],
     locations?: string[],
     armourPoints?: number,
-    amount?: string,
+    amount?: number,
+    carry?: number,
     description?: string,
 }
 

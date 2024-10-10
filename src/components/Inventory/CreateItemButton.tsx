@@ -4,7 +4,6 @@ import useItemStore from "../../store/InventoryStore";
 import { MultiSelect } from "primereact/multiselect";
 import { GiAxeSword, GiLeatherArmor, GiStandingPotion } from "react-icons/gi";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
-// import { Dropdown } from "primereact/dropdown";
 
 
 
@@ -23,9 +22,10 @@ const CreateItemButton = () => {
     const [itemAvailability, setItemAvailability] = useState('');
     const [itemQualities, setItemQualities] = useState([]);
     const [itemFlaws, setItemFlaws] = useState([]);
-    const [itemAmount, setItemAmount] = useState('');
+    const [itemAmount, setItemAmount] = useState<any>(null);
     const [itemLocations, setItemLocations] = useState([]);
     const [itemArmourPoints, setItemArmourPoints] = useState<any>(null);
+    const [itemCarry, setItemCarry] = useState<any>(null);
 
     const [showDialogContent, setShowDialogContent] = useState('');
 
@@ -48,6 +48,7 @@ const CreateItemButton = () => {
                 'flaws': itemFlaws,
                 'amount': itemAmount,
                 'locations': itemLocations,
+                'carry': itemCarry,
                 'armourPoints': itemArmourPoints,
             }
             addItem(new_item);
@@ -67,8 +68,9 @@ const CreateItemButton = () => {
         setItemAvailability('');
         setItemQualities([]);
         setItemFlaws([]);
-        setItemAmount('');
+        setItemAmount(null);
         setItemSubCategory([]);
+        setItemCarry(null);
         setTimeout(() => {
             setShowDialogContent('');
         }, 300)
@@ -94,7 +96,7 @@ const CreateItemButton = () => {
                 return { 'qualities_options': qualities.weapon, 'flaws_options': flaws.weapon };
             case 'armor':
                 return { 'qualities_options': qualities.armor, 'flaws_options': flaws.armor };
-            case 'consumable':
+            case 'items':
                 return { 'qualities_options': qualities.items, 'flaws_options': flaws.items };
             default:
                 return { 'qualities_options': [], 'flaws_options': [] };
@@ -103,8 +105,8 @@ const CreateItemButton = () => {
 
     //Item Sub Category options
     const subCategory: any = {
-        'weapon': ['Polearm', 'One-Handed'],
-        'armor': ['Leather', 'Plate'],
+        'weapon': ['Basic', 'Cavalry', 'Fencing', 'Brawling', 'Flail', 'Parry', 'Polearm', 'Two-Handed'],
+        'armor': ['Soft Leather', 'Boiled Leather', 'Mail', 'Plate'],
         'items': ['Consumable', 'Container']
     }
     let subCategoryOptions = subCategory[itemCategory] || [];
@@ -247,8 +249,8 @@ const CreateItemButton = () => {
                         </div>
                     </div>
                 </div>
-            case 'consumable':
-                return <div className="consumable-dialog">
+            case 'items':
+                return <div className="items-dialog">
 
                     <div className="top-section">
                         <div className="item-name">
@@ -284,12 +286,26 @@ const CreateItemButton = () => {
 
                     <div className="bottom-section">
                         <div>
-                            <label>ENCUMBRANCE</label>
-                            <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
-                        </div>
-                        <div>
                             <label>AMOUNT</label>
                             <input type="text" placeholder='Item Amount' value={itemAmount} onChange={(e: any) => setItemAmount(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>CARRY</label>
+                            <input type="text" placeholder="Carry Amount" value={itemCarry} onChange={(e: any) => setItemCarry(e.target.value)} />
+                        </div>
+                        <div>
+                            <label>SUB-CATEGORY</label>
+                            <MultiSelect
+                                placeholder="Select Sub-Category"
+                                value={itemSubCategory}
+                                onChange={(e) => setItemSubCategory(e.value)}
+                                options={subCategoryOptions}
+                                showSelectAll={false}
+                            />
+                        </div>
+                        <div>
+                            <label>ENCUMBRANCE</label>
+                            <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
                         </div>
                     </div>
                 </div>
@@ -313,8 +329,8 @@ const CreateItemButton = () => {
                         <span className="category-label">Armor</span>
                     </div>
                     <div className="category-button" onClick={() => {
-                        setShowDialogContent('consumable');
-                        setItemCategory('consumable');
+                        setShowDialogContent('items');
+                        setItemCategory('items');
                     }}>
                         <div className="category-background"></div>
                         <GiStandingPotion />
@@ -329,7 +345,7 @@ const CreateItemButton = () => {
         switch (showDialogContent) {
             case 'weapon': return <span>New Weapon</span>
             case 'armor': return <span>New Armor</span>
-            case 'consumable': return <span>New Item</span>
+            case 'items': return <span>New Item</span>
             default: return <span>Choose Category</span>
         }
     }
