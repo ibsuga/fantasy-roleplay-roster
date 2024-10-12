@@ -30,6 +30,7 @@ const InventoryBottom = () => {
     const EncumbranceTooltipContent =
         <div className="encumbrance-tooltip">
             <span className="header">Encumbrance by Category</span>
+            <span className="header-background">Encumbrance</span>
             <hr />
             <div>
                 <span className="label">Weapons: </span>
@@ -74,15 +75,15 @@ const InventoryBottom = () => {
             </div>
 
             <div className='wealth'>
-                <div>
+                <div className="coin-copper">
                     <BiSolidCoin />
                     <input type="text" value={wealth.copper} maxLength={4} onChange={(e) => updateWealth(Number(e.target.value), 'copper')} />
                 </div>
-                <div>
+                <div className="coin-silver">
                     <BiSolidCoin />
                     <input type="text" value={wealth.silver} maxLength={4} onChange={(e) => updateWealth(Number(e.target.value), 'silver')} />
                 </div>
-                <div>
+                <div className="coin-gold">
                     <BiSolidCoin />
                     <input type="text" value={wealth.gold} maxLength={4} onChange={(e) => updateWealth(Number(e.target.value), 'gold')} />
                 </div>

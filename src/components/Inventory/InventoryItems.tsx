@@ -2,8 +2,10 @@ import InventoryItem from '../InventoryItem/InventoryItem';
 import useItemStore from '../../store/InventoryStore';
 import CreateItemButton from './CreateItemButton';
 import { useState } from "react";
-import { GiChestArmor, GiCrocSword, GiPocketBow, GiPotionBall } from "react-icons/gi";
+import { GiChestArmor, GiCrocSword, GiPotionBall } from "react-icons/gi";
 import { FaSearch } from "react-icons/fa";
+import { MdClear } from "react-icons/md";
+import { LuDot } from "react-icons/lu";
 
 
 export const InventoryItems = () => {
@@ -35,12 +37,11 @@ export const InventoryItems = () => {
     return (
         <>
             <div className='filter-bar'>
-                <span onClick={() => setCategoryFilter('')}> X </span>
-                <span> · </span>
-                <span> <GiCrocSword onClick={() => setCategoryFilter('melee')} /> </span>
-                <span> <GiPocketBow onClick={() => setCategoryFilter('ranged')} /></span>
+                <span>  <MdClear onClick={() => setCategoryFilter('')} /> </span>
+                <span className='spacer'> <LuDot /> </span>
+                <span> <GiCrocSword onClick={() => setCategoryFilter('weapon')} /> </span>
                 <span> <GiChestArmor onClick={() => setCategoryFilter('armor')} /></span>
-                <span> <GiPotionBall onClick={() => setCategoryFilter('consumable')} /></span>
+                <span> <GiPotionBall onClick={() => setCategoryFilter('items')} /></span>
             </div>
             <div className="tools-bar">
                 <div className='inventory-search-bar'>

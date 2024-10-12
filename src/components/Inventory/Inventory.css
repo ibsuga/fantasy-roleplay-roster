@@ -32,14 +32,19 @@
 
 .Inventory .filter-bar span {
     font-size: 2em;
-    color: var(--font-color-default-highlight);
-    transition: 0.3s;
+    color: hsl(0, 0%, 50%);
+    transition: 0.25s;
     cursor: pointer;
     user-select: none;
 }
 
 .Inventory .filter-bar span:hover {
     color: var(--highlight-color-brown);
+}
+
+.Inventory .filter-bar .spacer:hover {
+    cursor: auto;
+    color: hsl(0, 0%, 50%);
 }
 
 /*TOOL BAR*/
@@ -133,16 +138,18 @@
 }
 
 /*ENCUMBRANCE*/
+
 .Inventory .inventory-bottom .encumbrance {
     display: grid;
     grid-template-columns: min-content auto;
+    gap: 2em;
 }
 
 .Inventory .inventory-bottom .encumbrance svg {
-    color: white;
+    color: hsl(0, 0%, 80%);
     font-size: 1.5em;
     align-self: center;
-    padding-left: 0.2em;
+    padding-left: 0.25em;
 }
 
 .Inventory .inventory-bottom .encumbrance .encumbrance-table {
@@ -150,7 +157,7 @@
     grid-template-columns: auto auto auto auto min-content;
     align-content: center;
     height: 2.5em;
-    border-bottom: 2px dotted white;
+    border-bottom: 2px dotted hsl(0, 0%, 60%);
     border-color: var(--font-color-default-faint);
     padding: 0 0.5em;
 }
@@ -161,18 +168,19 @@
 }
 
 .Inventory .inventory-bottom .encumbrance .encumbrance-table input {
-    /* justify-self: center; */
     text-align: center;
     font-family: 'Comforter Brush';
     width: 1em;
     font-size: 2.5em;
-    color: white;
+    color: hsl(0, 0%, 80%);
     background: none;
     border: none;
 }
 
 .encumbrance-table input:focus {
     outline: none;
+    caret-color: transparent;
+    color: var(--highlight-color-brown);
 }
 
 .Inventory .inventory-bottom .encumbrance .encumbrance-table span {
@@ -212,6 +220,18 @@
     color: hsl(0, 0%, 10%);
 }
 
+.encumbrance-tooltip .header-background {
+    position: absolute;
+    color: hsl(50, 25%, 45%, 0.5);
+    text-shadow: 0px 0px 10px hsl(50, 25%, 45%, 0.5);
+    font-family: 'Homemade apple';
+    font-size: 58px;
+    right: -20px;
+    bottom: -10px;
+    transform: rotate(10deg);
+    z-index: -1;
+}
+
 .encumbrance-tooltip .label {
     color: hsl(0, 0%, 10%);
 }
@@ -238,6 +258,10 @@
 .Inventory .inventory-bottom .wealth {
     display: flex;
     box-sizing: border-box;
+
+
+    width: 100%;
+    padding-left: 4em;
 }
 
 .Inventory .inventory-bottom .wealth div {
@@ -251,6 +275,18 @@
     font-size: 2em;
 }
 
+.Inventory .inventory-bottom .wealth .coin-copper svg {
+    color: hsl(36, 39%, 28%);
+}
+
+.Inventory .inventory-bottom .wealth .coin-silver svg {
+    color: silver;
+}
+
+.Inventory .inventory-bottom .wealth .coin-gold svg {
+    color: gold;
+}
+
 .Inventory .inventory-bottom .wealth input {
     height: 50%;
     width: 60%;
@@ -262,6 +298,8 @@
     border: none;
     background: none;
     padding-top: 10px;
+    overflow: hidden;
+    transition: 0.25s;
 }
 
 .Inventory .inventory-bottom .wealth input:focus {
