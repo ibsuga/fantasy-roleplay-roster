@@ -135,39 +135,31 @@
     border-radius: 4px;
     background: hsla(0, 0%, 0%, 0.2);
     backdrop-filter: blur(4px);
+    user-select: none;
 }
 
 /*ENCUMBRANCE*/
-
 .Inventory .inventory-bottom .encumbrance {
     display: grid;
-    grid-template-columns: min-content auto;
-    gap: 2em;
+    grid-template-columns: 3em auto;
+    gap: 1em;
 }
 
-.Inventory .inventory-bottom .encumbrance svg {
-    color: hsl(0, 0%, 80%);
-    font-size: 1.5em;
-    align-self: center;
-    padding-left: 0.25em;
-}
 
-.Inventory .inventory-bottom .encumbrance .encumbrance-table {
+.Inventory .inventory-bottom .encumbrance .encumbrance-section {
     display: grid;
     grid-template-columns: auto auto auto auto min-content;
     align-content: center;
     height: 2.5em;
-    border-bottom: 2px dotted hsl(0, 0%, 60%);
-    border-color: var(--font-color-default-faint);
-    padding: 0 0.5em;
 }
 
-.Inventory .inventory-bottom .encumbrance .encumbrance-table>* {
+.Inventory .inventory-bottom .encumbrance .encumbrance-section>* {
     display: flex;
     align-items: center;
 }
 
-.Inventory .inventory-bottom .encumbrance .encumbrance-table input {
+
+.Inventory .inventory-bottom .encumbrance .encumbrance-section input {
     text-align: center;
     font-family: 'Comforter Brush';
     width: 1em;
@@ -175,20 +167,21 @@
     color: hsl(0, 0%, 80%);
     background: none;
     border: none;
+    transition: 0.25s;
 }
 
-.encumbrance-table input:focus {
+.Inventory .inventory-bottom .encumbrance .encumbrance-section input:focus {
     outline: none;
     caret-color: transparent;
     color: var(--highlight-color-brown);
 }
 
-.Inventory .inventory-bottom .encumbrance .encumbrance-table span {
+.Inventory .inventory-bottom .encumbrance .encumbrance-section span {
     text-align: center;
     color: var(--font-color-default-faint);
 }
 
-.Inventory .inventory-bottom .encumbrance .encumbrance-table span.encumbered {
+.Inventory .inventory-bottom .encumbrance .encumbrance-section span.encumbered {
     color: rgb(218, 104, 104);
     text-shadow: 0px 0px 5px hsl(0, 85%, 45%);
     font-family: 'Comforter Brush';
@@ -196,100 +189,203 @@
     transition: 0.5s;
 }
 
-.Inventory .inventory-bottom .encumbrance .encumbrance-table span.not-encumbered {
+.Inventory .inventory-bottom .encumbrance .encumbrance-section span.not-encumbered {
     font-family: 'Comforter Brush';
     color: hsl(0, 0%, 80%);
     font-size: 2.5em;
     transition: 0.5s;
 }
 
-.Inventory .inventory-bottom .encumbrance .encumbrance-table .label,
+.Inventory .inventory-bottom .encumbrance .encumbrance-section .label,
 .encumbrance-tooltip .label {
     font-family: var(--font-default);
     color: var(--font-color-default);
 }
 
+
+/*ENCUMBRANCE RULES TOOLTIP*/
+.encumbrance>div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.encumbrance .rules-icon {
+    color: hsl(0, 0%, 30%);
+    font-size: 1.5em;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.encumbrance .rules-icon:hover {
+    color: var(--highlight-color-brown);
+}
+
+
 /*ENCUMBRANCE INFO TOOLTIP*/
-.encumbrance-tooltip {
+.encumbrance-info-tooltip {
     user-select: none;
 }
 
-.encumbrance-tooltip .header {
+.encumbrance-info-tooltip .header {
     font-family: var(--font-headers);
     text-transform: uppercase;
     color: hsl(0, 0%, 10%);
 }
 
-.encumbrance-tooltip .header-background {
-    position: absolute;
-    color: hsl(50, 25%, 45%, 0.5);
-    text-shadow: 0px 0px 10px hsl(50, 25%, 45%, 0.5);
-    font-family: 'Homemade apple';
-    font-size: 58px;
-    right: -20px;
-    bottom: -10px;
-    transform: rotate(10deg);
-    z-index: -1;
+.encumbrance-info-tooltip .header-background {
+    font-size: 48px;
+    right: -40px;
+    bottom: 20px;
 }
 
-.encumbrance-tooltip .label {
+.encumbrance-info-tooltip .label {
     color: hsl(0, 0%, 10%);
 }
 
-.encumbrance-tooltip .encumbrance-value {
+.encumbrance-info-tooltip .encumbrance-value {
     font-family: var(--font-headers);
     color: hsl(50, 25%, 30%);
 }
 
-.Inventory .inventory-bottom .encumbrance .encumbrance-table .info-button {
+.Inventory .inventory-bottom .encumbrance .encumbrance-section .info-button {
     grid-row: 1/3;
     grid-column: 3/4;
-    color: var(--font-color-default-highlight);
+    color: hsl(0, 0%, 30%);
     font-size: 1.5em;
     cursor: pointer;
     transition: 0.5s;
+    padding-right: 0.5em;
 }
 
-.Inventory .inventory-bottom .encumbrance .encumbrance-table .info-button:hover {
+
+.Inventory .inventory-bottom .encumbrance .encumbrance-section .info-button:hover {
     color: hsl(50, 25%, 45%);
+}
+
+/*ENCUMBRANCE RULES TOOLTIP*/
+.encumbrance-rules-tooltip .header {
+    font-weight: bolder;
+}
+
+.encumbrance-rules-tooltip .header-background {
+    right: -40px;
+    bottom: 0px;
+    font-size: 100px;
+    line-break: strict;
+}
+
+.encumbrance-rules-tooltip tr:nth-child(even) {
+    background-color: hsla(0, 0%, 45%, 0.4);
+}
+
+/*BOTTOM SECTION TOOLTIP HEADER BACKGROUND*/
+
+.header-background {
+    position: absolute;
+    color: hsl(50, 25%, 45%, 0.5);
+    text-shadow: 0px 0px 10px hsl(50, 25%, 45%, 0.5);
+    font-family: 'Homemade apple';
+    transform: rotate(15deg);
+    z-index: -1;
 }
 
 /*WEALTH*/
 .Inventory .inventory-bottom .wealth {
-    display: flex;
-    box-sizing: border-box;
-
-
-    width: 100%;
-    padding-left: 4em;
+    display: grid;
+    grid-template-columns: 3em auto;
+    gap: 1em;
 }
 
 .Inventory .inventory-bottom .wealth div {
     display: flex;
-    height: 4em;
+    height: 3em;
     align-items: center;
 }
 
-.Inventory .inventory-bottom .wealth svg {
-    color: white;
-    font-size: 2em;
+.wealth>div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
-.Inventory .inventory-bottom .wealth .coin-copper svg {
+/*WEALTH CONVERSION TOOLTIP*/
+.Inventory .inventory-bottom .wealth .conversion-icon {
+    color: hsl(0, 0%, 30%);
+    font-size: 2em;
+    align-self: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+
+.Inventory .inventory-bottom .wealth .conversion-icon:hover {
+    color: var(--highlight-color-brown);
+}
+
+.conversion-tooltip .header {
+    font-weight: bold;
+}
+
+.conversion-tooltip .header-background {
+    font-size: 60px;
+    right: -40px;
+    bottom: -10px;
+}
+
+.conversion-tooltip .content {
+    display: grid;
+}
+
+.conversion-tooltip .content span .gold {
+    color: hsl(50, 100%, 30%);
+}
+
+.conversion-tooltip .content span .silver {
+    color: hsl(0, 0%, 45%);
+}
+
+.conversion-tooltip .content span .copper {
     color: hsl(36, 39%, 28%);
 }
 
-.Inventory .inventory-bottom .wealth .coin-silver svg {
-    color: silver;
+/*COIN SECTION*/
+.Inventory .inventory-bottom .wealth .coin-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    border-top: 2px dotted hsl(0, 0%, 30%);
 }
 
-.Inventory .inventory-bottom .wealth .coin-gold svg {
-    color: gold;
+.inventory-bottom .wealth .coin-section .copper,
+.inventory-bottom .wealth .coin-section .silver,
+.inventory-bottom .wealth .coin-section .gold {
+    display: grid;
+    grid-template-columns: min-content auto;
+    overflow: hidden;
+}
+
+.Inventory .inventory-bottom .wealth .coin-section .copper svg {
+    color: hsl(36, 39%, 28%);
+    font-size: 2em;
+}
+
+.Inventory .inventory-bottom .wealth .coin-section .silver svg {
+    color: hsl(0, 0%, 45%);
+    font-size: 2em;
+}
+
+.Inventory .inventory-bottom .wealth .coin-section .gold svg {
+    color: hsl(50, 100%, 30%);
+    font-size: 2em;
 }
 
 .Inventory .inventory-bottom .wealth input {
-    height: 50%;
-    width: 60%;
+    width: 100%;
     font-size: 2.5em;
     font-family: 'Comforter Brush';
     box-sizing: border-box;
@@ -297,8 +393,7 @@
     color: var(--font-color-default);
     border: none;
     background: none;
-    padding-top: 10px;
-    overflow: hidden;
+    user-select: none;
     transition: 0.25s;
 }
 

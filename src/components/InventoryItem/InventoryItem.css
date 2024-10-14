@@ -130,9 +130,11 @@
 
 /*QUALITIES & FLAWS TOOLTIP*/
 
-.quality-tooltip {
+.quality-tooltip,
+.flaw-tooltip {
     display: grid;
     user-select: none;
+    width: 30em;
 }
 
 .quality-tooltip .header,
