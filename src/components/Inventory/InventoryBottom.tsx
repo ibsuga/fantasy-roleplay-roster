@@ -19,7 +19,7 @@ const InventoryBottom = () => {
     //Encumbrance filters by category
     const weaponEncumbranceFilter = useMemo(() => items.filter((item) => item.category === 'weapon'), [items]);
     const armorEncumbranceFilter = useMemo(() => items.filter((item) => item.category === 'armor'), [items]);
-    const consumableEncumbranceFilter = useMemo(() => items.filter((item) => item.category === 'consumable'), [items]);
+    const consumableEncumbranceFilter = useMemo(() => items.filter((item) => item.category === 'items'), [items]);
 
     const weaponEncumbrance = useMemo(() => weaponEncumbranceFilter.reduce((prev: number, item: any) => prev + (item.encumbrance * 1), 0), [items])
     const armorEncumbrance = useMemo(() => armorEncumbranceFilter.reduce((prev: number, item: any) => prev + (item.encumbrance * 1), 0), [items]);
@@ -41,7 +41,7 @@ const InventoryBottom = () => {
                 <span className="encumbrance-value">{armorEncumbrance}</span>
             </div>
             <div>
-                <span className="label">Consumables: </span>
+                <span className="label">Items: </span>
                 <span className="encumbrance-value">{consumableEncumbrance}</span>
             </div>
         </div>

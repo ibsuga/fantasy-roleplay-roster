@@ -320,7 +320,7 @@ const EditItemButton = (props: {
                 'category': selectedItem.category,
                 'subCategory': itemSubCategory,
                 'availability': selectedItem.availability,
-                'amount': selectedItem.amount,
+                'amount': itemAmount,
                 'locations': itemLocations,
                 'armourPoints': itemArmourPoints,
                 'carry': itemCarry,
