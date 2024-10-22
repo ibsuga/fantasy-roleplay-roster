@@ -1,16 +1,152 @@
 .InventoryItem {
+    display: flex;
+    flex-direction: row;
     background: hsla(0, 0%, 0%, 0.5);
-    border-radius: 5px;
+    border: 1px solid hsla(0, 0%, 0%, 0.5);
+    border-radius: 20px 5px 5px 20px;
+    width: 100%;
+    height: 2em;
+    position: relative;
+    align-items: center;
+
+    user-select: none;
+    color: white;
+    transition: 0.5s;
+}
+
+.InventoryItem:hover {
+    /* border-color: var(--highlight-color-brown); */
+    box-shadow: inset 50px 0px 35px -20px var(--highlight-color-brown);
+}
+
+/* ITEM EQUIP */
+
+.InventoryItem .item-equip {
+    display: flex;
+    border: 3px solid hsl(0, 0%, 27%);
+    position: absolute;
+    height: 1.5em;
+    width: 1.5em;
+    left: -2px;
+    background-color: hsl(0, 0%, 10%);
+
+    transition: 0.25s;
+    transform: rotateZ(45deg);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.InventoryItem .item-equip:hover {
+    border-color: var(--highlight-color-brown);
+    cursor: pointer;
+    box-shadow: 0px 0px 10px var(--highlight-color-brown);
+}
+
+.InventoryItem .item-equip>div {
+    transform: rotateZ(-45deg);
+    font-size: 24px;
+    color: hsl(0, 0%, 80%);
+    place-items: center;
+    z-index: 2;
+}
+
+
+/* ITEM CONTENT */
+.edit-button {
+    cursor: pointer;
+}
+
+
+.InventoryItem .item-content {
+    display: grid;
+    grid-template-columns: auto min-content;
+    width: 100%;
+}
+
+.InventoryItem .item-name {
+    font-family: var(--font-headers);
+    color: var(--font-color-default);
+    font-size: 14px;
+    padding-left: 3em;
+}
+
+/* ITEM STATS */
+.InventoryItem .item-stats {
+
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.InventoryItem .item-stats .stat {
+    display: flex;
+    gap: 0.15em;
+    width: 6em;
+    align-items: center;
+    font-size: 14px;
+}
+
+.InventoryItem .item-stats .stat .label {
+    font-family: var(--font-headers);
+    color: hsl(0, 0%, 50%);
+    font-size: 10px;
+    align-self: end;
+}
+
+.InventoryItem .item-stats .stat span {
+    font-family: var(--font-headers);
+    color: hsl(0, 0%, 80%);
+    align-self: end;
+}
+
+/* ITEM CONTAINER */
+.InventoryItem .item-container {
+    display: grid;
+    width: 4em;
+    font-size: 24px;
+    place-items: start;
+    color: hsl(0, 0%, 40%);
+    /* border: 1px solid green; */
+    margin-left: auto;
+    transition: 0.25s;
+}
+
+.InventoryItem .item-container:hover {
+    cursor: pointer;
+    color: hsl(0, 0%, 90%);
+}
+
+/* ITEM AMOUNT */
+.InventoryItem .item-amount {
+
+    /* border: 1px solid yellow; */
+    position: absolute;
+    align-self: center;
+    text-align: center;
+    font-size: 42px;
+    font-family: 'Caveat';
+    width: 1em;
+    right: 5px;
+    bottom: 0px;
+    z-index: 1;
+    color: hsl(0, 0%, 80%);
+}
+
+
+
+
+/* 
+.InventoryItem {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border: 1px solid hsla(0, 0%, 0%, 0.5);
     font-family: 'Quicksand';
     font-size: 14px;
     display: grid;
     grid-template-rows: min-content auto;
     user-select: none;
     width: 100%;
+ 
     position: relative;
     overflow: hidden;
 }
@@ -25,7 +161,11 @@
 
     right: 0%;
     transform: scaleX(-1);
-}
+} 
+*/
+
+
+/*
 
 .InventoryItem>.header {
     display: grid;
@@ -70,6 +210,10 @@
 .InventoryItem .header .item-tools svg:active {
     transform: scale(0.9);
 }
+*/
+
+
+
 
 .InventoryItem>.content {
     display: grid;
@@ -82,7 +226,7 @@
     min-height: 1.5em;
     width: 100%;
     color: var(--font-color-default-faint);
-    padding: 0.25em;
+    padding: 0.5em 0em;
     gap: 1em;
     font-style: italic;
     text-transform: capitalize;
@@ -173,14 +317,12 @@
 
 }
 
-
-
-
+/*STATS*/
 .InventoryItem>.content .item-stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     background: hsla(0, 0%, 0%, 0.3);
-    padding: 0.25em 1em;
+    padding: 0.20em 1em;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
@@ -201,7 +343,6 @@
     width: min-content;
     gap: 0.5em;
 }
-
 
 /*Icons*/
 .InventoryItem>.header .item-stats {

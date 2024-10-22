@@ -1,11 +1,9 @@
 import './InventoryItem.css';
-import useItemStore from '../../store/InventoryStore';
 import EditItemButton from '../Inventory/EditItemButton';
-import { useState } from 'react';
-import { FaRegWindowClose } from "react-icons/fa";
-import { GoNote } from "react-icons/go";
-import { GiCrocSword, GiChestArmor, GiPotionBall, GiPocketBow } from "react-icons/gi";
+import { GiCrocSword, GiChestArmor, GiPotionBall, GiPocketBow, GiHandBag } from "react-icons/gi";
+import useItemStore from '../../store/InventoryStore';
 import PopMenu from '../PopMenu/PopMenu';
+import ContainerSelector from './ContainerSelector';
 
 
 const InventoryItem = (props: {
@@ -24,185 +22,238 @@ const InventoryItem = (props: {
     amount?: number,
     carry?: number,
     isRanged?: boolean,
+    container_id?: number,
     description?: string,
 
 }) => {
-    const deleteItem = useItemStore((state) => state.deleteItem);
-    const updateItemDescription = useItemStore((state) => state.updateItemDescription);
 
-    const [showDescription, setShowDescription] = useState(false);
+    const [containers, updateItemAmount] = useItemStore((state) => [state.containers, state.updateItemAmount])
+    const container = containers.find((container) => container.id === props.container_id);
+
+
+
+    //Sets item icon for each category.
+    const itemIcons: any = {
+        'weapon': props.isRanged ? <GiPocketBow /> : <GiCrocSword />,
+        'armor': <GiChestArmor />,
+        'items': <GiPotionBall />,
+    }
 
     //Sets item stats depending on item category.
     const getItemStatsContent = () => {
         switch (props.category) {
             case 'weapon':
                 return <div className='item-stats'>
-                    <div className='stat'>
-                        <div className="label">DAMAGE</div>
+
+                    <div className="stat">
+                        <div className="label">DMG</div>
                         <span>{props.damage?.useSB ? '+SB+' : ''}</span>
                         <span>{props.damage?.value}</span>
                     </div>
-                    <div className='stat'>
-                        <div className="label">RANGE</div>
-                        <span>{props.range}</span>
+
+                    <div className="stat">
+                        <div className="label">ENC</div>
+                        <span>{props.encumbrance}</span>
                     </div>
-                    <div className='stat'>
-                        <div className="label">CATEGORY</div>
-                        <span>{props.subCategory}</span>
-                    </div>
-                    <div className='stat'>
-                        <div className="label">ENCUMBRANCE</div>
-                        <div className='encumbrance spaced'> {props.encumbrance} </div>
-                    </div>
+
                 </div>
             case 'armor':
                 return <div className='item-stats'>
-                    <div className='stat'>
-                        <div className='label'>LOCATIONS</div>
-                        <span className='locations'>
-                            {
-                                props.locations?.map((locations: string) => {
-                                    return <span>{locations}</span>
 
-                                })
-                            }
-                        </span>
-                    </div>
                     <div className='stat'>
-                        <div className='label'>ARMOUR POINTS</div>
+                        <div className='label'>AP</div>
                         <span>{props.armourPoints}</span>
                     </div>
+
                     <div className='stat'>
-                        <div className='label'>CATEGORY</div>
-                        <span>{props.subCategory}</span>
-                    </div>
-                    <div className='stat'>
-                        <div className='label'>ENCUMBRANCE</div>
+                        <div className="label">ENC</div>
                         <span>{props.encumbrance}</span>
                     </div>
+
                 </div>
             case 'items':
                 return <div className='item-stats'>
-                    <div className="stat">
-                        <div className="label">CARRY</div>
-                        <span>{props.carry}</span>
-                    </div>
 
                     <div className='stat'>
-                        <div className="label">AMOUNT</div>
-                        <div>{props.amount}</div>
+                        <div className="label">ENC</div>
+                        <span>{props.encumbrance}</span>
                     </div>
-                    <div className='stat'>
-                        <div className="label">CATEGORY</div>
-                        <span>{props.subCategory}</span>
-                    </div>
-                    <div className='stat'>
-                        <div className="label">ENCUMBRANCE</div>
-                        <div> {props.encumbrance} </div>
-                    </div>
+
                 </div>
-            default: return <span>test</span>
+            default: return <span>No Content...</span>
         }
     }
 
-    //Sets background icon for each category.
-    const itemBackgroundIcons: any = {
-        'weapon': props.isRanged ? <GiPocketBow /> : <GiCrocSword />,
-        'armor': <GiChestArmor />,
-        'items': <GiPotionBall />,
-    }
 
     return (
-        <div className="InventoryItem">
-            <div className="background-icon"> {itemBackgroundIcons[props.category]} </div>
-            <div className='header'>
-                <div className='item-name'>{props.name}</div>
+        <div className="InventoryItem" >
 
-                <div className='item-tools'>
-                    <GoNote onClick={() => setShowDescription(!showDescription)} />
-                    <EditItemButton id={props.id} />
-                    <div className='delete-button'>
-                        <FaRegWindowClose onClick={() => deleteItem(props.id)} />
-                    </div>
+            <div className='item-equip'>
+                <div>
+                    {itemIcons[props.category]}
                 </div>
             </div>
 
-            <div className='content'>
-                {showDescription ?
-                    <>
-                        <div className='item-description'>
-                            <textarea
-                                placeholder='Add item description.'
-                                value={props.description}
-                                spellCheck={false}
-                                rows={2}
-                                onChange={(e) => updateItemDescription(props.id, e.target.value)}></textarea>
-                        </div>
-                    </>
-                    :
-                    <>
-                        <div className='traits'>
-                            {props.qualities && props.qualities.length > 0 &&
-                                <span className='trait-qualities'>
-                                    {
-                                        props.qualities?.map((quality) => {
-                                            return <span className='quality'>
-                                                <PopMenu
-                                                    label={quality.name}
-                                                    content={
-                                                        <div className="quality-tooltip">
-                                                            <div className="header">
-                                                                <span>Quality</span>
-                                                                <div>{quality.name}</div>
-                                                                <hr />
-                                                            </div>
-                                                            <div className="description">
-                                                                <div>{quality.description}</div>
-                                                            </div>
-                                                        </div>}
+            <EditItemButton id={props.id}>
+                <div className='item-content'>
 
-                                                    positions={['top']}
-                                                    align="center"
-                                                />
-                                            </span>
-                                        })
-                                    }
-                                </span>
-                            }
-                            {props.flaws && props.flaws.length > 0 &&
-                                <span className='trait-flaws'>
-                                    {
-                                        props.flaws && props.flaws?.length > 0 && props.flaws?.map((flaw) => {
-                                            return <span className='flaw'>
-                                                <PopMenu
-                                                    label={flaw.name}
-                                                    content={
-                                                        <div className="flaw-tooltip">
-                                                            <div className="header">
-                                                                <span>Flaw</span>
-                                                                <div>{flaw.name}</div>
-                                                                <hr />
-                                                            </div>
-                                                            <div className="description">
-                                                                <div>{flaw.description}</div>
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                    positions={['top']}
-                                                    align="center"
-                                                />
-                                            </span>
-                                        })
-                                    }
-                                </span>
+                    <div className="item-name">{props.name}</div>
+
+                    {getItemStatsContent()}
+
+                </div>
+            </EditItemButton>
+
+            <div className="item-container">
+                <PopMenu
+                    trigger={
+                        <GiHandBag style={container ? { color: `#${container?.color}` } : {}} />
+                    }
+                    content={
+                        <div>
+                            <ContainerSelector
+                                itemId={props.id}
+                                containerId={null}
+                                containerLabel='No container'
+                            />
+                            {
+                                containers.map((container, index) =>
+                                    <ContainerSelector
+                                        key={index}
+                                        itemId={props.id}
+                                        containerId={container.id}
+                                        containerLabel={container.label}
+                                    />)
                             }
                         </div>
-                        {getItemStatsContent()}
-                    </>
+                    }
+
+                />
+            </div>
+            <div className="item-amount">x
+                {
+                    <input
+                        type='text'
+                        value={props.amount ?? 1}
+                        onChange={(e: any) => updateItemAmount(props.id, e.target.value)}
+                    />
                 }
             </div>
-        </div >
+        </div>
+
     )
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     return (
+//         <div className="InventoryItem">
+//             <div className="background-icon"> {itemBackgroundIcons[props.category]} </div>
+//             <div className='header'>
+//                 <div className='item-name'>{props.name}</div>
+
+//                 <div className='item-tools'>
+//                     <GoNote onClick={() => setShowDescription(!showDescription)} />
+//                     <EditItemButton id={props.id} />
+//                     <div className='delete-button'>
+//                         <FaRegWindowClose onClick={() => deleteItem(props.id)} />
+//                     </div>
+//                 </div>
+//             </div>
+
+//             <div className='content'>
+//                 {showDescription ?
+//                     <>
+//                         <div className='item-description'>
+//                             <textarea
+//                                 placeholder='Add item description.'
+//                                 value={props.description}
+//                                 spellCheck={false}
+//                                 rows={2}
+//                                 onChange={(e) => updateItemDescription(props.id, e.target.value)}></textarea>
+//                         </div>
+//                     </>
+//                     :
+//                     <>
+//                         <div className='traits'>
+//                             {props.qualities && props.qualities.length > 0 &&
+//                                 <span className='trait-qualities'>
+//                                     {
+//                                         props.qualities?.map((quality) => {
+//                                             return <span className='quality'>
+//                                                 <PopMenu
+//                                                     label={quality.name}
+//                                                     content={
+//                                                         <div className="quality-tooltip">
+//                                                             <div className="header">
+//                                                                 <span>Quality</span>
+//                                                                 <div>{quality.name}</div>
+//                                                                 <hr />
+//                                                             </div>
+//                                                             <div className="description">
+//                                                                 <div>{quality.description}</div>
+//                                                             </div>
+//                                                         </div>}
+
+//                                                     positions={['top']}
+//                                                     align="center"
+//                                                 />
+//                                             </span>
+//                                         })
+//                                     }
+//                                 </span>
+//                             }
+//                             {props.flaws && props.flaws.length > 0 &&
+//                                 <span className='trait-flaws'>
+//                                     {
+//                                         props.flaws && props.flaws?.length > 0 && props.flaws?.map((flaw) => {
+//                                             return <span className='flaw'>
+//                                                 <PopMenu
+//                                                     label={flaw.name}
+//                                                     content={
+//                                                         <div className="flaw-tooltip">
+//                                                             <div className="header">
+//                                                                 <span>Flaw</span>
+//                                                                 <div>{flaw.name}</div>
+//                                                                 <hr />
+//                                                             </div>
+//                                                             <div className="description">
+//                                                                 <div>{flaw.description}</div>
+//                                                             </div>
+//                                                         </div>
+//                                                     }
+//                                                     positions={['top']}
+//                                                     align="center"
+//                                                 />
+//                                             </span>
+//                                         })
+//                                     }
+//                                 </span>
+//                             }
+//                         </div>
+//                         {getItemStatsContent()}
+//                     </>
+//                 }
+//             </div>
+//         </div >
+//     )
+// }
 
 export default InventoryItem;

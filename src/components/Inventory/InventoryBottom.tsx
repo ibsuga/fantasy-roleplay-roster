@@ -99,11 +99,10 @@ const InventoryBottom = () => {
 
             <div className='encumbrance'>
                 <PopMenu
-                    className="encumbrance-rules-tooltip"
-                    label={<FaWeightHanging className="rules-icon" />}
+                    trigger={<FaWeightHanging className="rules-icon" />}
                     content={EncumbranceRulesTooltipContent}
                     positions={['top']}
-                    align="end"
+                    direction="top"
                 />
                 <div className='encumbrance-section'>
                     <span className='label'>Encumbrance</span>
@@ -116,10 +115,11 @@ const InventoryBottom = () => {
                         onChange={(e) => updateMaxEncumbrance(Number(e.target.value) || 0)}
                     />
                     <PopMenu
-                        label={<TbInfoHexagon className="info-button" />}
+                        trigger={<TbInfoHexagon className="info-button" />}
                         content={EncumbranceInfoTooltipContent}
                         positions={['top']}
-                        align="end"
+                        align='end'
+                        direction="top"
                     />
 
                 </div>
@@ -127,11 +127,10 @@ const InventoryBottom = () => {
 
             <div className='wealth'>
                 <PopMenu
-                    className="conversion-tooltip"
-                    label={<GiSwapBag className="conversion-icon" />}
+                    trigger={<GiSwapBag className="conversion-icon" />}
                     content={WealthConversionTooltipContent}
                     positions={['top']}
-                    align="end"
+                    direction="top"
                 />
                 <div className="coin-section">
                     <div className="copper">

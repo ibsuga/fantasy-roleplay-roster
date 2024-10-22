@@ -4,12 +4,16 @@ import useItemStore from "../../store/InventoryStore";
 import { MultiSelect } from "primereact/multiselect";
 import { GiAxeSword, GiLeatherArmor, GiStandingPotion } from "react-icons/gi";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
+import PopMenu from "../PopMenu/PopMenu";
 
+import { Dropdown } from 'primereact/dropdown';
+
+import { containerType } from "../../store/InventoryStore";
 
 
 const CreateItemButton = () => {
     //Dialog state.
-    const [createItemDialogOpen, setCreateItemDialogOpen] = useState(false);
+    const [inventoryDialogOpen, setInventoryDialogOpen] = useState(false);
 
     //Item states.
     const [itemName, setItemName] = useState('');
@@ -27,11 +31,13 @@ const CreateItemButton = () => {
     const [itemArmourPoints, setItemArmourPoints] = useState<any>(null);
     const [itemCarry, setItemCarry] = useState<any>(null);
 
+    const [itemContainer, setItemContainer] = useState<containerType | null>(null);
     const [weaponRanged, setWeaponRanged] = useState(false);
 
     const [showDialogContent, setShowDialogContent] = useState('');
 
     //Store
+    const containers = useItemStore((state) => state.containers);
     const addItem = useItemStore((state) => state.addItem);
 
     //Handles item creation.
@@ -53,16 +59,17 @@ const CreateItemButton = () => {
                 'carry': itemCarry,
                 'armourPoints': itemArmourPoints,
                 'isRanged': weaponRanged,
+                'container_id': itemContainer ? itemContainer?.id : -1,
             }
             addItem(new_item);
             handleClose();
-            setCreateItemDialogOpen(false);
+            setInventoryDialogOpen(false);
         }
     }
 
     //Handles closing dialog without saving item.
     const handleClose = () => {
-        setCreateItemDialogOpen(false);
+        setInventoryDialogOpen(false);
         setItemName('');
         setItemEncumbrance('');
         setItemDamage('');
@@ -75,6 +82,7 @@ const CreateItemButton = () => {
         setItemSubCategory([]);
         setItemCarry(null);
         setWeaponRanged(false);
+        setItemContainer(null);
         setTimeout(() => {
             setShowDialogContent('');
         }, 300)
@@ -170,115 +178,184 @@ const CreateItemButton = () => {
         switch (showDialogContent) {
             case 'weapon':
                 return <div className="weapon-dialog">
-                    <div className="top-section">
+                    <div className="header-section">
+                        <span>{getDialogHeader()}</span>
+                        {
+                            showDialogContent &&
+                            <button className='back-button'
+                                onClick={() => setShowDialogContent('')}>
+                                <IoArrowBackCircleSharp />
+                            </button>
+                        }
+
                         <div className="item-name">
-                            <label>NAME</label>
                             <input type="text" placeholder='Item name' value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
                         </div>
+
                     </div>
 
-                    <div className="mid-section">
-                        <div className='item-traits'>
-                            <div>
-                                <label className="qualities">QUALITIES</label>
-                                <MultiSelect
-                                    placeholder="Select qualities"
-                                    value={itemQualities}
-                                    onChange={(e: any) => setItemQualities(e.value)}
-                                    options={qualities_options}
-                                    optionLabel={'name'}
-                                    showSelectAll={false}
-                                />
-                            </div>
-                            <div>
-                                <label className="flaws">FLAWS</label>
-                                <MultiSelect
-                                    placeholder="Select flaws"
-                                    value={itemFlaws}
-                                    onChange={(e: any) => setItemFlaws(e.value)}
-                                    options={flaws_options}
-                                    optionLabel={'name'}
-                                    showSelectAll={false}
-                                />
-                            </div>
-                        </div>
-                    </div>
+                    <hr />
 
-                    <div className="bottom-section">
-                        <div>
-                            <div className="item-damage">
-                                <label>DAMAGE</label>
-                                <div>
-                                    <input type="checkbox" checked={itemDamageSb} onChange={(e: any) => setItemDamageSb(e.target.checked)} />
-                                    <label>Use SB</label>
-                                </div>
+                    <div className="stats-section">
+                        <div className="item-stat">
+                            <label>DAMAGE</label>
+                            <input type="text" placeholder='DMG' value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
+                            <label>Use SB</label>
+                            <div className="damage-sb">
+                                <input type="checkbox" checked={itemDamageSb} onChange={(e: any) => setItemDamageSb(e.target.checked)} />
                             </div>
-                            <input type="number" placeholder='Item Damage' value={itemDamage} onChange={(e: any) => setItemDamage(e.target.value)} />
                         </div>
-                        <div>
+
+                        <div className="item-stat">
                             <label>RANGE</label>
-                            <input type="text" placeholder='Item Range' value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
+                            <input type="text" placeholder='RNG' value={itemRange} onChange={(e: any) => setItemRange(e.target.value)} />
                         </div>
 
                         <div className="item-sub-category">
-                            <div>
-                                <label>SUB-CATEGORY</label>
-                                <span onClick={() => setWeaponRanged(!weaponRanged)}>{weaponRanged ? 'Ranged' : 'Melee'}</span>
-                            </div>
-
-                            <MultiSelect
-                                placeholder="Select Sub-Category"
+                            <label>SUB-CATEGORY</label>
+                            <Dropdown
+                                className="sub-category-select"
+                                placeholder="Sub-category"
                                 value={itemSubCategory}
-                                onChange={(e) => setItemSubCategory(e.value)}
                                 options={subCategoryOptions}
+                                onChange={(e) => { setItemSubCategory(e.target.value) }}
+                            />
+                        </div>
+
+                        <div className="item-stat">
+                            <label>ENCUMBRANCE</label>
+                            <input type="text" placeholder='ENC' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div className="traits-section">
+                        <div className="qualities-select">
+                            <label>QUALITIES</label>
+                            <MultiSelect
+                                placeholder="Select qualities"
+                                value={itemQualities}
+                                onChange={(e: any) => setItemQualities(e.value)}
+                                options={qualities_options}
+                                optionLabel={"name"}
                                 showSelectAll={false}
                             />
                         </div>
-                        <div>
-                            <label>ENCUMBRANCE</label>
-                            <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
+
+                        <div className="flaws-select">
+                            <label>FLAWS</label>
+                            <MultiSelect
+                                placeholder="Select flaws"
+                                value={itemFlaws}
+                                onChange={(e: any) => setItemFlaws(e.value)}
+                                options={flaws_options}
+                                optionLabel={'name'}
+                                showSelectAll={false}
+                            />
                         </div>
+
+                        {(itemQualities && itemQualities.length > 0)
+                            ?
+                            <span className='trait-qualities'>
+                                {
+                                    itemQualities?.map((quality) => {
+                                        return <span className='quality'>
+                                            <PopMenu
+                                                trigger={quality.name}
+                                                content={
+                                                    <div className="quality-tooltip">
+                                                        <div className="header">
+                                                            <span>Quality</span>
+                                                            <div>{quality.name}</div>
+                                                            <hr />
+                                                        </div>
+                                                        <div className="description">
+                                                            <div>{quality.description}</div>
+                                                        </div>
+                                                    </div>}
+
+                                                positions={['top']}
+                                                align="center"
+                                            />
+                                        </span>
+                                    })
+                                }
+                            </span>
+                            :
+                            <span className="placeholder">No qualities</span>
+                        }
+
+                        {(itemFlaws && itemFlaws.length > 0)
+                            ?
+                            <span className='trait-flaws'>
+                                {
+                                    itemFlaws.map((flaw) => {
+                                        return <span className='flaw'>
+                                            <PopMenu
+                                                trigger={flaw.name}
+                                                content={
+                                                    <div className="flaw-tooltip">
+                                                        <div className="header">
+                                                            <span>Flaw</span>
+                                                            <div>{flaw.name}</div>
+                                                            <hr />
+                                                        </div>
+                                                        <div className="description">
+                                                            <div>{flaw.description}</div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                positions={['top']}
+                                                align="center"
+                                            />
+                                        </span>
+                                    })
+                                }
+                            </span>
+                            :
+                            <span className="placeholder">No flaws</span>
+                        }
+
                     </div>
+
+                    <hr />
+
+                    <div className="container-section">
+                        <label>CONTAINER</label>
+                        <Dropdown
+                            placeholder="Place in a bag"
+                            value={itemContainer}
+                            onChange={(e) => { setItemContainer(e.target.value) }}
+                            options={containers}
+
+                        />
+                    </div>
+
                 </div>
             case 'armor':
                 return <div className="armor-dialog">
 
-                    <div className="top-section">
+                    <div className="header-section">
+                        <span>{getDialogHeader()}</span>
+                        {
+                            showDialogContent &&
+                            <button className='back-button'
+                                onClick={() => setShowDialogContent('')}>
+                                <IoArrowBackCircleSharp />
+                            </button>
+                        }
+
                         <div className="item-name">
-                            <label>NAME</label>
                             <input type="text" placeholder='Item name' value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
                         </div>
+
                     </div>
 
-                    <div className="mid-section">
-                        <div className='item-traits'>
-                            <div>
-                                <label className="qualities">QUALITIES</label>
-                                <MultiSelect
-                                    placeholder="Select qualities"
-                                    value={itemQualities}
-                                    onChange={(e: any) => setItemQualities(e.value)}
-                                    options={qualities_options}
-                                    optionLabel={'name'}
-                                    showSelectAll={false}
-                                />
-                            </div>
-                            <div>
-                                <label className="flaws">FLAWS</label>
-                                <MultiSelect
-                                    placeholder="Select flaws"
-                                    value={itemFlaws}
-                                    onChange={(e: any) => setItemFlaws(e.value)}
-                                    options={flaws_options}
-                                    optionLabel={'name'}
-                                    showSelectAll={false}
-                                />
-                            </div>
-                        </div>
-                    </div>
+                    <hr />
 
-                    <div className="bottom-section">
-                        <div>
+                    <div className="stats-section">
+                        <div className="item-stat">
                             <label>LOCATIONS</label>
                             <MultiSelect
                                 placeholder="Select locations"
@@ -288,73 +365,164 @@ const CreateItemButton = () => {
                                 showSelectAll={false}
                             />
                         </div>
-                        <div>
+                        <div className="item-stat">
                             <label>ARMOUR POINTS</label>
-                            <input type="number" placeholder="Set Armour Points" value={itemArmourPoints} onChange={(e) => setItemArmourPoints(e.target.value)} />
+                            <input type="text" placeholder="Set Armour Points" value={itemArmourPoints} onChange={(e: any) => setItemArmourPoints(e.target.value)} />
                         </div>
-                        <div>
+
+                        <div className="item-sub-category">
+
                             <label>SUB-CATEGORY</label>
-                            <MultiSelect
-                                placeholder="Select Sub-Category"
-                                value={itemSubCategory}
-                                onChange={(e) => setItemSubCategory(e.value)}
-                                options={subCategoryOptions}
-                                showSelectAll={false}
-                            />
+                            <select value={itemSubCategory} onChange={(e) => {
+                                setItemSubCategory(e.target.value)
+                            }}>
+                                <option value={[]}>Select Sub-Category</option>
+                                {
+                                    subCategoryOptions.map((subcategory: string) => <option value={subcategory}> {subcategory} </option>)
+                                }
+                            </select>
                         </div>
-                        <div>
+
+                        <div className="item-stat">
                             <label>ENCUMBRANCE</label>
                             <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
                         </div>
+                    </div>
+
+                    <hr />
+
+                    <div className="traits-section">
+                        <div className="qualities-select">
+                            <label>QUALITIES</label>
+                            <MultiSelect
+                                placeholder="Select qualities"
+                                value={itemQualities}
+                                onChange={(e: any) => setItemQualities(e.value)}
+                                options={qualities_options}
+                                optionLabel={"name"}
+                                showSelectAll={false}
+                            />
+                        </div>
+
+                        <div className="flaws-select">
+                            <label>FLAWS</label>
+                            <MultiSelect
+                                placeholder="Select flaws"
+                                value={itemFlaws}
+                                onChange={(e: any) => setItemFlaws(e.value)}
+                                options={flaws_options}
+                                optionLabel={'name'}
+                                showSelectAll={false}
+                            />
+                        </div>
+
+                        {(itemQualities && itemQualities.length > 0)
+                            ?
+                            <span className='trait-qualities'>
+                                {
+                                    itemQualities?.map((quality) => {
+                                        return <span className='quality'>
+                                            <PopMenu
+                                                trigger={quality.name}
+                                                content={
+                                                    <div className="quality-tooltip">
+                                                        <div className="header">
+                                                            <span>Quality</span>
+                                                            <div>{quality.name}</div>
+                                                            <hr />
+                                                        </div>
+                                                        <div className="description">
+                                                            <div>{quality.description}</div>
+                                                        </div>
+                                                    </div>}
+
+                                                positions={['top']}
+                                                align="center"
+                                            />
+                                        </span>
+                                    })
+                                }
+                            </span>
+                            :
+                            <span className="placeholder">No qualities</span>
+                        }
+
+                        {(itemFlaws && itemFlaws.length > 0)
+                            ?
+                            <span className='trait-flaws'>
+                                {
+                                    itemFlaws.map((flaw) => {
+                                        return <span className='flaw'>
+                                            <PopMenu
+                                                trigger={flaw.name}
+                                                content={
+                                                    <div className="flaw-tooltip">
+                                                        <div className="header">
+                                                            <span>Flaw</span>
+                                                            <div>{flaw.name}</div>
+                                                            <hr />
+                                                        </div>
+                                                        <div className="description">
+                                                            <div>{flaw.description}</div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                positions={['top']}
+                                                align="center"
+                                            />
+                                        </span>
+                                    })
+                                }
+                            </span>
+                            :
+                            <span className="placeholder">No flaws</span>
+                        }
+
+                    </div>
+
+                    <hr />
+
+                    <div className="container-section">
+                        <label>CONTAINER</label>
+                        <Dropdown
+                            placeholder="Place in a bag"
+                            value={itemContainer}
+                            onChange={(e) => { setItemContainer(e.target.value) }}
+                            options={containers}
+                        />
                     </div>
                 </div>
             case 'items':
                 return <div className="items-dialog">
 
-                    <div className="top-section">
+                    <div className="header-section">
+                        <span>{getDialogHeader()}</span>
+                        {
+                            showDialogContent &&
+                            <button className='back-button'
+                                onClick={() => setShowDialogContent('')}>
+                                <IoArrowBackCircleSharp />
+                            </button>
+                        }
+
                         <div className="item-name">
-                            <label>NAME</label>
                             <input type="text" placeholder='Item name' value={itemName} onChange={(e: any) => setItemName(e.target.value)} />
                         </div>
+
                     </div>
 
-                    <div className="mid-section">
-                        <div className='item-traits'>
-                            <div>
-                                <label className="qualities">QUALITIES</label>
-                                <MultiSelect
-                                    placeholder="Select qualities"
-                                    value={itemQualities}
-                                    onChange={(e: any) => setItemQualities(e.value)}
-                                    options={qualities_options}
-                                    optionLabel={'name'}
-                                    showSelectAll={false}
-                                />
-                            </div>
-                            <div>
-                                <label className="flaws">FLAWS</label>
-                                <MultiSelect
-                                    placeholder="Select flaws"
-                                    value={itemFlaws}
-                                    onChange={(e: any) => setItemFlaws(e.value)}
-                                    options={flaws_options}
-                                    optionLabel={'name'}
-                                    showSelectAll={false}
-                                />
-                            </div>
-                        </div>
-                    </div>
+                    <hr />
 
-                    <div className="bottom-section">
-                        <div>
+                    <div className="stats-section">
+                        <div className="item-stat">
                             <label>AMOUNT</label>
                             <input type="text" placeholder='Item Amount' value={itemAmount} onChange={(e: any) => setItemAmount(e.target.value)} />
                         </div>
-                        <div>
+                        <div className="item-stat">
                             <label>CARRY</label>
                             <input type="text" placeholder="Carry Amount" value={itemCarry} onChange={(e: any) => setItemCarry(e.target.value)} />
                         </div>
-                        <div>
+                        <div className="item-sub-category">
                             <label>SUB-CATEGORY</label>
                             <MultiSelect
                                 placeholder="Select Sub-Category"
@@ -364,11 +532,115 @@ const CreateItemButton = () => {
                                 showSelectAll={false}
                             />
                         </div>
-                        <div>
+                        <div className="item-stat">
                             <label>ENCUMBRANCE</label>
                             <input type="text" placeholder='Item Encumbrance' value={itemEncumbrance} onChange={(e: any) => setItemEncumbrance(e.target.value)} />
                         </div>
                     </div>
+
+                    <hr />
+
+                    <div className="traits-section">
+                        <div className="qualities-select">
+                            <label>QUALITIES</label>
+                            <MultiSelect
+                                placeholder="Select qualities"
+                                value={itemQualities}
+                                onChange={(e: any) => setItemQualities(e.value)}
+                                options={qualities_options}
+                                optionLabel={"name"}
+                                showSelectAll={false}
+                            />
+                        </div>
+
+                        <div className="flaws-select">
+                            <label>FLAWS</label>
+                            <MultiSelect
+                                placeholder="Select flaws"
+                                value={itemFlaws}
+                                onChange={(e: any) => setItemFlaws(e.value)}
+                                options={flaws_options}
+                                optionLabel={'name'}
+                                showSelectAll={false}
+                            />
+                        </div>
+
+                        {(itemQualities && itemQualities.length > 0)
+                            ?
+                            <span className='trait-qualities'>
+                                {
+                                    itemQualities?.map((quality) => {
+                                        return <span className='quality'>
+                                            <PopMenu
+                                                trigger={quality.name}
+                                                content={
+                                                    <div className="quality-tooltip">
+                                                        <div className="header">
+                                                            <span>Quality</span>
+                                                            <div>{quality.name}</div>
+                                                            <hr />
+                                                        </div>
+                                                        <div className="description">
+                                                            <div>{quality.description}</div>
+                                                        </div>
+                                                    </div>}
+
+                                                positions={['top']}
+                                                align="center"
+                                            />
+                                        </span>
+                                    })
+                                }
+                            </span>
+                            :
+                            <span className="placeholder">No qualities</span>
+                        }
+
+                        {(itemFlaws && itemFlaws.length > 0)
+                            ?
+                            <span className='trait-flaws'>
+                                {
+                                    itemFlaws.map((flaw) => {
+                                        return <span className='flaw'>
+                                            <PopMenu
+                                                trigger={flaw.name}
+                                                content={
+                                                    <div className="flaw-tooltip">
+                                                        <div className="header">
+                                                            <span>Flaw</span>
+                                                            <div>{flaw.name}</div>
+                                                            <hr />
+                                                        </div>
+                                                        <div className="description">
+                                                            <div>{flaw.description}</div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                positions={['top']}
+                                                align="center"
+                                            />
+                                        </span>
+                                    })
+                                }
+                            </span>
+                            :
+                            <span className="placeholder">No flaws</span>
+                        }
+
+                    </div>
+
+                    <hr />
+
+                    <div className="container-section">
+                        <label>CONTAINER</label>
+                        <Dropdown
+                            placeholder="Place in a bag"
+                            value={itemContainer}
+                            onChange={(e) => { setItemContainer(e.target.value) }}
+                            options={containers}
+                        />
+                    </div>
+
                 </div>
             default:
                 return <div className="item-category-select">
@@ -413,24 +685,10 @@ const CreateItemButton = () => {
 
     return (
         <>
-            <button className='create-item-button' onClick={() => setCreateItemDialogOpen(true)}> ADD ITEM </button>
+            <button className='create-item-button' onClick={() => setInventoryDialogOpen(true)}> ADD ITEM </button>
             <Dialog
-                className={'createItemDialog'}
-                header={
-                    <div className="dialog-header">
-                        <div>
-                            {
-                                showDialogContent &&
-                                <button className='back-button'
-                                    onClick={() => setShowDialogContent('')}>
-                                    <IoArrowBackCircleSharp />
-                                </button>
-                            }
-                        </div>
-                        <span>{getDialogHeader()}</span>
-                    </div>
-                }
-                visible={createItemDialogOpen}
+                className={'inventoryDialog'}
+                visible={inventoryDialogOpen}
                 onHide={handleClose}
                 footer={
                     <div className="dialog-footer">

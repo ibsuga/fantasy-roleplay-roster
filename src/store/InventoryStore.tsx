@@ -1,5 +1,13 @@
 import { create } from "zustand";
 
+
+export type containerType = {
+    id: number,
+    label: string,
+    color: string,
+}
+
+
 export type itemType = {
     id: number,
     name: string,
@@ -7,7 +15,7 @@ export type itemType = {
     damage?: { value: string, useSB: boolean },
     range: string,
     category: string,
-    subCategory?: string[],
+    subCategory?: string,
     availability: string,
     qualities?: { name: string, description: string }[],
     flaws?: { name: string, description: string }[],
@@ -16,6 +24,7 @@ export type itemType = {
     amount?: number,
     carry?: number,
     isRanged?: boolean,
+    container_id?: number | null,
     description?: string,
 }
 
@@ -24,18 +33,24 @@ type itemStore = {
     items: itemType[] | [],
     encumbrance: number,
     wealth: { copper: number, silver: number, gold: number },
+    containers: containerType[],
     addItem: (item: itemType) => void,
     deleteItem: (id: number) => void,
     updateItem: (item: itemType) => void,
     updateItemDescription: (id: number, description: string) => void,
+    updateItemContainer: (id: number, containerId: number | null) => void,
+    updateItemAmount: (id: number, amount: number) => void,
     updateMaxEncumbrance: (encumbrance: number) => void,
     updateWealth: (wealth: number, currency: string) => void,
+    addContainer: (label: string, color: string) => void,
+    deleteContainer: (id: number) => void,
 }
 
 
 const useItemStore = create<itemStore>()((set) => ({
     items: JSON.parse(localStorage.getItem('InventoryItems') || '[]'),
     encumbrance: JSON.parse(localStorage.getItem('MaxEncumbrance') || '-1'),
+    containers: JSON.parse(localStorage.getItem('InventoryContainers') || '[]'),
     wealth: {
         copper: localStorage.getItem('PlayerWealth') ? JSON.parse(localStorage.getItem('PlayerWealth') || '').copper || 0 : 0,
         silver: localStorage.getItem('PlayerWealth') ? JSON.parse(localStorage.getItem('PlayerWealth') || '').silver || 0 : 0,
@@ -71,6 +86,24 @@ const useItemStore = create<itemStore>()((set) => ({
         localStorage.setItem('InventoryItems', JSON.stringify(items));
         return { items: [...items] }
     }),
+    updateItemContainer: (id, containerId) => set((state) => {
+        let items = [...state.items];
+        const item_index = items.findIndex((item: itemType) => item.id === id);
+        if (item_index !== -1) {
+            items[item_index].container_id = containerId;
+        }
+        localStorage.setItem('InventoryItems', JSON.stringify(items));
+        return { items: [...items] }
+    }),
+    updateItemAmount: (id, amount) => set((state) => {
+        let items = [...state.items];
+        const item_index = items.findIndex((item: itemType) => item.id === id);
+        if (item_index !== -1) {
+            items[item_index].amount = amount;
+        }
+        localStorage.setItem('InventoryItems', JSON.stringify(items));
+        return { items: [...items] }
+    }),
     updateMaxEncumbrance: (encumbrance) => set(() => {
         localStorage.setItem('MaxEncumbrance', JSON.stringify(encumbrance));
         return { encumbrance: encumbrance }
@@ -86,6 +119,31 @@ const useItemStore = create<itemStore>()((set) => ({
         }
         localStorage.setItem('PlayerWealth', JSON.stringify(wealth));
         return { wealth: { ...wealth } }
+    }),
+    addContainer: (label, color) => set((state) => {
+        let containers = [...state.containers]
+        const new_container = {
+            id: Date.now(),
+            label: label,
+            color: color,
+        }
+        containers.push(new_container);
+        localStorage.setItem('InventoryContainers', JSON.stringify(containers));
+        return { containers: [...containers] };
+    }),
+    deleteContainer: (id) => set((state) => {
+        let containers = [...state.containers];
+        containers = containers.filter((containers) => containers.id !== id);
+        //Limpiar id de los items.
+        let items = [...state.items];
+        items.forEach((item) => {
+            if (item.container_id === id) {
+                item.container_id = undefined
+            }
+        })
+        localStorage.setItem('InventoryItems', JSON.stringify(items));
+        localStorage.setItem('InventoryContainers', JSON.stringify(containers));
+        return { items: [...items], containers: [...containers] };
     })
 }))
 

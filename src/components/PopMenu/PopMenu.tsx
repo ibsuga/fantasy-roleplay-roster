@@ -1,64 +1,47 @@
 import { useState } from 'react';
 import { PopMenuContext } from './PopMenuContext';
-import { Popover, PopoverAlign, PopoverPosition } from 'react-tiny-popover';
+import { Popover, PopoverPosition } from 'react-tiny-popover';
 import PopMenuAnimation from './PopMenuAnimation';
-import { MdOutlineClose } from 'react-icons/md';
 import './PopMenu.css';
 
 
 const PopMenu = (props: {
-  label: any,
-  className?: string,
-  positions?: PopoverPosition[];
-  content?: any;
+  trigger: JSX.Element | string,
+  content: JSX.Element | string,
+  positions?: PopoverPosition[],
+  align?: any,
+  padding?: number,
   clickHandler?: Function,
   highlighted?: boolean,
   useTools?: boolean,
   equalWidth?: boolean,
-  align?: PopoverAlign,
+  direction?: string,
 }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const handlePopover = () => setIsPopoverOpen(!isPopoverOpen);
 
   if (props.content) {
+    // USE AS POPPING ELEMENT
     return (
       <Popover
         isOpen={isPopoverOpen}
         positions={props.positions || ['bottom', 'right']} // if you'd like, you can limit the positions
-        align={props.align || 'start'}
-        padding={5} // adjust padding here!
-        reposition={true} // prevents automatic readjustment of content position that keeps your popover content within its parent's bounds
+        align={props.align ?? 'start'}
+        padding={props.padding || 4} // adjust padding here!
+        reposition={false} // prevents automatic readjustment of content position that keeps your popover content within its parent's bounds
         onClickOutside={() => setIsPopoverOpen(false)} // handle click events outside of the popover/target here!
-        content={({ childRect }) => ( // you can also provide a render function that injects some useful stuff!
-          <div className={props.className} >
-            <PopMenuContext.Provider value={{ handlePopover }}>
-              <PopMenuAnimation >
-                {props.useTools &&
-                  <div className={'tools'}>
-                    <div onClick={handlePopover}><MdOutlineClose /></div>
-                  </div>
-                }
-                <div className={'content'} style={(props.equalWidth ? { width: childRect.width } : {})}>
-                  {props.content}
-                </div>
-              </PopMenuAnimation>
-            </PopMenuContext.Provider>
-          </div>
+        content={() => ( // you can also provide a render function that injects some useful stuff!
+          <PopMenuContext.Provider value={{ handlePopover }}>
+            <PopMenuAnimation direction={props.direction}>
+              {props.content}
+            </PopMenuAnimation>
+          </PopMenuContext.Provider>
         )}
       >
-        <div
-          className={`popmenu-button ${props.highlighted ? 'highlighted' : ''}`}
-          onClick={() => setIsPopoverOpen(!isPopoverOpen)}
-        >
-          <span>{props.label}</span>
+        <div onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
+          {props.trigger}
         </div>
       </Popover>
-    );
-  } else {
-    return (
-      <div className={`button ${props.highlighted ? 'highlighted' : ''}`}>
-        <span onClick={() => props.clickHandler && props.clickHandler()}>{props.label}</span>
-      </div >
     );
   }
 };
