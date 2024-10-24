@@ -9,16 +9,18 @@
 
 .Inventory .title {
     display: grid;
-    grid-column: 1/3;
+    grid-template-columns: 1fr min-content 1fr;
+    grid-column: 2/3;
     grid-row-start: 1;
     justify-content: center;
+    text-align: center;
     padding-bottom: 0.5em;
 }
 
 .Inventory .title span {
     font-family: var(--font-headers);
     color: var(--font-color-default);
-    font-size: 1.5em;
+    font-size: 1.85em;
 }
 
 /*FILTER BAR*/
@@ -70,7 +72,6 @@
 
 /* TOOLS BAR */
 
-
 .Inventory .tools-bar {
     display: grid;
     grid-template-rows: auto auto;
@@ -78,33 +79,40 @@
     grid-row-start: 2;
     text-align: end;
     align-items: center;
+    gap: 0.25em;
 }
 
 .Inventory .tools-bar .tools-bar-top {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 3fr 2fr;
 }
 
 .Inventory .tools-bar .tools-bar-bottom {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1em;
+    grid-template-columns: min-content min-content 1fr 1fr;
 }
 
-.Inventory .tools-bar .tools-bar-bottom .sort-buttons button.active {
-    background-color: tomato;
-}
-
+/* TOOLS BAR TOP */
 
 /* ACTIVE FILTER */
 
 .Inventory .tools-bar .tools-bar-top .active-filter {
     text-transform: capitalize;
     color: hsl(0, 0%, 80%);
-    text-align: center;
-    font-size: 26px;
+    text-align: start;
+    font-size: 2em;
     font-family: "Caveat";
+    height: 1em;
+
+    display: flex;
+    gap: 0.25em;
+    align-items: center;
 }
+
+.Inventory .tools-bar .tools-bar-top .active-filter svg {
+    font-size: 1.05em;
+}
+
 
 /*SEARCH BAR*/
 .Inventory .tools-bar .inventory-search-bar {
@@ -119,7 +127,7 @@
     background: none;
     color: hsl(0, 0%, 80%);
     font-family: var(--font-default);
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 2px;
     border-bottom: 2px solid grey;
     border-top: none;
@@ -139,6 +147,8 @@
     color: hsl(0, 0%, 80%);
     align-self: center;
 }
+
+/* TOOLS BAR BOTTOM */
 
 /* DELETE CONTAINER BUTTON */
 .Inventory .tools-bar .tools-bar-bottom .delete-container-button {
@@ -165,25 +175,44 @@
 }
 
 /*CREATE ITEM BUTTON*/
-.Inventory .tools-bar .create-item-button {
-    text-wrap: nowrap;
+.Inventory .tools-bar .toolbar-button {
+    background-color: hsl(0, 0%, 10%, 0.85);
+    border: 1px solid hsla(0, 0%, 10%, 0.85);
+    color: hsl(0, 0%, 80%);
+    cursor: pointer;
     font-family: var(--font-default);
     font-weight: bold;
-    font-size: 22px;
-    background: none;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
     transition: 0.25s;
-    color: hsl(0, 0%, 80%);
-    margin-left: auto;
+    font-size: 0.85em;
+    white-space: nowrap;
+    height: 1.75em;
+
+    -webkit-mask-image: url(../../assets/mask_dlc.png);
+    -webkit-mask-mode: alpha;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-image: url(../../assets/mask_dlc.png);
+    mask-mode: alpha;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    padding: 0em 1em;
 }
 
 
-.Inventory .tools-bar .create-item-button:hover {
+.Inventory .tools-bar .toolbar-button:hover {
     color: var(--highlight-color-brown);
-    border-color: var(--highlight-color-brown);
 }
+
+
+.Inventory .tools-bar .toolbar-button.active {
+    background-color: var(--highlight-color-brown-faint);
+    border-color: var(--highlight-color-brown);
+    color: hsl(0, 0%, 80%);
+}
+
+
 
 .Inventory .items {
     grid-column-start: 2;

@@ -225,7 +225,7 @@ const CreateItemDialog = () => {
 
   return (
     <>
-      <button className='create-item-button' onClick={() => setDialogOpen(true)}> ADD ITEM </button>
+      <button className='toolbar-button' onClick={() => setDialogOpen(true)}> ADD ITEM </button>
       <Dialog
         className={'inventoryDialog'}
         visible={dialogOpen}

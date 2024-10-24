@@ -1,21 +1,23 @@
 .InventoryItem {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 5em;
     flex-direction: row;
     background: hsla(0, 0%, 0%, 0.5);
-    border: 1px solid hsla(0, 0%, 0%, 0.5);
     border-radius: 20px 5px 5px 20px;
     width: 100%;
     height: 2em;
+    gap: 0.75em;
     position: relative;
     align-items: center;
 
     user-select: none;
     color: white;
     transition: 0.5s;
+
+    --inventory_item_font_size: 0.9rem;
 }
 
 .InventoryItem:hover {
-    /* border-color: var(--highlight-color-brown); */
     box-shadow: inset 50px 0px 35px -20px var(--highlight-color-brown);
 }
 
@@ -54,61 +56,63 @@
 /* ITEM CONTENT */
 .edit-button {
     cursor: pointer;
-}
-
-
-.InventoryItem .item-content {
     display: grid;
     grid-template-columns: auto min-content;
+    align-items: center;
+    padding-right: 1em;
     width: 100%;
 }
 
+
 .InventoryItem .item-name {
-    font-family: var(--font-headers);
+    font-family: var(--font-default);
     color: var(--font-color-default);
-    font-size: 14px;
+    font-size: var(--inventory_item_font_size);
     padding-left: 3em;
+    overflow: hidden;
+    line-height: 1.1em;
+    text-wrap: balance;
 }
 
 /* ITEM STATS */
 .InventoryItem .item-stats {
-
     display: flex;
-    flex-direction: row;
-    gap: 1em;
+    flex-direction: row-reverse;
+    gap: 0.5em;
 }
 
 .InventoryItem .item-stats .stat {
     display: flex;
     gap: 0.15em;
-    width: 6em;
     align-items: center;
-    font-size: 14px;
+    font-size: var(--inventory_item_font_size);
 }
 
 .InventoryItem .item-stats .stat .label {
-    font-family: var(--font-headers);
-    color: hsl(0, 0%, 50%);
-    font-size: 10px;
+    font-family: var(--font-default);
+    color: hsl(0, 0%, 35%);
+    font-size: var(--inventory_item_font_size);
     align-self: end;
 }
 
 .InventoryItem .item-stats .stat span {
-    font-family: var(--font-headers);
+    font-family: var(--font-default);
     color: hsl(0, 0%, 80%);
     align-self: end;
 }
 
 /* ITEM CONTAINER */
 .InventoryItem .item-container {
-    display: grid;
     width: 4em;
-    font-size: 24px;
-    place-items: start;
+    font-size: 1.75em;
     color: hsl(0, 0%, 40%);
-    /* border: 1px solid green; */
     margin-left: auto;
     transition: 0.25s;
+}
+
+.InventoryItem .item-container>div {
+    display: flex;
+    align-self: center;
 }
 
 .InventoryItem .item-container:hover {
@@ -118,18 +122,34 @@
 
 /* ITEM AMOUNT */
 .InventoryItem .item-amount {
-
-    /* border: 1px solid yellow; */
     position: absolute;
     align-self: center;
     text-align: center;
-    font-size: 42px;
-    font-family: 'Caveat';
-    width: 1em;
-    right: 5px;
-    bottom: 0px;
+    right: -10px;
+    bottom: -5px;
     z-index: 1;
-    color: hsl(0, 0%, 80%);
+    color: hsl(0, 0%, 70%);
+}
+
+.InventoryItem .item-amount::first-letter {
+    font-size: 1.75em;
+    font-family: 'Caveat';
+}
+
+
+.InventoryItem .item-amount input {
+    width: 1em;
+    font-family: 'Caveat';
+    font-size: 2.25em;
+    text-align: start;
+    background: none;
+    border: none;
+    color: hsl(0, 0%, 70%);
+}
+
+.InventoryItem .item-amount input:focus {
+    outline: none;
+    color: var(--highlight-color-brown);
 }
 
 

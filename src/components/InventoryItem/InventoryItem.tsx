@@ -26,13 +26,13 @@ const InventoryItem = (props: {
         return (
           <div className='item-stats'>
             <div className="stat">
+              <div className="label">ENC</div>
+              <span>{props.data.encumbrance}</span>
+            </div>
+            <div className="stat">
               <div className="label">DMG</div>
               <span>{props.data.damage?.useSB ? '+SB+' : ''}</span>
               <span>{props.data.damage?.value}</span>
-            </div>
-            <div className="stat">
-              <div className="label">ENC</div>
-              <span>{props.data.encumbrance}</span>
             </div>
           </div>
         );
@@ -40,12 +40,12 @@ const InventoryItem = (props: {
         return (
           <div className='item-stats'>
             <div className='stat'>
-              <div className='label'>AP</div>
-              <span>{props.data.armourPoints}</span>
-            </div>
-            <div className='stat'>
               <div className="label">ENC</div>
               <span>{props.data.encumbrance}</span>
+            </div>
+            <div className='stat'>
+              <div className='label'>AP</div>
+              <span>{props.data.armourPoints}</span>
             </div>
           </div>
         );
@@ -71,10 +71,10 @@ const InventoryItem = (props: {
       </div>
 
       <EditItemDialog id={props.data.id}>
-        <div className='item-content'>
+        <>
           <div className="item-name">{props.data.name}</div>
           {getItemStatsContent()}
-        </div>
+        </>
       </EditItemDialog>
 
       <div className="item-container">
@@ -104,6 +104,7 @@ const InventoryItem = (props: {
       <div className="item-amount">x
         <input
           type='text'
+          maxLength={2}
           value={props.data.amount ?? 1}
           onChange={(e: any) => updateItemAmount(props.data.id, e.target.value)}
         />

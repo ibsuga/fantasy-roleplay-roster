@@ -178,7 +178,7 @@ export const InventoryItems = () => {
       <div className="tools-bar">
 
         <div className="tools-bar-top">
-          <div className='active-filter'>{activeFilterLabel}</div>
+          <div className='active-filter'> <GiHandBag /> {activeFilterLabel}</div>
           <div className='inventory-search-bar'>
             <FaSearch />
             <input onChange={handleChangeSearchtext} value={searchText} type="text" placeholder='Find items...' />
@@ -186,23 +186,21 @@ export const InventoryItems = () => {
         </div>
 
         <div className="tools-bar-bottom">
-          <div className="sort-buttons">
-            <button
-              onClick={() => setSortMode(sortMode === 'a-z' ? 'z-a' : 'a-z')}
-              className={(sortMode === 'a-z' || sortMode === 'z-a') ? 'active' : ''}
-            >
-              {sortMode === 'z-a' ? 'Z-A' : 'A-Z'}
-            </button>
-            <button
-              onClick={() => setSortMode(sortMode === 'new' ? 'old' : 'new')}
-              className={(sortMode === 'new' || sortMode === 'old') ? 'active' : ''}
-            >
-              {sortMode === 'old' ? 'OLD' : 'NEW'}
-            </button>
-          </div>
+          <button
+            onClick={() => setSortMode(sortMode === 'a-z' ? 'z-a' : 'a-z')}
+            className={`toolbar-button ${(sortMode === 'a-z' || sortMode === 'z-a') ? 'active' : ''}`}
+          >
+            {sortMode === 'z-a' ? 'Z-A' : 'A-Z'}
+          </button>
+          <button
+            onClick={() => setSortMode(sortMode === 'new' ? 'old' : 'new')}
+            className={`toolbar-button ${(sortMode === 'new' || sortMode === 'old') ? 'active' : ''} `}
+          >
+            {sortMode === 'old' ? 'OLD' : 'NEW'}
+          </button>
 
           <button
-            className='delete-container-button'
+            className='toolbar-button'
             onClick={handleDeleteContainer}
             disabled={!containerFilter}
           >

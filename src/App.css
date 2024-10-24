@@ -21,6 +21,7 @@
     --font-color-default-highlight: hsl(210, 5%, 80%);
     --background-color: hsl(210, 5%, 15%);
     --highlight-color-brown: hsl(50, 25%, 45%);
+    --highlight-color-brown-faint: hsl(50, 25%, 35%);
 }
 
 html,
