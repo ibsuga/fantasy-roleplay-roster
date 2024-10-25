@@ -6,7 +6,9 @@ import { GiChestArmor, GiCrocSword, GiPotionBall, GiHandBag } from "react-icons/
 import { FaSearch } from "react-icons/fa";
 import { MdClear } from "react-icons/md";
 import { LuDot } from "react-icons/lu";
+import { IoListSharp } from "react-icons/io5";
 import { Dialog } from 'primereact/dialog';
+import { MdOutlineAddBox } from "react-icons/md";
 import { ColorPicker } from 'primereact/colorpicker';
 
 
@@ -122,7 +124,21 @@ export const InventoryItems = () => {
     }
   }, [categoryFilter, containerFilter]);
 
-  console.log(sorted_items);
+
+  const activeFilterIcon = useMemo(() => {
+    if (categoryFilter !== null) {
+      switch (categoryFilter) {
+        case 'weapon': return <GiCrocSword />;
+        case 'armor': return <GiChestArmor />;
+        case 'items': return <GiPotionBall />;
+      }
+    } else if (containerFilter !== null) {
+      return <GiHandBag style={{ color: `#${selectedContainer?.color}` }} />
+    } else {
+      return <IoListSharp />
+    }
+  }, [categoryFilter, containerFilter]);
+
 
   return (
     <>
@@ -147,12 +163,11 @@ export const InventoryItems = () => {
               />
             )
           }
-          <button onClick={() => setInventoryDialogOpen(true)}>+</button>
+          <div className='add-container-button' onClick={() => setInventoryDialogOpen(true)}> + </div>
         </div>
 
         <Dialog
           className={'inventoryDialog'}
-          header={'New Container'}
           visible={inventoryDialogOpen}
           onHide={handleClose}
           footer={
@@ -165,10 +180,13 @@ export const InventoryItems = () => {
           draggable={false}
           resizable={false}
         >
-          <div>
+          <div className='container-dialog'>
             <div>
-              <label>Name</label>
+              <GiHandBag />
               <input type="text" placeholder='Container Name' value={containerLabel} onChange={(e) => setContainerLabel(e.target.value)} />
+            </div>
+            <div className='color-selector'>
+              <span>Container color</span>
               <ColorPicker format='hex' value={containerColor} onChange={(e: any) => setContainerColor(e.value)} />
             </div>
           </div>
@@ -178,7 +196,7 @@ export const InventoryItems = () => {
       <div className="tools-bar">
 
         <div className="tools-bar-top">
-          <div className='active-filter'> <GiHandBag /> {activeFilterLabel}</div>
+          <div className='active-filter'> {activeFilterIcon} {activeFilterLabel}</div>
           <div className='inventory-search-bar'>
             <FaSearch />
             <input onChange={handleChangeSearchtext} value={searchText} type="text" placeholder='Find items...' />

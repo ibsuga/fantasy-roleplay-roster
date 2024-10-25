@@ -132,18 +132,29 @@ const CreateItemDialog = () => {
             <div className="item-stat">
               <label>DAMAGE</label>
               <input type="text" placeholder='DMG' value={damage} onChange={(e: any) => setDamage(e.target.value)} />
+            </div>
+
+            <div className="item-stat">
+              <label>RANGE</label>
+              <input type="text" placeholder='RNG' value={range} onChange={(e: any) => setRange(e.target.value)} />
+            </div>
+            <div className="item-stat">
               <label>Use SB</label>
               <div className="damage-sb">
                 <input type="checkbox" checked={damageSb} onChange={(e: any) => setDamageSb(e.target.checked)} />
               </div>
             </div>
             <div className="item-stat">
-              <label>RANGE</label>
-              <input type="text" placeholder='RNG' value={range} onChange={(e: any) => setRange(e.target.value)} />
+              <label>ENCUMBRANCE</label>
+              <input type="text" placeholder='ENC' value={encumbrance} onChange={(e: any) => setEncumbrance(e.target.value)} />
             </div>
             <div className="item-stat">
-              <label>SUB-CATEGORY</label>
+              <label>SC TYPE</label>
               <span onClick={() => setWeaponRanged(!weaponRanged)}>{weaponRanged ? 'Ranged' : 'Melee'}</span>
+            </div>
+            <div className="item-stat" >
+
+              <label>SUBCATEGORY</label>
               <Dropdown
                 className="sub-category-select"
                 placeholder="Sub-category"
@@ -151,10 +162,6 @@ const CreateItemDialog = () => {
                 options={subcategory_options}
                 onChange={(e) => setSubCategory(e.target.value)}
               />
-            </div>
-            <div className="item-stat">
-              <label>ENCUMBRANCE</label>
-              <input type="text" placeholder='ENC' value={encumbrance} onChange={(e: any) => setEncumbrance(e.target.value)} />
             </div>
           </>
         );

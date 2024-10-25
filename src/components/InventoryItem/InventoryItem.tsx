@@ -63,6 +63,36 @@ const InventoryItem = (props: {
     }
   };
 
+
+  const ContainerSelectorTooltipContent =
+    <div className="container-tooltip">
+      <div className="header">STORE IN...</div>
+      <hr />
+
+      <div className="container-option">
+        <ContainerSelector
+          itemId={props.data.id}
+          containerId={null}
+          containerLabel='Inventory'
+          isActive={!props.data.container_id}
+        />
+      </div>
+      {
+        containers.map((container, index) =>
+          <div className="container-option">
+            <ContainerSelector
+              key={index}
+              itemId={props.data.id}
+              containerId={container.id}
+              containerLabel={container.label}
+              isActive={container.id === props.data.container_id}
+            />
+          </div>
+        )
+      }
+    </div >
+
+
   return (
     <div className="InventoryItem" >
 
@@ -80,24 +110,7 @@ const InventoryItem = (props: {
       <div className="item-container">
         <PopMenu
           trigger={<GiHandBag style={container ? { color: `#${container?.color}` } : {}} />}
-          content={
-            <>
-              <ContainerSelector
-                itemId={props.data.id}
-                containerId={null}
-                containerLabel='No container'
-              />
-              {
-                containers.map((container, index) =>
-                  <ContainerSelector
-                    key={index}
-                    itemId={props.data.id}
-                    containerId={container.id}
-                    containerLabel={container.label}
-                  />)
-              }
-            </>
-          }
+          content={ContainerSelectorTooltipContent}
         />
       </div>
 

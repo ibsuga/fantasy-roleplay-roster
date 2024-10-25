@@ -49,6 +49,35 @@
     color: hsl(0, 0%, 50%);
 }
 
+.Inventory .filter-bar .add-container-button {
+    background-color: hsl(0, 0%, 10%, 0.85);
+    border: 1px solid hsla(0, 0%, 10%, 0.85);
+    color: hsl(0, 0%, 80%);
+    cursor: pointer;
+    font-family: var(--font-default);
+    font-weight: bold;
+    transition: 0.25s;
+    font-size: 1.5em;
+    white-space: nowrap;
+
+
+    -webkit-mask-image: url(../../assets/mask_dlc.png);
+    -webkit-mask-mode: alpha;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-image: url(../../assets/mask_dlc.png);
+    mask-mode: alpha;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    padding: 0.1em 0.35em;
+}
+
+.Inventory .filter-bar .add-container-button:hover {
+    color: var(--highlight-color-brown);
+}
+
 /*CONTAINER BAR*/
 
 .Inventory .filter-bar .containers {
@@ -97,16 +126,16 @@
 /* ACTIVE FILTER */
 
 .Inventory .tools-bar .tools-bar-top .active-filter {
-    text-transform: capitalize;
-    color: hsl(0, 0%, 80%);
+    display: flex;
     text-align: start;
     font-size: 2em;
     font-family: "Caveat";
+    color: hsl(0, 0%, 80%);
     height: 1em;
-
-    display: flex;
     gap: 0.25em;
+    text-transform: capitalize;
     align-items: center;
+    user-select: none;
 }
 
 .Inventory .tools-bar .tools-bar-top .active-filter svg {
@@ -212,6 +241,11 @@
     color: hsl(0, 0%, 80%);
 }
 
+.Inventory .tools-bar .toolbar-button:disabled {
+    color: hsl(0, 0%, 25%);
+    cursor: default;
+    pointer-events: none;
+}
 
 
 .Inventory .items {
@@ -225,7 +259,7 @@
 .Inventory .items>div {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 0.6em;
 }
 
 
@@ -281,7 +315,7 @@
 
 .Inventory .inventory-bottom .encumbrance .encumbrance-section input:focus {
     outline: none;
-    caret-color: transparent;
+    /* caret-color: transparent; */
     color: var(--highlight-color-brown);
 }
 
@@ -333,8 +367,13 @@
 
 
 /*ENCUMBRANCE INFO TOOLTIP*/
-.encumbrance-info-tooltip {
+.encumbrance-info-tooltip,
+.encumbrance-rules-tooltip,
+.conversion-tooltip {
     user-select: none;
+    padding: 0.5em;
+    font-family: var(--font-default);
+    background: hsla(0, 0%, 70%, 0.5);
 }
 
 .encumbrance-info-tooltip .header {
@@ -354,7 +393,8 @@
 }
 
 .encumbrance-info-tooltip .encumbrance-value {
-    font-family: var(--font-headers);
+    font-family: var(--font-default);
+    font-weight: bold;
     color: hsl(50, 25%, 30%);
 }
 
@@ -376,6 +416,7 @@
 /*ENCUMBRANCE RULES TOOLTIP*/
 .encumbrance-rules-tooltip .header {
     font-weight: bolder;
+    font-family: var(--font-headers);
 }
 
 .encumbrance-rules-tooltip .header-background {
@@ -386,7 +427,7 @@
 }
 
 .encumbrance-rules-tooltip tr:nth-child(even) {
-    background-color: hsla(0, 0%, 45%, 0.4);
+    background-color: hsla(0, 0%, 25%, 0.4);
 }
 
 /*BOTTOM SECTION TOOLTIP HEADER BACKGROUND*/
@@ -508,7 +549,7 @@
 
 .Inventory .inventory-bottom .wealth input:focus {
     outline: none;
-    caret-color: transparent;
+    /* caret-color: transparent; */
     color: var(--highlight-color-brown);
 }
 

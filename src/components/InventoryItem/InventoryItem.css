@@ -120,6 +120,46 @@
     color: hsl(0, 0%, 90%);
 }
 
+/* ITEM CONTAINER POPMENU */
+
+.container-tooltip {
+    padding: 0.5em;
+    color: hsl(0, 0%, 80%);
+    font-family: var(--font-default);
+    background-color: hsl(0, 0%, 0%, 0.5);
+    border: 1px solid hsl(0, 0%, 0%, 0.15);
+    user-select: none;
+}
+
+.container-tooltip .header {
+    font-family: var(--font-headers);
+}
+
+.container-tooltip hr {
+    width: 100%;
+}
+
+.container-tooltip .container-option>div {
+    cursor: pointer;
+    margin: 0.25em 0em;
+}
+
+.container-tooltip .container-option>div:hover {
+    background-color: hsl(50, 25%, 35%, 0.5);
+}
+
+.container-tooltip .container-option .active {
+    color: hsl(0, 0%, 50%);
+    pointer-events: none;
+}
+
+.container-tooltip .container-option .active:hover {
+    background-color: hsl(0, 0%, 30%, 0.25);
+    cursor: default;
+}
+
+
+
 /* ITEM AMOUNT */
 .InventoryItem .item-amount {
     position: absolute;
@@ -299,6 +339,10 @@
     display: grid;
     user-select: none;
     width: 30em;
+    background: hsla(0, 0%, 80%, 0.5);
+    padding: 0.5em;
+    font-family: var(--font-default);
+
 }
 
 .quality-tooltip .header,
