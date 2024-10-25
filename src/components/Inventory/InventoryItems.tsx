@@ -8,7 +8,6 @@ import { MdClear } from "react-icons/md";
 import { LuDot } from "react-icons/lu";
 import { IoListSharp } from "react-icons/io5";
 import { Dialog } from 'primereact/dialog';
-import { MdOutlineAddBox } from "react-icons/md";
 import { ColorPicker } from 'primereact/colorpicker';
 
 
