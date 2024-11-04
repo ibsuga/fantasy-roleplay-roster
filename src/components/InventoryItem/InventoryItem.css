@@ -41,7 +41,10 @@
 .InventoryItem .item-equip:hover {
     border-color: var(--highlight-color-brown);
     cursor: pointer;
-    box-shadow: 0px 0px 10px var(--highlight-color-brown);
+}
+
+.InventoryItem .item-equip:active {
+    transform: rotateZ(45deg) scale(0.9);
 }
 
 .InventoryItem .item-equip>div {
@@ -50,6 +53,11 @@
     color: hsl(0, 0%, 80%);
     place-items: center;
     z-index: 2;
+}
+
+.InventoryItem .item-equip.equipped {
+    border-color: var(--highlight-color-brown);
+    cursor: pointer;
 }
 
 

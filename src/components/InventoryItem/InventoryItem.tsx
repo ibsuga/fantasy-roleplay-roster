@@ -9,7 +9,14 @@ import ContainerSelector from './ContainerSelector';
 const InventoryItem = (props: {
   data: itemType;
 }) => {
-  const [containers, updateItemAmount] = useItemStore((state) => [state.containers, state.updateItemAmount]);
+  const [containers, updateItemAmount, equippedItems, equipItem, unequipItem] = useItemStore((state) => [
+    state.containers,
+    state.updateItemAmount,
+    state.equippedItems,
+    state.equipItem,
+    state.unequipItem
+  ]);
+
   const container = containers.find((container) => container.id === props.data.container_id);
 
   //Sets item icon for each category.
@@ -92,11 +99,13 @@ const InventoryItem = (props: {
       }
     </div >
 
+  //Checks if item is equipped or not (!! = boolean casting).
+  let isItemEquipped = !!equippedItems.find((item: number) => item === props.data.id);
 
   return (
     <div className="InventoryItem" >
 
-      <div className='item-equip'>
+      <div className={`item-equip ${isItemEquipped ? 'equipped' : ''}`} onClick={() => isItemEquipped ? unequipItem(props.data.id) : equipItem(props.data.id)}>
         <div>{itemIcons[props.data.category]}</div>
       </div>
 

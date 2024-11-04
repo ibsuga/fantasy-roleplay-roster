@@ -34,6 +34,9 @@ type itemStore = {
   encumbrance: number,
   wealth: { copper: number, silver: number, gold: number; },
   containers: containerType[],
+  equippedItems: number[] | [],
+  equipItem: (id: number) => void,
+  unequipItem: (id: number) => void,
   addItem: (item: itemType) => void,
   deleteItem: (id: number) => void,
   updateItem: (item: itemType) => void,
@@ -49,6 +52,7 @@ type itemStore = {
 
 const useItemStore = create<itemStore>()((set) => ({
   items: JSON.parse(localStorage.getItem('InventoryItems') || '[]'),
+  equippedItems: [],
   encumbrance: JSON.parse(localStorage.getItem('MaxEncumbrance') || '-1'),
   containers: JSON.parse(localStorage.getItem('InventoryContainers') || '[]'),
   wealth: {
@@ -76,6 +80,21 @@ const useItemStore = create<itemStore>()((set) => ({
     }
     localStorage.setItem('InventoryItems', JSON.stringify(items));
     return { items: [...items] };
+  }),
+  equipItem: (id) => set((state) => {
+    let equippedItems = [...state.equippedItems];
+    const item_index = equippedItems.findIndex((itemId: number) => itemId === id);
+    if (item_index === -1) {
+      equippedItems.push(id);
+    }
+    localStorage.setItem('EquippedItems', JSON.stringify(equippedItems));
+    return { equippedItems: equippedItems };
+  }),
+  unequipItem: (id) => set((state) => {
+    let equippedItems = [...state.equippedItems];
+    equippedItems = equippedItems.filter((itemId: number) => itemId !== id);
+    localStorage.setItem('Equippeditems', JSON.stringify(equippedItems));
+    return { equippedItems: equippedItems };
   }),
   updateItemDescription: (id, description) => set((state) => {
     let items = [...state.items];

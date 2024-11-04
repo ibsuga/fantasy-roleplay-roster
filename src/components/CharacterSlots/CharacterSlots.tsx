@@ -20,8 +20,6 @@ const CharacterSlots = () => {
                 <ItemSlot label="Item" image={LifeElixir} />
                 <ItemSlot label="Item" image={LifeElixir} />
                 <ItemSlot label="Item" image={LifeElixir} />
-                <ItemSlot label="Item" image={LifeElixir} />
-                <ItemSlot label="Item" image={LifeElixir} />
             </div>
             <div className='armor-slots'>
                 <img className="silhouette" src={Silhouette} />
