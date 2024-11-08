@@ -30,8 +30,9 @@
 
 /*ITEMS*/
 .CharacterSlots .item-slots {
-    display: grid;
-    gap: 0.25em 0em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em 0em;
     height: 28em;
     user-select: none;
     margin-top: 1em;
