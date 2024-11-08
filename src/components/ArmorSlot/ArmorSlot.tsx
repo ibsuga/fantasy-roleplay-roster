@@ -1,9 +1,8 @@
-import { GiPotionBall } from 'react-icons/gi';
-import './ItemSlot.css'
 import useItemStore from '../../store/InventoryStore';
+import './ArmorSlot.css';
 
 
-const ItemSlot = (props: {
+const ArmorSlot = (props: {
     id?: number,
     label: string,
     image: string,
@@ -13,19 +12,22 @@ const ItemSlot = (props: {
     const updateItemAmount = useItemStore((state) => state.updateItemAmount);
 
     return (
-        <div className="ItemSlot">
+        <div className='ArmorSlot'>
+
             <input
                 type="text"
                 maxLength={2}
                 value={props.amount}
                 onChange={(e: any) => props.id && updateItemAmount(props.id, e.target.value)}
             />
-            <div className='item-slot-image'>
-                <GiPotionBall />
+            <div className="slot-image">
+                <div className="slot-image-input-bg"></div>
+                <img src={props.image} />
             </div>
-            <div className='item-slot-label'>{props.label}</div>
+
+            <div className="slot-label">{props.label}</div>
         </div>
     )
 }
 
-export default ItemSlot;
+export default ArmorSlot;

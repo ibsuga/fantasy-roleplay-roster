@@ -1,6 +1,7 @@
 .CharacterSlots {
     display: grid;
-    grid-template-columns: 35% auto;
+    grid-template-columns: 50% auto;
+    grid-template-rows: min-content auto;
     height: 100%;
     font-size: 1.2em;
     border-left: 4px dotted hsla(0, 0%, 55%, 0.35);
@@ -10,25 +11,48 @@
     justify-items: center;
 }
 
-/*CONSUMABLES*/
-.CharacterSlots .consumable-slots {
+/* TITLE */
+.CharacterSlots .title {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75em 0em;
-    height: min-content;
-    user-select: none;
-    margin-top: 2em;
-    padding: 1em;
+    grid-template-columns: 1fr min-content 1fr;
+    grid-column: 1/3;
+    grid-row-start: 1;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 0.5em;
 }
 
-.CharacterSlots .consumable-slots .ItemSlot {
+.CharacterSlots .title span {
+    font-family: var(--font-headers);
+    color: var(--font-color-default);
+    font-size: 1.85rem;
+}
+
+/*ITEMS*/
+.CharacterSlots .item-slots {
+    display: grid;
+    gap: 0.25em 0em;
+    height: 28em;
+    user-select: none;
+    margin-top: 1em;
+    padding: 0.5em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    grid-column: 1/1;
+}
+
+.CharacterSlots .item-slots .ItemSlot:nth-child(even) {
+    margin-left: 1em;
+}
+
+.CharacterSlots .item-slots .ArmorSlot {
     font-size: 0.9rem;
 }
 
 /*ARMOR*/
 .CharacterSlots .armor-slots {
     user-select: none;
-    font-size: 0.88rem;
+    font-size: 0.78rem;
     width: 20em;
     position: relative;
 }
@@ -39,42 +63,42 @@
     position: absolute;
 }
 
-.CharacterSlots .armor-slots .ItemSlot {
+.CharacterSlots .armor-slots .ArmorSlot {
     position: absolute;
     font-size: 1.2em;
 }
 
-.CharacterSlots .armor-slots .ItemSlot:nth-child(2) {
+.CharacterSlots .armor-slots .ArmorSlot:nth-child(2) {
     top: 1.5em;
     left: 6em;
 }
 
-.CharacterSlots .armor-slots .ItemSlot:nth-child(3) {
+.CharacterSlots .armor-slots .ArmorSlot:nth-child(3) {
     top: 9em;
     left: 6em;
 }
 
-.CharacterSlots .armor-slots .ItemSlot:nth-child(4) {
+.CharacterSlots .armor-slots .ArmorSlot:nth-child(4) {
     top: 14em;
     left: 12em;
 }
 
-.CharacterSlots .armor-slots .ItemSlot:nth-child(5) {
+.CharacterSlots .armor-slots .ArmorSlot:nth-child(5) {
     top: 14em;
     left: -0.5em;
 }
 
-.CharacterSlots .armor-slots .ItemSlot:nth-child(6) {
+.CharacterSlots .armor-slots .ArmorSlot:nth-child(6) {
     top: 29em;
     left: 10em;
 }
 
-.CharacterSlots .armor-slots .ItemSlot:nth-child(7) {
+.CharacterSlots .armor-slots .ArmorSlot:nth-child(7) {
     top: 29em;
     left: 2em;
 }
 
-.CharacterSlots .armor-slots .ItemSlot:nth-child(8) {
+.CharacterSlots .armor-slots .ArmorSlot:nth-child(8) {
     top: 5em;
     left: 12em;
 }

@@ -20,7 +20,7 @@
 .Inventory .title span {
     font-family: var(--font-headers);
     color: var(--font-color-default);
-    font-size: 1.85em;
+    font-size: 1.85rem;
 }
 
 /*FILTER BAR*/
