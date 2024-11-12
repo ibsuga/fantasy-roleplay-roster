@@ -23,7 +23,7 @@ const CreateItemDialog = () => {
   const [range, setRange] = useState<string>('');
   const [qualities, setQualities] = useState<{ name: string, description: string; }[] | undefined>([]);
   const [flaws, setFlaws] = useState<{ name: string, description: string; }[] | undefined>([]);
-  const [amount, setAmount] = useState<number | undefined>(0);
+  const [amount, setAmount] = useState<number | undefined>(1);
   const [locations, setLocations] = useState<string[] | undefined>([]);
   const [armourPoints, setArmourPoints] = useState<number | undefined>(0);
   const [category, setCategory] = useState<any>(null);
@@ -47,11 +47,13 @@ const CreateItemDialog = () => {
     setCategory(null);
     setQualities(undefined);
     setFlaws(undefined);
-    setAmount(0);
+    setAmount(1);
     setSubCategory(undefined);
     setCarry(0);
     setWeaponRanged(false);
     setContainer(null);
+    setLocations(undefined);
+    setArmourPoints(0);
     setTimeout(() => {
       setDialogSection('');
     }, 300);

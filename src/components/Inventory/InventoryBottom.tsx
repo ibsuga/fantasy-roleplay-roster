@@ -23,7 +23,7 @@ const InventoryBottom = () => {
   const weaponEncumbrance = useMemo(() => weaponItems.reduce((prev: number, item: any) => prev + (item.encumbrance * 1), 0), [items]);
   const armorEncumbrance = useMemo(() => armorItems.reduce((prev: number, item: any) => prev + (item.encumbrance * 1), 0), [items]);
   const consumableEncumbrance = useMemo(() => consumableItems.reduce((prev: number, item: any) => prev + (item.encumbrance * 1), 0), [items]);
-  const totalEncumbrance = useMemo(() => items.reduce((prev: number, item: any) => prev + (item.encumbrance * 1), 0), [items]);
+  const totalEncumbrance = useMemo(() => items.reduce((prev: number, item: any) => prev + (item.encumbrance * item.amount), 0), [items]);
 
 
   const EncumbranceInfoTooltipContent =

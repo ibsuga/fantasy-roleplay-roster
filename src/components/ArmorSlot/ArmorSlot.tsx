@@ -1,31 +1,28 @@
-import useItemStore from '../../store/InventoryStore';
+import { GiChestArmor } from 'react-icons/gi';
 import './ArmorSlot.css';
 
 
 const ArmorSlot = (props: {
-    id?: number,
     label: string,
-    image: string,
-    amount?: number,
+    image?: string,
+    armourPoints: number,
 }) => {
 
-    const updateItemAmount = useItemStore((state) => state.updateItemAmount);
 
     return (
         <div className='ArmorSlot'>
 
-            <input
-                type="text"
-                maxLength={2}
-                value={props.amount}
-                onChange={(e: any) => props.id && updateItemAmount(props.id, e.target.value)}
-            />
+            <span className='slot-ap'>
+                {props.armourPoints}
+            </span>
+
             <div className="slot-image">
-                <div className="slot-image-input-bg"></div>
-                <img src={props.image} />
+                <GiChestArmor />
             </div>
 
-            <div className="slot-label">{props.label}</div>
+            <div className="slot-label">
+                {props.label}
+            </div>
         </div>
     )
 }

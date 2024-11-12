@@ -52,7 +52,7 @@ type itemStore = {
 
 const useItemStore = create<itemStore>()((set) => ({
   items: JSON.parse(localStorage.getItem('InventoryItems') || '[]'),
-  equippedItems: [],
+  equippedItems: JSON.parse(localStorage.getItem('EquippedItems') || '[]'),
   encumbrance: JSON.parse(localStorage.getItem('MaxEncumbrance') || '-1'),
   containers: JSON.parse(localStorage.getItem('InventoryContainers') || '[]'),
   wealth: {
@@ -93,7 +93,7 @@ const useItemStore = create<itemStore>()((set) => ({
   unequipItem: (id) => set((state) => {
     let equippedItems = [...state.equippedItems];
     equippedItems = equippedItems.filter((itemId: number) => itemId !== id);
-    localStorage.setItem('Equippeditems', JSON.stringify(equippedItems));
+    localStorage.setItem('EquippedItems', JSON.stringify(equippedItems));
     return { equippedItems: equippedItems };
   }),
   updateItemDescription: (id, description) => set((state) => {
