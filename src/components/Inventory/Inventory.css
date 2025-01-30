@@ -549,7 +549,6 @@
 
 .Inventory .inventory-bottom .wealth input:focus {
     outline: none;
-    /* caret-color: transparent; */
     color: var(--highlight-color-brown);
 }
 

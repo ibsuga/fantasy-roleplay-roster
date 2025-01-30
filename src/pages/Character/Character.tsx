@@ -10,6 +10,9 @@ const Character = () => {
             <div className='section'>
                 <Inventory />
             </div>
+
+            <hr style={{ border: "1px dashed" }} />
+
             <div className='section'>
                 <CharacterSlots />
             </div>

@@ -1,0 +1,15 @@
+.WeaponSlot {
+    display: grid;
+    background-color: hsl(0, 0%, 100%, 0.25);
+    border-radius: 2px;
+    width: 9em;
+    min-width: 9em;
+    padding: 0.2em;
+
+}
+
+.WeaponSlot .weapon-label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

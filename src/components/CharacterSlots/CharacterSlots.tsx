@@ -6,6 +6,7 @@ import Silhouette from '../../assets/hero-silhouette.png';
 import ShortswordImage from '../../assets/item-icons/Lightarmor1.png';
 import LifeElixir from '../../assets/item-icons/Lifeelixir1.png';
 import { useMemo } from 'react';
+import WeaponSlot from '../WeaponSlot/WeaponSlot';
 
 
 const CharacterSlots = () => {
@@ -21,6 +22,8 @@ const CharacterSlots = () => {
     let itemSlots = equipmentSlots.filter((item) => item.category === 'items');
     let armorSlots = equipmentSlots.filter((item) => item.category === 'armor');
 
+    let weaponSlots = equipmentSlots.filter((item) => item.category === 'weapon');
+
 
     let checkArmorPoints = (location: string) => {
         return armorSlots.reduce((acc: number, armorItem: itemType) => {
@@ -31,6 +34,7 @@ const CharacterSlots = () => {
             }
         }, 0);
     }
+
 
 
     let headArmorPoints = useMemo(() => checkArmorPoints('Head'), [armorSlots]);
@@ -50,29 +54,45 @@ const CharacterSlots = () => {
                 <span style={{ opacity: '25%', fontSize: '1.25em', alignSelf: 'center', justifySelf: 'start' }}>CONDITIONS</span>
             </div>
 
+            <div className='slot-section'>
 
-            <div className='item-slots'>
+                <div className='item-slots'>
+                    {
+                        itemSlots.map((item: itemType, index) =>
+                            <ItemSlot
+                                key={index}
+                                id={item.id}
+                                label={item.name}
+                                amount={item.amount}
+                                image={LifeElixir} />
+                        )
+                    }
+                </div>
+
+                <div className='armor-slots'>
+                    <img className="silhouette" src={Silhouette} />
+                    <ArmorSlot armourPoints={headArmorPoints} label="Head" />
+                    <ArmorSlot armourPoints={bodyArmorPoints} label="Body" />
+                    <ArmorSlot armourPoints={armsArmorPoints} label="Arm (L)" />
+                    <ArmorSlot armourPoints={armsArmorPoints} label="Arm (R)" />
+                    <ArmorSlot armourPoints={legsArmorPoints} label="Leg (L)" />
+                    <ArmorSlot armourPoints={legsArmorPoints} label="Leg (R)" />
+                    <ArmorSlot armourPoints={1} label="Shield" image={ShortswordImage} />
+                </div>
+            </div>
+
+            <div className="weapon-slots">
                 {
-                    itemSlots.map((item: itemType, index) =>
-                        <ItemSlot
+                    weaponSlots.map((item: itemType, index) =>
+                        <WeaponSlot
                             key={index}
-                            id={item.id}
                             label={item.name}
-                            amount={item.amount}
-                            image={LifeElixir} />
+                            damage={item.damage?.value}
+                        />
                     )
                 }
             </div>
-            <div className='armor-slots'>
-                <img className="silhouette" src={Silhouette} />
-                <ArmorSlot armourPoints={headArmorPoints} label="Head" />
-                <ArmorSlot armourPoints={bodyArmorPoints} label="Body" />
-                <ArmorSlot armourPoints={armsArmorPoints} label="Arm (L)" />
-                <ArmorSlot armourPoints={armsArmorPoints} label="Arm (R)" />
-                <ArmorSlot armourPoints={legsArmorPoints} label="Leg (L)" />
-                <ArmorSlot armourPoints={legsArmorPoints} label="Leg (R)" />
-                <ArmorSlot armourPoints={1} label="Shield" image={ShortswordImage} />
-            </div>
+
         </div>
     )
 }
