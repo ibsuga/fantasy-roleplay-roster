@@ -1,215 +1,324 @@
 .Stats {
     display: grid;
-    grid-template-rows: min-content min-content auto;
+    grid-template-rows: min-content min-content min-content;
     height: 100%;
+    width: 100%;
     text-align: center;
     color: var(--font-color-default);
-
 }
 
-.Stats .player-health {
+.Stats .title {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.Stats .stats-table input:last-of-type {
-    border-left: 2px dotted hsla(213, 5%, 40%);
-    color: var(--font-color-default);
-}
-
-.Stats .stats-table {
-    display: grid;
-    grid-template-rows: min-content auto;
-}
-
-.Stats .stats-table>span {
-    font-family: var(--font-default);
-    align-self: center;
-    font-size: 0.9em;
-    color: var(--font-color-default-faint);
-}
-
-.Stats .stats-table>input,
-.Stats .player-points .stats-table input {
+    grid-template-columns: 1fr min-content 1fr;
+    justify-content: center;
     text-align: center;
-    font-family: var(--font-labels);
-    color: hsl(210, 5%, 45%);
-    width: 90%;
-    height: 1em;
-    font-size: 2em;
-    justify-self: center;
-    padding-top: 6px;
-    background: none;
-    border: none;
+    padding-bottom: 0.5em;
 }
 
-.Stats .stats-table>input:focus,
-.Stats .player-points .stats-table input:focus {
-    outline: none;
-    color: var(--highlight-color-brown);
-    caret-color: transparent;
-}
-
-.Stats .stats-table.wounds {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-}
-
-.Stats .stats-table.fate-resilience {
-    grid-template-columns: 1fr 1fr;
-}
-
-.Stats .stats-value {
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 1em;
-    padding-bottom: 1em;
-
-}
-
-.Stats .stats-value svg {
-    font-size: 2em;
-    color: var(--font-color-default-faint);
-}
-
-/*Wounds Section*/
-.Stats .player-health .player-wounds {
-    display: grid;
-    grid-template-rows: min-content auto min-content;
-}
-
-.Stats .player-health .player-wounds>span {
-    font-family: var(--font-headers);
-    align-self: center;
-    box-shadow: inset 0px 0px 138px 0 hsla(0, 0%, 0%, 0.15);
-}
-
-/* .Stats .player-health .player-wounds .wounds-table input:last-of-type {
-    border-left: 2px dotted hsla(213, 5%, 40%);
-    color: var(--font-color-default);
-} */
-
-.Stats .player-health .player-wounds>input {
-    text-align: center;
-    font-family: var(--font-labels);
-    color: firebrick;
-    width: 90%;
-    font-size: 7em;
-    height: 0.9em;
-    justify-self: center;
-    padding-top: 26px;
-    background: none;
-    border: none;
-}
-
-.Stats .player-health .player-wounds>input:focus {
-    outline: none;
-    color: var(--highlight-color-brown);
-    caret-color: transparent;
-}
-
-/*Wounds table*/
-/* .Stats .player-health .player-wounds .wounds-table {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: min-content auto;
-}
-
-.Stats .player-health .player-wounds .wounds-table>span {
-    font-family: var(--font-default);
-    align-self: center;
-    font-size: 0.9em;
-    color: var(--font-color-default-faint);
-}
-
-.Stats .player-health .player-wounds .wounds-table>input,
-.Stats .player-points .stats-table input {
-    text-align: center;
-    font-family: var(--font-labels);
-    color: hsl(210, 5%, 45%);
-    width: 90%;
-    height: 1em;
-    font-size: 2em;
-    justify-self: center;
-    padding-top: 6px;
-    background: none;
-    border: none;
-}
-
-.Stats .player-health .player-wounds .wounds-table>input:focus,
-.Stats .player-points .stats-table input:focus {
-    outline: none;
-    color: var(--highlight-color-brown);
-    caret-color: transparent;
-} */
-
-.Stats .player-points {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.Stats .player-points>div {
-    display: grid;
-    grid-template-rows: min-content auto;
-}
-
-.Stats .player-points>div>span {
-    font-family: var(--font-headers);
-}
-
-/* .Stats .player-points .stats-table {
-    display: flex;
-    justify-content: space-evenly;
-} */
-
-
-
-
-
-.Stats .player-status {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-}
-
-/*Banner section containers*/
-.Stats .player-status .status-psychology,
-.Stats .player-status .status-corruption,
-.Stats .player-status .status-conditions {
-    display: grid;
-    grid-template-rows: min-content auto;
-}
-
-/* Banner section titles*/
-.Stats .player-status .status-psychology>span,
-.Stats .player-status .status-corruption>span,
-.Stats .player-status .status-conditions>span {
+.Stats .title span {
     font-family: var(--font-headers);
     color: var(--font-color-default);
-    padding-bottom: 0.25em;
-}
-
-/*Banner section banners*/
-.Stats .player-status .status-psychology>div,
-.Stats .player-status .status-corruption>div,
-.Stats .player-status .status-conditions>div {
-    display: flex;
-    gap: 0.5em;
-    justify-content: space-evenly;
-    overflow-x: scroll;
-    padding-bottom: 1em;
-    padding-left: 1em;
+    font-size: 1.85rem;
 }
 
 
+/*HEALTH SECTION*/
 
-
-.Stats>div>div>span {
-    background-color: hsla(0, 0%, 0%, 0.2);
-}
-
-.Stats>div>div {
+/*Boxes*/
+.Stats .stats-container {
+    display: grid;
+    grid-template-rows: min-content auto;
     margin: 0.25em;
     border-radius: 4px;
     background: hsla(0, 0%, 0%, 0.2);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(5px);
+
+    .stat-header {
+        display: inline-block;
+        width: 100%;
+        font-family: var(--font-default);
+        font-weight: bold;
+        font-size: 14px;
+        align-self: center;
+        color: var(--font-color-default);
+        box-shadow: inset 0px 0px 138px 0 hsla(0, 0%, 0%, 0);
+        background-color: hsla(0, 0%, 0%, 0.2);
+    }
+
+}
+
+
+/*Inputs*/
+.Stats .stat-slot input {
+    text-align: center;
+    font-family: 'Comforter Brush';
+    height: 1em;
+    width: 1em;
+    font-size: 25px;
+    color: hsl(0, 0%, 70%);
+    text-shadow: 0px 0px 5px hsl(50, 25%, 45%);
+    justify-self: center;
+    background: none;
+    border: none;
+    transition: 0.25s;
+}
+
+.Stats .stat-slot input:focus {
+    outline: none;
+    color: hsl(0, 20%, 80%);
+    caret-color: transparent;
+}
+
+/*CURRENT Input*/
+.Stats .player-health .hit-points>div>input {
+    text-align: center;
+    font-family: 'Comforter Brush';
+    height: 1.55em;
+    width: 1em;
+    font-size: 40px;
+    color: hsl(0, 61%, 63%);
+    text-shadow: 0px 0px 5px hsl(0, 85%, 45%);
+    justify-self: center;
+    background: none;
+    border: none;
+    transition: 0.25s;
+}
+
+.Stats .player-health .hit-points>div>input:focus {
+    outline: none;
+    color: hsl(0, 45%, 70%);
+    caret-color: transparent;
+}
+
+/*Spans under inputs*/
+.Stats .player-health .stat-slot span {
+    width: 70%;
+    justify-self: center;
+    border-top: 1px solid hsl(0, 0%, 30%);
+    font-family: var(--font-headers);
+    color: hsl(0, 0%, 30%);
+    font-size: 12px;
+}
+
+/*CURRENT Span*/
+.Stats .player-health .hit-points>div>span {
+    width: 70%;
+    justify-self: center;
+    border-top: 1px solid hsl(0, 0%, 30%);
+    font-family: var(--font-headers);
+    color: hsl(0, 0%, 30%);
+    font-size: 12px;
+}
+
+
+/*ARMOR CLASS*/
+
+/* AC BOX*/
+.Stats .stats-container.ac-box {
+    border-bottom-left-radius: 400px;
+    border-bottom-right-radius: 400px;
+}
+
+.Stats .armor-class {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.Stats .armor-class .stat-slot.ac {
+    display: grid;
+}
+
+.Stats .armor-class .stat-slot input {
+    padding-top: 0.25em;
+}
+
+.Stats .armor-class input[type='checkbox'] {
+    height: 0.4em;
+    width: 0.4em;
+}
+
+.Stats .armor-class>div input {
+    font-size: 40px;
+}
+
+
+/*HIT POINTS*/
+.Stats .player-health {
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+
+    .hit-points {
+        display: grid;
+        grid-template-rows: min-content auto;
+        padding: 0.10em;
+
+        &>div {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            &>div {
+                display: grid;
+                grid-template-rows: 1fr min-content;
+                grid-column-start: 2;
+                grid-row-start: 1;
+                grid-row-end: 3;
+            }
+        }
+
+        .stat-slot {
+            display: grid;
+        }
+
+    }
+}
+
+
+/*HIT DICE*/
+.Stats .player-health .hit-dice {
+    display: grid;
+    grid-template-rows: min-content auto;
+}
+
+.Stats .player-health .hit-dice>div>div {
+    display: grid;
+    padding-top: 0.15em;
+}
+
+
+/*DEATH SAVES*/
+
+/*Death saves icons*/
+.Stats .death-saves .stat-slot>div svg {
+    font-size: 15px;
+    padding: 0.3em;
+}
+
+
+/*CHARACTERISTICS SECTION*/
+.Stats .player-characteristics {
+    display: grid;
+    grid-template-rows: min-content auto;
+
+    .pc-section-top {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .pc-section-bottom {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5em;
+        padding-top: 0.5em;
+    }
+
+}
+
+/*PROFICIENCY BONUS & HEROIC INSPIRATION*/
+.Stats .player-characteristics .pc-section-bottom>:nth-child(7) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+/*Inputs General*/
+.Stats .pc-container-content input {
+    align-self: center;
+    text-align: center;
+    font-family: 'Comforter Brush';
+    height: 0.55em;
+    width: 1.25em;
+    font-size: 25px;
+    color: hsl(0, 0%, 60%);
+    text-shadow: 0px 0px 5px hsl(50, 25%, 45%);
+    justify-self: center;
+    background: none;
+    border: none;
+    transition: 0.25s;
+}
+
+.Stats .pc-container-content input:focus {
+    outline: none;
+    color: hsl(0, 0%, 80%);
+    caret-color: transparent;
+}
+
+
+/*STAT CARDS*/
+.Stats .pc-container {
+    display: grid;
+    outline: 1px solid hsla(0, 0%, 0%, 0.2);
+    border-radius: 4px;
+    background-color: hsl(0, 0%, 0%, 0.5);
+    padding: 0.25em;
+
+
+    .pc-container-header {
+        font-size: 16px;
+        display: inline-block;
+        width: 100%;
+        font-family: var(--font-default);
+        font-weight: bold;
+        align-self: center;
+        color: var(--font-color-default);
+    }
+
+    .pc-container-content {
+        display: grid;
+        grid-template-rows: 1fr min-content 2fr;
+
+        .modifier {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid hsl(0, 0%, 15%);
+            padding: 0.5em;
+
+            .big {
+                font-size: 40px;
+                border-radius: 4px;
+            }
+
+            span {
+                font-family: var(--font-default);
+                font-size: 12px;
+                color: hsl(0, 0%, 25%);
+                padding-bottom: 0.25em;
+            }
+        }
+
+        .saving-throw {
+            display: flex;
+            padding: 0.25em 0;
+            border-bottom: 1px solid hsl(0, 0%, 15%);
+
+            span {
+                align-self: center;
+                font-family: var(--font-default);
+                font-size: 12px;
+                color: hsl(0, 0%, 45%);
+                border: none;
+            }
+        }
+
+        .skills {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            gap: 0.35em;
+            padding-top: 0.5em;
+
+            span {
+                align-self: center;
+                font-family: var(--font-default);
+                font-size: 12px;
+                color: hsl(0, 0%, 45%);
+                border: none;
+            }
+        }
+
+    }
 }

@@ -16,6 +16,9 @@ const Character = () => {
             <div className='section'>
                 <CharacterSlots />
             </div>
+
+            <hr style={{ border: "1px dashed" }} />
+
             <div className='section'>
                 <Stats />
             </div>

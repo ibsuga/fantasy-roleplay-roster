@@ -3,9 +3,10 @@
     background-color: hsl(0, 0%, 100%, 0.25);
     border-radius: 2px;
     width: 9em;
+    height: 3em;
     min-width: 9em;
     padding: 0.2em;
-
+    margin: auto;
 }
 
 .WeaponSlot .weapon-label {

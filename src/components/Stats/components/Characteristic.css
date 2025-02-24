@@ -1,0 +1,103 @@
+.Characteristic {
+    display: grid;
+    border-radius: 4px;
+    background-color: hsl(0, 0%, 0%, 0.5);
+    outline: 1px solid hsla(0, 0%, 0%, 0.2);
+}
+
+/*INPUTS*/
+.Characteristic input {
+    align-self: center;
+    text-align: center;
+    font-family: 'Comforter Brush';
+    height: 0.7em;
+    width: 1.25em;
+    font-size: 25px;
+    color: hsl(0, 0%, 60%);
+    text-shadow: 0px 0px 5px hsl(50, 25%, 45%);
+    justify-self: center;
+    background: none;
+    border: none;
+    transition: 0.25s;
+}
+
+.Characteristic input:focus {
+    outline: none;
+    color: hsl(0, 0%, 80%);
+    caret-color: transparent;
+}
+
+.Characteristic input.modifier {
+    font-size: 40px;
+}
+
+.Characteristic input[type='checkbox'] {
+    height: 0.5em;
+    width: 0.5em;
+}
+
+
+.Characteristic .header {
+    font-size: 16px;
+    display: inline-block;
+    width: 100%;
+    font-family: var(--font-default);
+    font-weight: bold;
+    align-self: center;
+    color: var(--font-color-default);
+}
+
+.Characteristic .content {
+    display: grid;
+    grid-template-rows: 1fr min-content 2fr;
+}
+
+/*MODIFIER & SCORE*/
+.Characteristic .content>:first-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid hsl(0, 0%, 15%);
+    padding: 0.5em;
+}
+
+.Characteristic .content>:first-child span {
+    font-family: var(--font-default);
+    font-size: 12px;
+    color: hsl(0, 0%, 25%);
+    padding-bottom: 0.25em;
+}
+
+/*SAVING THROW*/
+.Characteristic .content>:nth-child(2) {
+    display: grid;
+    grid-template-columns: min-content min-content auto;
+    padding: 0.25em 0;
+    border-bottom: 1px solid hsl(0, 0%, 15%);
+    justify-content: center;
+}
+
+.Characteristic .content>:nth-child(2) span {
+    align-self: center;
+    font-family: var(--font-default);
+    font-size: 12px;
+    color: hsl(0, 0%, 45%);
+    border: none;
+}
+
+/*SKILLS*/
+
+.Characteristic .content>:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35em;
+    padding-top: 0.5em;
+}
+
+.Characteristic .content>:last-child span {
+    align-self: center;
+    font-family: var(--font-default);
+    font-size: 12px;
+    color: hsl(0, 0%, 45%);
+    border: none;
+}

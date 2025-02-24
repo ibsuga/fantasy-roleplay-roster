@@ -1,32 +1,227 @@
-import Banner from '../Banner/Banner';
-import { FaRegCircle, FaCircle } from "react-icons/fa";
-import { LuCircleDashed } from "react-icons/lu";
+// import Banner from '../Banner/Banner';
+// import { FaRegCircle, FaCircle } from "react-icons/fa";
+// import { LuCircleDashed } from "react-icons/lu";
+import Characteristic from './components/Characteristic';
 import './Stats.css';
+import { TbDiamonds } from "react-icons/tb";
 
 const Stats = () => {
     return (
         <div className="Stats">
-            <div className='player-health'>
-                <div className='player-wounds'>
-                    <span>WOUNDS</span>
-                    <input type="text" maxLength={2} placeholder='-' />
-                    <div className='stats-table wounds'>
-                        <span>SB</span>
-                        <span>TB+2</span>
-                        <span>WPB</span>
-                        <span>Hardy</span>
-                        <span>Max.</span>
-                        <input type="text" maxLength={2} placeholder='-' />
-                        <input type="text" maxLength={2} placeholder='-' />
-                        <input type="text" maxLength={2} placeholder='-' />
-                        <input type="text" maxLength={2} placeholder='-' />
-                        <input type="text" maxLength={2} placeholder='-' />
-                    </div>
-                </div>
-                <div>CRITICAL WOUNDS</div>
+
+            <div className='title'>
+
+                <span style={{ opacity: '25%', fontSize: '1.25em', alignSelf: 'center', justifySelf: 'end' }}>EQUIPMENT</span>
+                <span> STATS </span>
+                <span style={{ opacity: '25%', fontSize: '1.25em', alignSelf: 'center', justifySelf: 'start' }}>INVENTORY</span>
+
             </div>
 
-            <div className='player-points'>
+            {/*HEALTH SECTION*/}
+            <div className='player-health'>
+
+                {/*ARMOR CLASS*/}
+                <div className="stats-container ac-box">
+                    <span className='stat-header'>AC</span>
+
+                    <div className="armor-class">
+                        <div className="stat-slot">
+                            <input type="text" maxLength={2} placeholder='-' />
+                        </div>
+                        <div className='stat-slot ac'>
+                            <span>SHIELD</span>
+                            <input type="checkbox" />
+                        </div>
+                    </div>
+                </div>
+
+                {/*HIT POINTS */}
+                <div className='stats-container'>
+
+                    <span className='stat-header'>HIT POINTS</span>
+
+                    <div className='hit-points'>
+                        <div>
+
+                            <input type="text" maxLength={2} placeholder='-' />
+                            <span>CURRENT</span>
+
+                            <div>
+                                <div className='stat-slot'>
+                                    <input type="text" maxLength={2} placeholder='-' />
+                                    <span>TEMP</span>
+                                </div>
+                                <div className='stat-slot'>
+                                    <input type="text" maxLength={2} placeholder='-' />
+                                    <span>MAX</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                {/*HIT DICE*/}
+                <div className="stats-container">
+                    <span className='stat-header'>HIT DICE</span>
+
+                    <div className='hit-dice'>
+                        <div>
+                            <div className='stat-slot'>
+                                <input type="text" maxLength={2} placeholder='-' />
+                                <span>SPENT</span>
+                            </div>
+                            <div className='stat-slot'>
+                                <input type="text" maxLength={2} placeholder='-' />
+                                <span>MAX</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {/*DEATH SAVES*/}
+                <div className="stats-container">
+
+                    <span className='stat-header'>DEATH SAVES</span>
+                    <div className='death-saves'>
+                        <div>
+                            <div className='stat-slot'>
+                                <div>
+                                    <TbDiamonds />
+                                    <TbDiamonds />
+                                    <TbDiamonds />
+                                </div>
+                                <span>SUCCESSES</span>
+                            </div>
+                            <div className='stat-slot'>
+                                <div>
+                                    <TbDiamonds />
+                                    <TbDiamonds />
+                                    <TbDiamonds />
+                                </div>
+                                <span>FAILURES</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {/*CHARACTERISTICS SECTION*/}
+            <div className="player-characteristics">
+
+                <div className="pc-section-top">
+
+                    <div className='stats-container'>
+                        <span className="stat-header">INITIATIVE</span>
+                        <div className="stat-slot">
+                            <input type="text" maxLength={2} placeholder='-' />
+                        </div>
+                    </div>
+
+                    <div className='stats-container'>
+                        <span className="stat-header">SPEED</span>
+                        <div className="stat-slot">
+                            <input type="text" maxLength={2} placeholder='-' />
+                        </div>
+                    </div>
+
+                    <div className='stats-container'>
+                        <span className="stat-header">SIZE</span>
+                        <div className="stat-slot">
+                            <input type="text" maxLength={2} placeholder='-' />
+                        </div>
+                    </div>
+
+                    <div className='stats-container'>
+                        <span className="stat-header">PERCEPTION</span>
+                        <div className="stat-slot">
+                            <input type="text" maxLength={2} placeholder='-' />
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div className="pc-section-bottom">
+
+                    {/*STRENGHT */}
+                    <Characteristic label='STRENGHT' skills={['Athletics']} />
+
+                    {/*INTELLIGENCE */}
+                    <Characteristic label='INTELLIGENCE' skills={['Arcana', 'History', 'Investigation', 'Nature', 'Religion']} />
+
+                    {/*DEXTERITY*/}
+                    <Characteristic label='DEXTERITY' skills={['Acrobatics', 'Sleight of Hand', 'Stealh']} />
+
+                    {/*WISDOM*/}
+                    <Characteristic label='WISDOM' skills={['Animal Handl.', 'Insight', 'Medicine', 'Perception', 'Survival']} />
+
+                    {/*CONSTITUTION*/}
+                    <Characteristic label='CONSTITUTION' skills={[]} />
+
+                    {/*CHARISMA*/}
+                    <Characteristic label='CHARISMA' skills={['Deception', 'Intimidation', 'Performance', 'Persuasion']} />
+
+                    {/*PROFICIENCY BONUS & HEROIC INSPIRATION */}
+                    <div>
+
+                        <div className='stats-container'>
+                            <span className="stat-header">PROFICIENCY BONUS</span>
+                            <div className="stat-slot">
+                                <input type="text" maxLength={2} placeholder='-' />
+                            </div>
+                        </div>
+
+                        <div className='stats-container'>
+                            <span className="stat-header">HEROIC INSPIRATION </span>
+                            <div className="stat-slot">
+                                <input type="checkbox" maxLength={2} placeholder='-' />
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            {/* <div className='player-points'>
                 <div>
                     <span>FATE</span>
                     <div className='stats-value'>
@@ -60,29 +255,12 @@ const Stats = () => {
                         <input type="text" />
                     </div>
                 </div>
-                {/* <div>
-                    <span>FORTUNE</span>
-                    <div className='points-table'>
-                        <span>Max.</span>
-                        <span>Current</span>
-                        <input type="text" maxLength={2} placeholder='-' />
-                        <input type="text" maxLength={2} placeholder='-' />
-                    </div>
-                </div>
-                <div>
-                    <span>RESOLVE</span>
-                    <div className='points-table'>
-                        <span>Max.</span>
-                        <span>Current</span>
-                        <input type="text" maxLength={2} placeholder='-' />
-                        <input type="text" maxLength={2} placeholder='-' />
-                    </div>
-                </div> */}
-
-            </div>
 
 
-            <div className='player-status'>
+            </div> */}
+
+
+            {/* <div className='player-status'>
                 <div className='status-conditions'>
                     <span>CONDITIONS</span>
                     <div>
@@ -114,7 +292,7 @@ const Stats = () => {
                         <Banner />
                     </div>
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )
