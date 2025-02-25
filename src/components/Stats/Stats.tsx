@@ -1,11 +1,22 @@
-// import Banner from '../Banner/Banner';
-// import { FaRegCircle, FaCircle } from "react-icons/fa";
-// import { LuCircleDashed } from "react-icons/lu";
 import Characteristic from './components/Characteristic';
 import './Stats.css';
 import { TbDiamonds } from "react-icons/tb";
+import useStatsStore from '../../store/StatsStore';
+
 
 const Stats = () => {
+
+    const [armorClass, updateArmorClass, hitPoints, updateHitPoints, hitDice, updateHitDice] = useStatsStore((state) => [
+        state.armorClass,
+        state.updateArmorClass,
+        state.hitPoints,
+        state.updateHitPoints,
+        state.hitDice,
+        state.updateHitDice,
+    ]);
+
+
+
     return (
         <div className="Stats">
 
@@ -26,7 +37,12 @@ const Stats = () => {
 
                     <div className="armor-class">
                         <div className="stat-slot">
-                            <input type="text" maxLength={2} placeholder='-' />
+                            <input
+                                type="text"
+                                maxLength={2}
+                                value={armorClass}
+                                onChange={(e) => updateArmorClass(Number(e.target.value) || 0)}
+                            />
                         </div>
                         <div className='stat-slot ac'>
                             <span>SHIELD</span>
@@ -42,17 +58,31 @@ const Stats = () => {
 
                     <div className='hit-points'>
                         <div>
-
-                            <input type="text" maxLength={2} placeholder='-' />
+                            <input
+                                type="text"
+                                maxLength={2}
+                                value={hitPoints.current}
+                                onChange={(e) => updateHitPoints(Number(e.target.value), 'current')}
+                            />
                             <span>CURRENT</span>
 
                             <div>
                                 <div className='stat-slot'>
-                                    <input type="text" maxLength={2} placeholder='-' />
+                                    <input
+                                        type="text"
+                                        maxLength={2}
+                                        value={hitPoints.temp}
+                                        onChange={(e) => updateHitPoints(Number(e.target.value), 'temp')}
+                                    />
                                     <span>TEMP</span>
                                 </div>
                                 <div className='stat-slot'>
-                                    <input type="text" maxLength={2} placeholder='-' />
+                                    <input
+                                        type="text"
+                                        maxLength={2}
+                                        value={hitPoints.max}
+                                        onChange={(e) => updateHitPoints(Number(e.target.value), 'max')}
+                                    />
                                     <span>MAX</span>
                                 </div>
                             </div>
@@ -63,16 +93,28 @@ const Stats = () => {
 
                 {/*HIT DICE*/}
                 <div className="stats-container">
+
                     <span className='stat-header'>HIT DICE</span>
 
                     <div className='hit-dice'>
                         <div>
                             <div className='stat-slot'>
-                                <input type="text" maxLength={2} placeholder='-' />
+                                <input
+                                    type="text"
+                                    maxLength={2}
+                                    placeholder='-'
+                                    value={hitDice.spent}
+                                    onChange={(e) => updateHitDice(Number(e.target.value), 'spent')}
+                                />
                                 <span>SPENT</span>
                             </div>
                             <div className='stat-slot'>
-                                <input type="text" maxLength={2} placeholder='-' />
+                                <input
+                                    type="text"
+                                    maxLength={2}
+                                    value={hitDice.max}
+                                    onChange={(e) => updateHitDice(Number(e.target.value), 'max')}
+                                />
                                 <span>MAX</span>
                             </div>
                         </div>
