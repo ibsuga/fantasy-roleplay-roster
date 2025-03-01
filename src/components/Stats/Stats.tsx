@@ -2,20 +2,36 @@ import Characteristic from './components/Characteristic';
 import './Stats.css';
 import { TbDiamonds } from "react-icons/tb";
 import useStatsStore from '../../store/StatsStore';
+import Stat from './components/Stat';
 
 
 const Stats = () => {
 
-    const [armorClass, updateArmorClass, hitPoints, updateHitPoints, hitDice, updateHitDice] = useStatsStore((state) => [
+    const [
+        stats,
+        armorClass,
+        updateArmorClass,
+        hitPoints,
+        updateHitPoints,
+        hitDice,
+        characteristics,
+        updateHitDice,
+        updateStats,
+        hasHeroicInspiration,
+        updateHeroicInspiration
+    ] = useStatsStore((state) => [
+        state.stats,
         state.armorClass,
         state.updateArmorClass,
         state.hitPoints,
         state.updateHitPoints,
         state.hitDice,
+        state.characteristics,
         state.updateHitDice,
+        state.updateStats,
+        state.hasHeroicInspiration,
+        state.updateHeroicInspiration
     ]);
-
-
 
     return (
         <div className="Stats">
@@ -31,10 +47,7 @@ const Stats = () => {
             {/*HEALTH SECTION*/}
             <div className='player-health'>
 
-                {/*ARMOR CLASS*/}
-                <div className="stats-container ac-box">
-                    <span className='stat-header'>AC</span>
-
+                <Stat header='HIT POINTS' className="ac-box">
                     <div className="armor-class">
                         <div className="stat-slot">
                             <input
@@ -49,13 +62,9 @@ const Stats = () => {
                             <input type="checkbox" />
                         </div>
                     </div>
-                </div>
+                </Stat>
 
-                {/*HIT POINTS */}
-                <div className='stats-container'>
-
-                    <span className='stat-header'>HIT POINTS</span>
-
+                <Stat header='HIT POINTS'>
                     <div className='hit-points'>
                         <div>
                             <input
@@ -89,13 +98,9 @@ const Stats = () => {
 
                         </div>
                     </div>
-                </div>
+                </Stat>
 
-                {/*HIT DICE*/}
-                <div className="stats-container">
-
-                    <span className='stat-header'>HIT DICE</span>
-
+                <Stat header='HIT DICE'>
                     <div className='hit-dice'>
                         <div>
                             <div className='stat-slot'>
@@ -119,13 +124,9 @@ const Stats = () => {
                             </div>
                         </div>
                     </div>
+                </Stat>
 
-                </div>
-
-                {/*DEATH SAVES*/}
-                <div className="stats-container">
-
-                    <span className='stat-header'>DEATH SAVES</span>
+                <Stat header='DEATH SAVES'>
                     <div className='death-saves'>
                         <div>
                             <div className='stat-slot'>
@@ -146,8 +147,7 @@ const Stats = () => {
                             </div>
                         </div>
                     </div>
-
-                </div>
+                </Stat>
             </div>
 
             {/*CHARACTERISTICS SECTION*/}
@@ -155,73 +155,58 @@ const Stats = () => {
 
                 <div className="pc-section-top">
 
-                    <div className='stats-container'>
-                        <span className="stat-header">INITIATIVE</span>
-                        <div className="stat-slot">
-                            <input type="text" maxLength={2} placeholder='-' />
-                        </div>
-                    </div>
+                    <Stat header='INITIATIVE'>
+                        <input type="text" maxLength={2} placeholder='-' value={stats.initiative} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateStats("initiative", Number(e.target.value))} />
+                    </Stat>
 
-                    <div className='stats-container'>
-                        <span className="stat-header">SPEED</span>
-                        <div className="stat-slot">
-                            <input type="text" maxLength={2} placeholder='-' />
-                        </div>
-                    </div>
+                    <Stat header='SPEED' >
+                        <input type="text" maxLength={2} placeholder='-' value={stats.speed} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateStats("speed", Number(e.target.value))} />
+                    </Stat>
 
-                    <div className='stats-container'>
-                        <span className="stat-header">SIZE</span>
-                        <div className="stat-slot">
-                            <input type="text" maxLength={2} placeholder='-' />
-                        </div>
-                    </div>
+                    <Stat header='SIZE' >
+                        <input type="text" maxLength={2} placeholder='-' value={stats.size} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateStats("size", Number(e.target.value))} />
+                    </Stat>
 
-                    <div className='stats-container'>
-                        <span className="stat-header">PERCEPTION</span>
-                        <div className="stat-slot">
-                            <input type="text" maxLength={2} placeholder='-' />
-                        </div>
-                    </div>
+                    <Stat header='PERCEPTION' >
+                        <input type="text" maxLength={2} placeholder='-' value={stats.perception} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateStats("perception", Number(e.target.value))} />
+                    </Stat>
+
+
 
                 </div>
 
 
                 <div className="pc-section-bottom">
 
-                    {/*STRENGHT */}
+                    {
+                        characteristics.map((characteristic) => <Characteristic data={characteristic} />)
+                    }
+
+                    {/* 
                     <Characteristic label='STRENGHT' skills={['Athletics']} />
 
-                    {/*INTELLIGENCE */}
                     <Characteristic label='INTELLIGENCE' skills={['Arcana', 'History', 'Investigation', 'Nature', 'Religion']} />
 
-                    {/*DEXTERITY*/}
                     <Characteristic label='DEXTERITY' skills={['Acrobatics', 'Sleight of Hand', 'Stealh']} />
 
-                    {/*WISDOM*/}
                     <Characteristic label='WISDOM' skills={['Animal Handl.', 'Insight', 'Medicine', 'Perception', 'Survival']} />
 
-                    {/*CONSTITUTION*/}
                     <Characteristic label='CONSTITUTION' skills={[]} />
 
-                    {/*CHARISMA*/}
-                    <Characteristic label='CHARISMA' skills={['Deception', 'Intimidation', 'Performance', 'Persuasion']} />
+                    <Characteristic label='CHARISMA' skills={['Deception', 'Intimidation', 'Performance', 'Persuasion']} /> */}
 
                     {/*PROFICIENCY BONUS & HEROIC INSPIRATION */}
                     <div>
 
-                        <div className='stats-container'>
-                            <span className="stat-header">PROFICIENCY BONUS</span>
-                            <div className="stat-slot">
-                                <input type="text" maxLength={2} placeholder='-' />
-                            </div>
-                        </div>
+                        <Stat header='PROFICIENCY BONUS'>
+                            <input type="text" maxLength={2} placeholder='-' value={stats.proficiencyBonus} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateStats("proficiencyBonus", Number(e.target.value))} />
 
-                        <div className='stats-container'>
-                            <span className="stat-header">HEROIC INSPIRATION </span>
-                            <div className="stat-slot">
-                                <input type="checkbox" maxLength={2} placeholder='-' />
-                            </div>
-                        </div>
+                        </Stat>
+
+
+                        <Stat header='HEROIC INSPIRATION'>
+                            <input type="checkbox" checked={hasHeroicInspiration} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateHeroicInspiration(e.target.checked)} />
+                        </Stat>
 
                     </div>
 

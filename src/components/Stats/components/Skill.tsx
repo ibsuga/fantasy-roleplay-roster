@@ -1,14 +1,27 @@
+import { useMemo } from "react";
+import useStatsStore, { ISkill } from "../../../store/StatsStore";
+
 const Skill = (props: {
-    name: string;
+    data: ISkill,
+    characteristic: string,
+    modifier: number,
 }) => {
+
+    const [toggleCharacteristicSkill, proficiencyBonus] = useStatsStore((state) => [state.toggleCharacteristicSkill, state.stats.proficiencyBonus]);
+
+    const skillModifier = useMemo(() => props.modifier + (props.data.isProficient ? proficiencyBonus : 0), [props.modifier, proficiencyBonus, props.data.isProficient])
+
     return (
         <div className="skill">
-            <input type="checkbox" />
-            <input type="text" maxLength={2} placeholder='-' />
-            <span> {props.name} </span>
+            <input
+                type="checkbox"
+                checked={props.data.isProficient}
+                onChange={() => { toggleCharacteristicSkill(props.characteristic, props.data.name) }}
+            />
+            <span className="score"> {skillModifier}</span>
+            <span> {props.data.name} </span>
         </div>
     )
-
 }
 
 export default Skill;

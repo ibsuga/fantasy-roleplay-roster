@@ -7,7 +7,9 @@
 }
 
 /*INPUTS*/
-.Characteristic input {
+.Characteristic input,
+.Characteristic .modifier,
+.Characteristic .score {
     align-self: center;
     text-align: center;
     font-family: 'Comforter Brush';
@@ -20,6 +22,9 @@
     background: none;
     border: none;
     transition: 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Characteristic input:focus {
@@ -28,7 +33,7 @@
     caret-color: transparent;
 }
 
-.Characteristic input.modifier {
+.Characteristic span.modifier {
     font-size: 40px;
 }
 
@@ -46,6 +51,7 @@
     font-weight: bold;
     align-self: center;
     color: var(--font-color-default);
+    text-transform: uppercase;
 }
 
 .Characteristic .content {
@@ -61,11 +67,15 @@
     padding: 0.5em;
 }
 
-.Characteristic .content>:first-child span {
+.Characteristic span.label {
     font-family: var(--font-default);
     font-size: 12px;
-    color: hsl(0, 0%, 25%);
+    color: hsl(0, 0%, 45%);
     padding-bottom: 0.25em;
+}
+
+.Characteristic span.label.dim {
+    color: hsl(0, 0%, 25%);
 }
 
 /*SAVING THROW*/
@@ -77,13 +87,7 @@
     justify-content: center;
 }
 
-.Characteristic .content>:nth-child(2) span {
-    align-self: center;
-    font-family: var(--font-default);
-    font-size: 12px;
-    color: hsl(0, 0%, 45%);
-    border: none;
-}
+
 
 /*SKILLS*/
 .Characteristic .content>:last-child {
@@ -105,4 +109,5 @@
     font-size: 12px;
     color: hsl(0, 0%, 45%);
     border: none;
+    text-transform: capitalize;
 }
