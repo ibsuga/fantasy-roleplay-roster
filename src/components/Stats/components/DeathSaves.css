@@ -1,0 +1,27 @@
+.DeathSaves {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.DeathSaves__icons {
+    display: flex;
+}
+
+.DeathSaves__icons svg {
+    font-size: 17px;
+    padding: 0.3em;
+    cursor: pointer;
+}
+
+.DeathSaves__icons .successes svg {
+    color: hsl(120, 15%, 30%);
+}
+
+.DeathSaves__icons .failures svg {
+    color: hsl(5, 35%, 30%);
+}
+
+.DeathSaves span {
+    text-transform: uppercase;
+}

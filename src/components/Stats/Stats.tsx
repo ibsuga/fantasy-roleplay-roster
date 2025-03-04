@@ -1,8 +1,8 @@
 import Characteristic from './components/Characteristic';
 import './Stats.css';
-import { TbDiamonds, TbDiamondsFilled } from "react-icons/tb";
 import useStatsStore from '../../store/StatsStore';
 import Stat from './components/Stat';
+import DeathSaves from './components/DeathSaves';
 
 
 const Stats = () => {
@@ -21,8 +21,6 @@ const Stats = () => {
         updateHeroicInspiration,
         toggleShield,
         hasShield,
-        deathSaves,
-        updateDeathSaves
     ] = useStatsStore((state) => [
         state.stats,
         state.armorClass,
@@ -37,36 +35,9 @@ const Stats = () => {
         state.updateHeroicInspiration,
         state.toggleShield,
         state.hasShield,
-        state.deathSaves,
-        state.updateDeathSaves
     ]);
 
     let armorClassShield = hasShield ? armorClass + 2 : armorClass;
-
-    let handleDeathSaves = (type: string) => {
-        let deathSaveType: number;
-        if (type === 'successes') {
-            deathSaveType = deathSaves.successes;
-        } else if (type === 'failures') {
-            deathSaveType = deathSaves.failures;
-        }
-
-        return (
-            [...Array(3)].map((_, index) => {
-                index += 1;
-                return (
-                    <div
-                        style={{ display: 'inline-block' }}
-                        key={index}
-                        className={type}
-                        onClick={() => updateDeathSaves(type, index)}
-                    >
-                        {index <= deathSaveType ? <TbDiamondsFilled /> : <TbDiamonds />}
-                    </div>
-                )
-            })
-        )
-    }
 
     return (
         <div className="Stats">
@@ -165,16 +136,10 @@ const Stats = () => {
                     <div className='death-saves'>
                         <div>
                             <div className='stat-slot'>
-                                <div>
-                                    {handleDeathSaves('successes')}
-                                </div>
-                                <span>SUCCESSES</span>
+                                <DeathSaves type='successes' />
                             </div>
                             <div className='stat-slot'>
-                                <div>
-                                    {handleDeathSaves('failures')}
-                                </div>
-                                <span>FAILURES</span>
+                                <DeathSaves type='failures' />
                             </div>
                         </div>
                     </div>
