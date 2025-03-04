@@ -1,6 +1,6 @@
 import Characteristic from './components/Characteristic';
 import './Stats.css';
-import { TbDiamonds } from "react-icons/tb";
+import { TbDiamonds, TbDiamondsFilled } from "react-icons/tb";
 import useStatsStore from '../../store/StatsStore';
 import Stat from './components/Stat';
 
@@ -18,7 +18,11 @@ const Stats = () => {
         updateHitDice,
         updateStats,
         hasHeroicInspiration,
-        updateHeroicInspiration
+        updateHeroicInspiration,
+        toggleShield,
+        hasShield,
+        deathSaves,
+        updateDeathSaves
     ] = useStatsStore((state) => [
         state.stats,
         state.armorClass,
@@ -30,8 +34,39 @@ const Stats = () => {
         state.updateHitDice,
         state.updateStats,
         state.hasHeroicInspiration,
-        state.updateHeroicInspiration
+        state.updateHeroicInspiration,
+        state.toggleShield,
+        state.hasShield,
+        state.deathSaves,
+        state.updateDeathSaves
     ]);
+
+    let armorClassShield = hasShield ? armorClass + 2 : armorClass;
+
+    let handleDeathSaves = (type: string) => {
+        let deathSaveType: number;
+        if (type === 'successes') {
+            deathSaveType = deathSaves.successes;
+        } else if (type === 'failures') {
+            deathSaveType = deathSaves.failures;
+        }
+
+        return (
+            [...Array(3)].map((_, index) => {
+                index += 1;
+                return (
+                    <div
+                        style={{ display: 'inline-block' }}
+                        key={index}
+                        className={type}
+                        onClick={() => updateDeathSaves(type, index)}
+                    >
+                        {index <= deathSaveType ? <TbDiamondsFilled /> : <TbDiamonds />}
+                    </div>
+                )
+            })
+        )
+    }
 
     return (
         <div className="Stats">
@@ -47,19 +82,19 @@ const Stats = () => {
             {/*HEALTH SECTION*/}
             <div className='player-health'>
 
-                <Stat header='HIT POINTS' className="ac-box">
+                <Stat header='AC' className="ac-box">
                     <div className="armor-class">
                         <div className="stat-slot">
                             <input
                                 type="text"
                                 maxLength={2}
-                                value={armorClass}
+                                value={armorClassShield}
                                 onChange={(e) => updateArmorClass(Number(e.target.value) || 0)}
                             />
                         </div>
                         <div className='stat-slot ac'>
                             <span>SHIELD</span>
-                            <input type="checkbox" />
+                            <input type="checkbox" checked={hasShield} onChange={(e: React.ChangeEvent<HTMLInputElement>) => toggleShield(e.target.checked)} />
                         </div>
                     </div>
                 </Stat>
@@ -131,27 +166,23 @@ const Stats = () => {
                         <div>
                             <div className='stat-slot'>
                                 <div>
-                                    <TbDiamonds />
-                                    <TbDiamonds />
-                                    <TbDiamonds />
+                                    {handleDeathSaves('successes')}
                                 </div>
                                 <span>SUCCESSES</span>
                             </div>
                             <div className='stat-slot'>
                                 <div>
-                                    <TbDiamonds />
-                                    <TbDiamonds />
-                                    <TbDiamonds />
+                                    {handleDeathSaves('failures')}
                                 </div>
                                 <span>FAILURES</span>
                             </div>
                         </div>
                     </div>
                 </Stat>
-            </div>
+            </div >
 
             {/*CHARACTERISTICS SECTION*/}
-            <div className="player-characteristics">
+            < div className="player-characteristics" >
 
                 <div className="pc-section-top">
 
@@ -182,27 +213,11 @@ const Stats = () => {
                         characteristics.map((characteristic) => <Characteristic data={characteristic} />)
                     }
 
-                    {/* 
-                    <Characteristic label='STRENGHT' skills={['Athletics']} />
-
-                    <Characteristic label='INTELLIGENCE' skills={['Arcana', 'History', 'Investigation', 'Nature', 'Religion']} />
-
-                    <Characteristic label='DEXTERITY' skills={['Acrobatics', 'Sleight of Hand', 'Stealh']} />
-
-                    <Characteristic label='WISDOM' skills={['Animal Handl.', 'Insight', 'Medicine', 'Perception', 'Survival']} />
-
-                    <Characteristic label='CONSTITUTION' skills={[]} />
-
-                    <Characteristic label='CHARISMA' skills={['Deception', 'Intimidation', 'Performance', 'Persuasion']} /> */}
-
-                    {/*PROFICIENCY BONUS & HEROIC INSPIRATION */}
                     <div>
 
                         <Stat header='PROFICIENCY BONUS'>
                             <input type="text" maxLength={2} placeholder='-' value={stats.proficiencyBonus} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateStats("proficiencyBonus", Number(e.target.value))} />
-
                         </Stat>
-
 
                         <Stat header='HEROIC INSPIRATION'>
                             <input type="checkbox" checked={hasHeroicInspiration} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateHeroicInspiration(e.target.checked)} />
@@ -213,7 +228,7 @@ const Stats = () => {
                 </div>
 
 
-            </div>
+            </div >
 
 
 
@@ -321,7 +336,7 @@ const Stats = () => {
                 </div>
             </div> */}
 
-        </div>
+        </div >
     )
 }
 

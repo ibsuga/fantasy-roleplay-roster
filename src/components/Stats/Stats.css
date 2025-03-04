@@ -195,6 +195,13 @@
     padding: 0.3em;
 }
 
+.Stats .death-saves .stat-slot>div .successes svg {
+    color: hsl(120, 15%, 30%);
+}
+
+.Stats .death-saves .stat-slot>div .failures svg {
+    color: hsl(5, 35%, 30%);
+}
 
 /*CHARACTERISTICS SECTION*/
 .Stats .player-characteristics {

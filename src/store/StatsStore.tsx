@@ -22,11 +22,15 @@ type StatsStore = {
     stats: { initiative: number, speed: number, size: number, perception: number, proficiencyBonus: number },
     characteristics: ICharacteristic[],
     hasHeroicInspiration: boolean,
+    hasShield: boolean,
+    deathSaves: { successes: number, failures: number },
     updateArmorClass: (armorClass: number) => void,
     updateHitPoints: (amount: number, type: 'current' | 'temp' | 'max') => void,
+    toggleShield: (value: boolean) => void,
     updateHitDice: (amount: number, type: 'spent' | 'max') => void;
     updateStats: (name: StatName, value: number) => void;
     updateHeroicInspiration: (value: boolean) => void;
+    updateDeathSaves: (type: string, value: number) => void;
 
     /* CHARACTERISTICS */
     updateCharacteristicScore: (name: string, score: number) => void,
@@ -117,6 +121,11 @@ const useStatsStore = create<StatsStore>((set) => ({
     },
     characteristics: localStorage.getItem('PlayerCharacteristics') ? JSON.parse(localStorage.getItem('PlayerCharacteristics') || '') : initialStoreCharacteristicsValue,
     hasHeroicInspiration: JSON.parse(localStorage.getItem('PlayerHeroicInspiration') || 'false'),
+    hasShield: JSON.parse(localStorage.getItem('PlayerShield') || 'false'),
+    deathSaves: {
+        successes: localStorage.getItem('PlayerDeathSaves') ? JSON.parse(localStorage.getItem('PlayerDeathSaves') || '').successes || 0 : 0,
+        failures: localStorage.getItem('PlayerDeathSaves') ? JSON.parse(localStorage.getItem('PlayerDeathSaves') || '').failures || 0 : 0,
+    },
 
     updateArmorClass: (armorClass) => set(() => {
         localStorage.setItem('ArmorClass', JSON.stringify(armorClass));
@@ -144,7 +153,6 @@ const useStatsStore = create<StatsStore>((set) => ({
         localStorage.setItem('PlayerHitDice', JSON.stringify(hitDice));
         return { hitDice };
     }),
-
     updateStats: (name, value) => set((state) => {
         let stats = { ...state.stats };
         stats[name] = value;
@@ -185,6 +193,20 @@ const useStatsStore = create<StatsStore>((set) => ({
         localStorage.setItem('PlayerCharacteristics', JSON.stringify(characteristics));
         return { characteristics };
     }),
+    toggleShield: (value) => set(() => {
+        localStorage.setItem('PlayerShield', JSON.stringify(value));
+        return { hasShield: value };
+    }),
+    updateDeathSaves: (type, value) => set((state) => {
+        let deathSaves = { ...state.deathSaves };
+        if (type === 'successes') {
+            deathSaves.successes = deathSaves.successes === value ? 0 : value;
+        } else if (type === 'failures') {
+            deathSaves.failures = deathSaves.failures === value ? 0 : value;
+        }
+        localStorage.setItem('PlayerDeathSaves', JSON.stringify(deathSaves));
+        return { deathSaves: deathSaves };
+    })
 }))
 
 
