@@ -1,0 +1,48 @@
+.TraitsFeats {
+    display: grid;
+    grid-template-rows: min-content auto;
+    text-align: center;
+    width: 100%;
+}
+
+/*TITLE*/
+.TraitsFeats .title {
+    display: grid;
+    grid-template-columns: 1fr min-content 1fr;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 0.5em;
+}
+
+.TraitsFeats .title span {
+    font-family: var(--font-headers);
+    color: var(--font-color-default);
+    font-size: 1.85rem;
+}
+
+/* CONTENT */
+.TraitsFeats .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1em;
+    padding: 0.5em;
+}
+
+.TraitsFeats .content-top {
+    grid-column: 1/3;
+    outline: 1px solid red;
+}
+
+.TraitsFeats .content-center {
+    display: grid;
+    grid-column: 1/3;
+    grid-template-columns: 1fr 1fr;
+    outline: 1px solid green;
+    gap: 1em;
+}
+
+.TraitsFeats .content-bottom {
+    grid-column: 1/3;
+    outline: 1px solid blue;
+}
