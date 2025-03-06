@@ -3,6 +3,7 @@
     grid-template-rows: min-content auto;
     text-align: center;
     width: 100%;
+    padding-bottom: 1em;
 }
 
 /*TITLE*/
@@ -12,37 +13,36 @@
     justify-content: center;
     text-align: center;
     padding-bottom: 0.5em;
+    user-select: none;
 }
 
 .TraitsFeats .title span {
     font-family: var(--font-headers);
     color: var(--font-color-default);
     font-size: 1.85rem;
+    user-select: none;
 }
 
 /* CONTENT */
-.TraitsFeats .content {
+.TraitsFeats .list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 1em;
-    padding: 0.5em;
+    padding: 0.25em;
 }
 
 .TraitsFeats .content-top {
     grid-column: 1/3;
-    outline: 1px solid red;
 }
 
 .TraitsFeats .content-center {
-    display: grid;
     grid-column: 1/3;
-    grid-template-columns: 1fr 1fr;
-    outline: 1px solid green;
-    gap: 1em;
 }
 
 .TraitsFeats .content-bottom {
+    display: grid;
     grid-column: 1/3;
-    outline: 1px solid blue;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
 }

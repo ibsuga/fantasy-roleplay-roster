@@ -2,6 +2,26 @@
     display: grid;
     grid-template-rows: min-content 1fr;
     height: 100%;
+    gap: 0.25em;
+}
+
+/* TITLE */
+.Container>div {
+    display: grid;
+    grid-template-columns: auto min-content;
+    gap: 0.5em;
+    user-select: none;
+}
+
+.Container>div span {
+    font-family: var(--font-default);
+    font-weight: bold;
+    color: var(--font-color-default);
+    background-color: hsla(0, 0%, 0%, 0.4);
+    border-radius: 4px;
+    align-self: center;
+    padding: 0.25em;
+    text-transform: uppercase;
 }
 
 /* BUTTON */
@@ -13,7 +33,7 @@
     font-family: var(--font-default);
     font-weight: bold;
     transition: 0.25s;
-    font-size: 0.85em;
+    font-size: 1em;
     white-space: nowrap;
     height: 1.75em;
     -webkit-mask-image: url(/wfrp4e-roster/src/assets/mask_dlc.png);
@@ -26,14 +46,72 @@
     mask-position: center;
     mask-repeat: no-repeat;
     mask-size: 100% 100%;
-    padding: 0em 1em;
+    padding: 0em 0.7em;
+}
+
+.Container .container-button:hover {
+    color: var(--highlight-color-brown);
 }
 
 /* CONTENT */
 .Container .content {
-    background-color: hsl(0, 0%, 0%, 0.5);
-    border-radius: 4px;
+    display: flex;
+    align-content: start;
+    flex-wrap: wrap;
     color: white;
-    /* height: 100%; */
+    background-color: hsla(0, 0%, 0%, 0.2);
+    backdrop-filter: blur(4px);
+    border: 1px solid hsl(0, 0%, 0%, 0.1);
+    border-radius: 4px;
+    padding: 0.5em;
+    gap: 1em;
+}
 
+/* BADGES */
+.Container .content .badge {
+    font-family: var(--font-default);
+    height: min-content;
+    font-size: 14px;
+    outline: 1px solid hsl(0, 0%, 20%, 0.5);
+    border-radius: 5px;
+    padding: 0.5em;
+    background-color: hsl(0, 0%, 0%, 0.5);
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.Container .content .badge:hover {
+    outline-color: var(--highlight-color-brown-faint);
+}
+
+/* TETE'S SHIT */
+.epic-badge {
+    font-size: 1rem;
+    display: grid;
+    grid-template-rows: min-content min-content;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    border-radius: 4px;
+    font-family: var(--font-default);
+    color: var(--font-default);
+    padding: 0.15em 0.3em;
+    /* padding-left: 0.75em; */
+}
+
+.epic-badge__name {
+    line-height: 1em;
+    padding-bottom: 0.15em;
+}
+
+.epic-badge__details {
+    font-size: 0.6em;
+    display: grid;
+    grid-template-columns: auto min-content;
+    justify-items: start;
+}
+
+.epic-badge__details span {
+    background-color: transparent !important;
+    padding: 0 !important;
+    color: hsl(0, 0%, 30%) !important;
+    white-space: nowrap;
 }

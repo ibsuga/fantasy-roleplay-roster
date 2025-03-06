@@ -1,0 +1,88 @@
+.TraitsFeatsDialog {
+
+    display: grid;
+    background-color: hsla(0, 0%, 10%, 0.80);
+    backdrop-filter: blur(4px);
+    color: hsl(210, 5%, 75%);
+
+    -webkit-mask-image: url(../../../assets/mask_rough_edges.png);
+    -webkit-mask-mode: alpha;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-image: url(../../../assets/mask_rough_edges.png);
+    mask-mode: alpha;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    padding: 1em;
+}
+
+/* HEADER */
+.TraitsFeatsDialog .dialog-header {
+    font-family: var(--font-default);
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    padding: 0.5em;
+}
+
+/* CONTENT */
+.TraitsFeatsDialog .dialog-content {
+    display: grid;
+    width: 100%;
+    grid-template-rows: 1fr auto;
+    gap: 1em;
+    font-family: var(--font-default);
+    font-weight: bold;
+}
+
+/* INPUTS */
+.TraitsFeatsDialog input {
+    background-color: hsla(0, 0%, 20%, 0.5);
+    border: none;
+    border-radius: 4px;
+    color: hsl(210, 5%, 75%);
+    font-family: var(--font-default);
+    transition: 0.25s;
+    padding: 0.5em;
+}
+
+.TraitsFeatsDialog .dialog-header input {
+    font-size: 22px;
+    text-align: center;
+}
+
+.TraitsFeatsDialog ::placeholder {
+    font-style: italic;
+    color: hsl(210, 5%, 55%, 0.5);
+}
+
+/* DESCRIPTION */
+.TraitsFeatsDialog .dialog-description {
+    background-color: hsl(35, 51%, 95%, 0.15);
+    -webkit-mask-image: url(/wfrp4e-roster/src/assets/mask_dlc.png);
+    -webkit-mask-mode: alpha;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-image: url(/wfrp4e-roster/src/assets/mask_dlc.png);
+    mask-mode: alpha;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    width: 100%;
+}
+
+.TraitsFeatsDialog textarea {
+    width: 100%;
+    height: 6em;
+    resize: none;
+    background: none;
+    border: none;
+    text-align: start;
+    color: hsl(0, 0%, 70%);
+    font-family: 'Caveat';
+    padding: 1em;
+    font-size: 16px;
+}

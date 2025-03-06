@@ -13,26 +13,22 @@ const TraitsFeats = () => {
 
             </div>
 
-
-            <div className='content'>
+            <div className='list'>
 
                 <div className="content-top">
-                    <Container />
+                    <Container label='class features' />
                 </div>
 
                 <div className="content-center">
-                    <Container />
-
-                    <Container />
+                    <Container label='feats' />
                 </div>
 
-
                 <div className="content-bottom">
-                    <Container />
+                    <Container label='traits' />
+                    <Container label='proficiencies' />
                 </div>
 
             </div>
-
 
         </div>
     )
