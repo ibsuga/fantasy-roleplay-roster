@@ -1,10 +1,11 @@
-import Container from './components/Container';
+import ClassFeaturesContainer from './components/ClassFeaturesContainer';
+import FeatsContainer from './components/FeatsContainer';
+import TraitsContainer from './components/TraitsContainer';
 import './TraitsFeats.css'
 
 const TraitsFeats = () => {
     return (
         <div className="TraitsFeats">
-
             <div className='title'>
 
                 <span style={{ opacity: '25%', fontSize: '1.25em', alignSelf: 'center', justifySelf: 'end' }}>INVENTORY</span>
@@ -16,16 +17,16 @@ const TraitsFeats = () => {
             <div className='list'>
 
                 <div className="content-top">
-                    <Container label='class features' />
+                    <ClassFeaturesContainer />
                 </div>
 
                 <div className="content-center">
-                    <Container label='feats' />
+                    <FeatsContainer />
                 </div>
 
                 <div className="content-bottom">
-                    <Container label='traits' />
-                    <Container label='proficiencies' />
+                    <TraitsContainer />
+                    <TraitsContainer />
                 </div>
 
             </div>

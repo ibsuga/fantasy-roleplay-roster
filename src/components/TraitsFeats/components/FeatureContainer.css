@@ -1,4 +1,4 @@
-.Container {
+.FeatureContainer {
     display: grid;
     grid-template-rows: min-content 1fr;
     height: 100%;
@@ -6,14 +6,14 @@
 }
 
 /* TITLE */
-.Container>div {
+.FeatureContainer>div {
     display: grid;
     grid-template-columns: auto min-content;
     gap: 0.5em;
     user-select: none;
 }
 
-.Container>div span {
+.FeatureContainer>div span {
     font-family: var(--font-default);
     font-weight: bold;
     color: var(--font-color-default);
@@ -25,7 +25,7 @@
 }
 
 /* BUTTON */
-.Container .container-button {
+.FeatureContainer .container-button {
     background-color: hsl(0, 0%, 10%, 0.85);
     border: 1px solid hsla(0, 0%, 10%, 0.85);
     color: hsl(0, 0%, 80%);
@@ -49,12 +49,12 @@
     padding: 0em 0.7em;
 }
 
-.Container .container-button:hover {
+.FeatureContainer .container-button:hover {
     color: var(--highlight-color-brown);
 }
 
 /* CONTENT */
-.Container .content {
+.FeatureContainer .content {
     display: flex;
     align-content: start;
     flex-wrap: wrap;
@@ -68,7 +68,7 @@
 }
 
 /* BADGES */
-.Container .content .badge {
+.FeatureContainer .content .badge {
     font-family: var(--font-default);
     height: min-content;
     font-size: 14px;
@@ -80,38 +80,6 @@
     cursor: pointer;
 }
 
-.Container .content .badge:hover {
+.FeatureContainer .content .badge:hover {
     outline-color: var(--highlight-color-brown-faint);
-}
-
-/* TETE'S SHIT */
-.epic-badge {
-    font-size: 1rem;
-    display: grid;
-    grid-template-rows: min-content min-content;
-    background-color: hsla(0, 0%, 0%, 0.5);
-    border-radius: 4px;
-    font-family: var(--font-default);
-    color: var(--font-default);
-    padding: 0.15em 0.3em;
-    /* padding-left: 0.75em; */
-}
-
-.epic-badge__name {
-    line-height: 1em;
-    padding-bottom: 0.15em;
-}
-
-.epic-badge__details {
-    font-size: 0.6em;
-    display: grid;
-    grid-template-columns: auto min-content;
-    justify-items: start;
-}
-
-.epic-badge__details span {
-    background-color: transparent !important;
-    padding: 0 !important;
-    color: hsl(0, 0%, 30%) !important;
-    white-space: nowrap;
 }
