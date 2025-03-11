@@ -1,6 +1,8 @@
 import { Dialog } from 'primereact/dialog';
 import { useState } from 'react';
 import useTraitsFeatsStore from '../../../store/TraitsFeatsStore';
+import { FaRegTrashCan } from "react-icons/fa6";
+
 
 
 const TraitsBadge = (props: {
@@ -28,6 +30,12 @@ const TraitsBadge = (props: {
         }
     }
 
+    const handleClose = () => {
+        setName(selectedTrait?.name || '');
+        setDescription(selectedTrait?.description || '');
+        setDialogOpen(false);
+    }
+
     const handleDelete = () => {
         deleteTrait(props.id)
         setDialogOpen(false);
@@ -43,11 +51,14 @@ const TraitsBadge = (props: {
                 className='FeatureDialog'
                 visible={dialogOpen}
                 onHide={() => setDialogOpen(false)}
+                closable={false}
+                draggable={false}
+                resizable={false}
                 footer={
-                    <div>
-                        <button disabled={name === ''} onClick={handleSave}>save</button>
-                        <button onClick={() => setDialogOpen(false)}>close</button>
-                        <button onClick={handleDelete}>delete</button>
+                    <div className='dialog-footer'>
+                        <button className='dialog-button' disabled={name === ''} onClick={handleSave}>save</button>
+                        <button className='dialog-button' onClick={handleClose}>close</button>
+                        <button className='dialog-button delete' onClick={handleDelete}><FaRegTrashCan /></button>
                     </div>
                 }
             >

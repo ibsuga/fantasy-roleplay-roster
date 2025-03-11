@@ -1,6 +1,8 @@
 import { Dialog } from 'primereact/dialog';
 import { useState } from 'react';
 import useTraitsFeatsStore from '../../../store/TraitsFeatsStore';
+import { FaRegTrashCan } from "react-icons/fa6";
+
 
 
 const ClassFeaturesBadge = (props: {
@@ -30,6 +32,13 @@ const ClassFeaturesBadge = (props: {
         }
     }
 
+    const handleClose = () => {
+        setName(selectedClassFeature?.name || '');
+        setLevel('' + selectedClassFeature?.level || '0');
+        setDescription(selectedClassFeature?.description || '');
+        setDialogOpen(false);
+    }
+
     const handleDelete = () => {
         deleteClassFeature(props.id)
         setDialogOpen(false);
@@ -49,11 +58,14 @@ const ClassFeaturesBadge = (props: {
                 className='FeatureDialog'
                 visible={dialogOpen}
                 onHide={() => setDialogOpen(false)}
+                closable={false}
+                draggable={false}
+                resizable={false}
                 footer={
-                    <div>
-                        <button disabled={name === ''} onClick={handleSave}>save</button>
-                        <button onClick={() => setDialogOpen(false)}>close</button>
-                        <button onClick={handleDelete}>delete</button>
+                    <div className='dialog-footer'>
+                        <button className='dialog-button' disabled={name === ''} onClick={handleSave}>save</button>
+                        <button className='dialog-button' onClick={handleClose}>close</button>
+                        <button className='dialog-button delete' onClick={handleDelete}><FaRegTrashCan /></button>
                     </div>
                 }
             >
@@ -62,8 +74,10 @@ const ClassFeaturesBadge = (props: {
                 </div>
 
                 <div className='dialog-content'>
-                    <span>level</span>
-                    <input type="text" placeholder='SET LEVEL' value={level} onChange={(e) => setLevel(e.target.value)} />
+                    <div>
+                        <span>level</span>
+                        <input type="text" placeholder='SET LEVEL' value={level} onChange={(e) => setLevel(e.target.value)} />
+                    </div>
                     <textarea className='dialog-description' value={description} onChange={(e) => setDescription(e.target.value)}> </textarea>
                 </div>
 

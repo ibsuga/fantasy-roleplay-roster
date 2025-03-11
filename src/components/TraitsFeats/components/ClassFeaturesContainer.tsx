@@ -18,8 +18,15 @@ const ClassFeaturesContainer = () => {
     const handleSave = () => {
         if (name !== '') {
             createClassFeature(name, level, description)
-            setDialogOpen(false);
+            handleClose();
         }
+    }
+
+    const handleClose = () => {
+        setDialogOpen(false);
+        setName('');
+        setLevel(null);
+        setDescription('');
     }
 
     return (
@@ -32,11 +39,13 @@ const ClassFeaturesContainer = () => {
                         className={'FeatureDialog'}
                         visible={dialogOpen}
                         onHide={() => setDialogOpen(false)}
-
+                        closable={false}
+                        draggable={false}
+                        resizable={false}
                         footer={
-                            <div>
-                                <button disabled={name === ''} onClick={() => handleSave()}>save</button>
-                                <button onClick={() => setDialogOpen(false)}> close </button>
+                            <div className="dialog-footer">
+                                <button className="dialog-button" disabled={name === ''} onClick={() => handleSave()}>save</button>
+                                <button className="dialog-button" onClick={handleClose}> close </button>
                             </div>
                         }
                     >

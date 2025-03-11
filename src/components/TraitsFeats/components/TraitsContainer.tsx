@@ -17,8 +17,14 @@ const TraitsContainer = () => {
     const handleSave = () => {
         if (name !== '') {
             createTrait(name, description)
-            setDialogOpen(false);
+            handleClose();
         }
+    }
+
+    const handleClose = () => {
+        setName('');
+        setDescription('');
+        setDialogOpen(false);
     }
 
     return (
@@ -31,11 +37,13 @@ const TraitsContainer = () => {
                         className={'FeatureDialog'}
                         visible={dialogOpen}
                         onHide={() => setDialogOpen(false)}
-
+                        closable={false}
+                        draggable={false}
+                        resizable={false}
                         footer={
-                            <div>
-                                <button disabled={name === ''} onClick={() => handleSave()}>save</button>
-                                <button onClick={() => setDialogOpen(false)}> close </button>
+                            <div className="dialog-footer">
+                                <button className="dialog-button" disabled={name === ''} onClick={() => handleSave()}>save</button>
+                                <button className="dialog-button" onClick={handleClose}> close </button>
                             </div>
                         }
                     >
