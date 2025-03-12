@@ -5,14 +5,12 @@ import TraitsBadge from "./TraitsBadge";
 import { Dialog } from "primereact/dialog";
 
 const TraitsContainer = () => {
-    const [traits] = useTraitsFeatsStore(state => [state.traits]);
+    const [traits, createTrait] = useTraitsFeatsStore(state => [state.traits, state.createTrait]);
 
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-
-    const createTrait = useTraitsFeatsStore(state => state.createTrait);
 
     const handleSave = () => {
         if (name !== '') {

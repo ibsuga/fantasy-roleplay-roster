@@ -1,5 +1,6 @@
 import ClassFeaturesContainer from './components/ClassFeaturesContainer';
 import FeatsContainer from './components/FeatsContainer';
+import ProficiencyContainer from './components/ProficiencyContainer';
 import TraitsContainer from './components/TraitsContainer';
 import './TraitsFeats.css'
 
@@ -26,7 +27,7 @@ const TraitsFeats = () => {
 
                 <div className="content-bottom">
                     <TraitsContainer />
-                    <TraitsContainer />
+                    <ProficiencyContainer />
                 </div>
 
             </div>
