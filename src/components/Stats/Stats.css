@@ -222,3 +222,16 @@
     height: 0.6em;
     width: 0.6em;
 }
+
+.Stats .player-characteristics .pc-section-bottom .proficiencyBonus {
+    text-align: center;
+    font-family: 'Comforter Brush';
+    height: 1em;
+    width: 1em;
+    font-size: 25px;
+    color: hsl(0, 0%, 70%);
+    text-shadow: 0px 0px 5px hsl(50, 25%, 45%);
+    justify-self: center;
+    background: none;
+    border: none;
+}

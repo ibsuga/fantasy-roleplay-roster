@@ -3,6 +3,7 @@ import './Stats.css';
 import useStatsStore from '../../store/StatsStore';
 import Stat from './components/Stat';
 import DeathSaves from './components/DeathSaves';
+import useNavbarStore from '../../store/NavbarStore';
 
 
 const Stats = () => {
@@ -36,6 +37,8 @@ const Stats = () => {
         state.toggleShield,
         state.hasShield,
     ]);
+
+    const proficiencyBonus = useNavbarStore((state) => state.characterExperience.proficiencyBonus);
 
     let armorClassShield = hasShield ? armorClass + 2 : armorClass;
 
@@ -181,7 +184,8 @@ const Stats = () => {
                     <div>
 
                         <Stat header='PROFICIENCY BONUS'>
-                            <input type="text" maxLength={2} placeholder='-' value={stats.proficiencyBonus} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateStats("proficiencyBonus", Number(e.target.value))} />
+                            <span className='proficiencyBonus'>{proficiencyBonus}</span>
+                            {/* <input type="text" maxLength={2} placeholder='-' value={stats.proficiencyBonus} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateStats("proficiencyBonus", Number(e.target.value))} /> */}
                         </Stat>
 
                         <Stat header='HEROIC INSPIRATION'>
