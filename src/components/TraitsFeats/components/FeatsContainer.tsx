@@ -64,9 +64,11 @@ const FeatsContainer = () => {
                 </>
             }
         >
-            {
-                feats.map((feature, index) => <FeatsBadge key={index} id={feature.id} name={feature.name} category={feature.category} />)
-            }
+            <>
+                {
+                    feats.map((feature, index) => <FeatsBadge key={index} id={feature.id} name={feature.name} category={feature.category} />)
+                }
+            </>
         </FeatureContainer>
     )
 }

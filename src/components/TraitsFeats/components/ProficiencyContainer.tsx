@@ -66,11 +66,10 @@ const ProficiencyContainer = () => {
                     </Dialog>
                 </>
             }
-            proficiency={
+        >
+            <>
                 <div className="armor-proficiency">
-
                     <span className="proficiency-label">ARMOR PROFICIENCY</span>
-
                     <div className="proficiency-stat">
                         <input type="checkbox" checked={armorProficiencies.light} onChange={(e) => updateArmorProficiency('light', e.target.checked)} />
                         <label>Light</label>
@@ -86,16 +85,13 @@ const ProficiencyContainer = () => {
                     <div className="proficiency-stat">
                         <input type="checkbox" checked={armorProficiencies.shields} onChange={(e) => updateArmorProficiency('shields', e.target.checked)} />
                         <label>Shields</label>
-
                     </div>
-
                 </div>
-            }
-        >
-            {
-                proficiencies.map((feature, index) => <ProficiencyBadge key={index} id={feature.id} name={feature.name} />)
 
-            }
+                {
+                    proficiencies.map((feature, index) => <ProficiencyBadge key={index} id={feature.id} name={feature.name} />)
+                }
+            </>
         </FeatureContainer>
     )
 }

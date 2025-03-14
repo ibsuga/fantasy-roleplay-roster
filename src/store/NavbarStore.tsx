@@ -61,34 +61,51 @@ const useNavbarStore = create<NavbarStore>((set) => ({
 
     updateCharacterExperience: (experience) => set((state) => {
         let characterExperience = { ...state.characterExperience };
+
         const maxLevel = Object.entries(expTable).length;
-        for (let lvl = 1; lvl <= maxLevel; lvl++) {
 
-            const currentLevel = expTable[lvl];
-            const nextLevel = expTable[lvl + 1] || null;
+        let lvl = 1;
 
-            if (lvl === maxLevel || !nextLevel) {
-                characterExperience = {
-                    level: 20,
-                    currentExp: 355000,
-                    startingExp: 355000,
-                    nextLevelExp: 355000,
-                    proficiencyBonus: 6
-                }
-                break;
-            }
+        do {
+            characterExperience = {
+                level: lvl,
+                currentExp: experience,
+                startingExp: expTable[lvl].experience,
+                nextLevelExp: expTable[lvl + 1]?.experience || 355000,
+                proficiencyBonus: expTable[lvl].proficiencyBonus,
+            };
+            lvl++;
+        } while (experience >= expTable[lvl]?.experience && lvl <= maxLevel);
 
-            if (experience >= currentLevel.experience && experience < nextLevel.experience) {
-                characterExperience = {
-                    level: lvl,
-                    currentExp: experience,
-                    startingExp: currentLevel.experience,
-                    nextLevelExp: nextLevel.experience,
-                    proficiencyBonus: currentLevel.proficiencyBonus,
-                }
-                break;
-            }
-        }
+
+        // for (let lvl = 1; lvl <= maxLevel; lvl++) {
+
+        //     const currentLevel = expTable[lvl];
+        //     const nextLevel = expTable[lvl + 1] || null;
+
+        //     if (lvl === maxLevel || !nextLevel) {
+        //         characterExperience = {
+        //             level: 20,
+        //             currentExp: 355000,
+        //             startingExp: 355000,
+        //             nextLevelExp: 355000,
+        //             proficiencyBonus: 6
+        //         }
+        //         break;
+        //     }
+
+        //     if (experience >= currentLevel.experience && experience < nextLevel.experience) {
+        //         characterExperience = {
+        //             level: lvl,
+        //             currentExp: experience,
+        //             startingExp: currentLevel.experience,
+        //             nextLevelExp: nextLevel.experience,
+        //             proficiencyBonus: currentLevel.proficiencyBonus,
+        //         }
+        //         break;
+        //     }
+        // }
+
         localStorage.setItem('PlayerExperience', JSON.stringify(characterExperience));
         return { characterExperience: characterExperience }
     }),

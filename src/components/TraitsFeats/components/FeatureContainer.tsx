@@ -4,8 +4,7 @@ import './FeatureContainer.css';
 const FeatureContainer = (props: {
     title: string,
     tools?: JSX.Element,
-    proficiency?: JSX.Element,
-    children: JSX.Element[]
+    children: JSX.Element
 }) => {
 
     return (
@@ -17,7 +16,6 @@ const FeatureContainer = (props: {
             </div>
 
             <div className="content">
-                {props.proficiency}
                 {props.children}
             </div>
 

@@ -65,9 +65,11 @@ const ClassFeaturesContainer = () => {
                 </>
             }
         >
-            {
-                classFeatures.map((feature, index) => <ClassFeaturesBadge key={index} id={feature.id} name={feature.name} level={feature.level} />)
-            }
+            <>
+                {
+                    classFeatures.map((feature, index) => <ClassFeaturesBadge key={index} id={feature.id} name={feature.name} level={feature.level} />)
+                }
+            </>
         </FeatureContainer>
     )
 }

@@ -37,10 +37,10 @@ const useTraitsFeatsStore = create<TraitsFeatsStore>((set) => ({
     traits: localStorage.getItem('PlayerTraits') ? JSON.parse(localStorage.getItem('PlayerTraits') || '') : [],
     proficiencies: localStorage.getItem('PlayerProficiencies') ? JSON.parse(localStorage.getItem('PlayerProficiencies') || '') : [],
     armorProficiencies: {
-        light: localStorage.getItem('PlayerArmorProficiencies') ? JSON.parse(localStorage.getItem('PlayerArmorProficiencies') || '').light || false : initialArmorProficienciesValue,
-        medium: localStorage.getItem('PlayerArmorProficiencies') ? JSON.parse(localStorage.getItem('PlayerArmorProficiencies') || '').medium || false : initialArmorProficienciesValue,
-        heavy: localStorage.getItem('PlayerArmorProficiencies') ? JSON.parse(localStorage.getItem('PlayerArmorProficiencies') || '').heavy || false : initialArmorProficienciesValue,
-        shields: localStorage.getItem('PlayerArmorProficiencies') ? JSON.parse(localStorage.getItem('PlayerArmorProficiencies') || '').shields || false : initialArmorProficienciesValue,
+        light: localStorage.getItem('PlayerArmorProficiencies') ? JSON.parse(localStorage.getItem('PlayerArmorProficiencies') || '').light || false : initialArmorProficienciesValue.light,
+        medium: localStorage.getItem('PlayerArmorProficiencies') ? JSON.parse(localStorage.getItem('PlayerArmorProficiencies') || '').medium || false : initialArmorProficienciesValue.medium,
+        heavy: localStorage.getItem('PlayerArmorProficiencies') ? JSON.parse(localStorage.getItem('PlayerArmorProficiencies') || '').heavy || false : initialArmorProficienciesValue.heavy,
+        shields: localStorage.getItem('PlayerArmorProficiencies') ? JSON.parse(localStorage.getItem('PlayerArmorProficiencies') || '').shields || false : initialArmorProficienciesValue.shields,
     },
 
     createClassFeature: (name, level, description) => set((state) => {
