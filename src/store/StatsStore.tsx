@@ -104,7 +104,7 @@ const initialStoreCharacteristicsValue = [
 ];
 
 const useStatsStore = create<StatsStore>((set) => ({
-    armorClass: localStorage.getItem('ArmorClass') ? JSON.parse(localStorage.getItem('ArmorClass') || '-') : '',
+    armorClass: localStorage.getItem('ArmorClass') ? JSON.parse(localStorage.getItem('ArmorClass') || '') : '',
     size: localStorage.getItem('PlayerSize') ? JSON.parse(localStorage.getItem('PlayerSize') || '') : '',
     hitPoints: {
         current: localStorage.getItem('PlayerHitPoints') ? JSON.parse(localStorage.getItem('PlayerHitPoints') || '').current || 0 : 0,

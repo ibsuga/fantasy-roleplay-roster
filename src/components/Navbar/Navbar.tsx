@@ -32,7 +32,7 @@ const Navbar = () => {
                 <div className='character-level'>
 
                     <div className='experience'>
-                        <span>Experience</span>
+                        {/* <span>Exp.</span> */}
                         <input type="text" maxLength={6} placeholder='exp here' value={characterExperience.currentExp} onChange={(e) => updateCharacterExperience(Number(e.target.value))} />
                         <span> / {characterExperience.nextLevelExp}</span>
                     </div>
