@@ -60,7 +60,7 @@ body,
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 20px;
+    padding: 10px;
     padding-bottom: 0;
     z-index: 1;
 }

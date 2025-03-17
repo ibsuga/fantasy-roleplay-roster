@@ -5,6 +5,7 @@
     width: 100%;
     text-align: center;
     color: var(--font-color-default);
+    user-select: none;
 }
 
 .Stats .title {
@@ -67,7 +68,6 @@
 .Stats .stat-slot input:focus {
     outline: none;
     color: hsl(0, 20%, 80%);
-    caret-color: transparent;
 }
 
 /*CURRENT Input*/
@@ -88,7 +88,6 @@
 .Stats .player-health .hit-points>div>input:focus {
     outline: none;
     color: hsl(0, 45%, 70%);
-    caret-color: transparent;
 }
 
 /*Spans under inputs*/
@@ -136,6 +135,7 @@
 .Stats .armor-class input[type='checkbox'] {
     height: 0.4em;
     width: 0.4em;
+    cursor: pointer;
 }
 
 .Stats .armor-class>div input {
@@ -221,6 +221,7 @@
 .Stats .pc-section-bottom>:nth-child(7) input[type='checkbox'] {
     height: 0.6em;
     width: 0.6em;
+    cursor: pointer;
 }
 
 .Stats .player-characteristics .pc-section-bottom .proficiencyBonus {

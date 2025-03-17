@@ -50,18 +50,25 @@
 
 /* BUTTON */
 .Navbar .button-section {
-    display: flex;
-    gap: 1em;
-    flex-grow: 1;
+    display: grid;
+    align-content: start;
     justify-content: center;
     color: var(--font-color-default-faint);
+    user-select: none;
 }
 
-.Navbar .button-section .navbar-button:hover {
-    color: var(--highlight-color-brown);
-    /* color: var(--font-color-default-highlight); */
-    transition: color .3s;
-    cursor: pointer;
+.Navbar .button-section .title-tiny {
+    font-size: 10px;
+    text-align: center;
+    color: var(--highlight-color-brown-faint);
+    filter: drop-shadow(0px 0px 5px hsl(0, 0%, 0%))
+}
+
+.Navbar .button-section .title-big {
+    font-size: 28px;
+    font-family: "Rowdies";
+    color: var(--highlight-color-brown-faint);
+    filter: drop-shadow(0px 0px 5px hsl(0, 0%, 0%))
 }
 
 
@@ -70,8 +77,6 @@
     right: 0;
     margin-left: auto;
 }
-
-
 
 .Navbar .level-section .character-level {
     display: flex;

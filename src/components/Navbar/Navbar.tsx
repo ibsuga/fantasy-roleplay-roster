@@ -23,9 +23,8 @@ const Navbar = () => {
                 <input type="text" placeholder='Adventurer name...' value={characterName} onChange={(e) => updateCharacterName(e.target.value)} />
             </div>
             <div className='button-section'>
-                <div className='navbar-button'>Character</div>
-                <div className='navbar-button'>Skills</div>
-                <div className='navbar-button'>Adventure</div>
+                <span className='title-tiny'>FANTASY ROLEPLAY</span>
+                <span className='title-big'>ROSTER</span>
             </div>
             <div className='level-section'>
 

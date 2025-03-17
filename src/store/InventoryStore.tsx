@@ -34,7 +34,7 @@ type itemStore = {
   encumbrance: number,
   wealth: { copper: number, silver: number, gold: number; },
   containers: containerType[],
-  equippedItems: number[] | [],
+  equippedItems: number[],
   equipItem: (id: number) => void,
   unequipItem: (id: number) => void,
   addItem: (item: itemType) => void,

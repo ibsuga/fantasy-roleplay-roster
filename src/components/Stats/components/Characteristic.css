@@ -30,7 +30,6 @@
 .Characteristic input:focus {
     outline: none;
     color: hsl(0, 0%, 80%);
-    caret-color: transparent;
 }
 
 .Characteristic span.modifier {
@@ -40,6 +39,7 @@
 .Characteristic input[type='checkbox'] {
     height: 0.5em;
     width: 0.5em;
+    cursor: pointer;
 }
 
 

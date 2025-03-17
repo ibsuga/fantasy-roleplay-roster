@@ -1,25 +1,4 @@
 .Banner {
-    /* --color-primary: hsl(0, 0%, 6%);
-    --color-test: hsl(3, 78%, 40%);
-
-    display: grid;
-    grid-template-rows: 3em auto;
-    font-family: var(--font-banner);
-    font-size: 0.7rem;
-    overflow: hidden;
-    min-width: 6em;
-    max-width: 6em;
-    height: 8em;
-    padding-top: 0.25em;
-    border-radius: 2px;
-    color: var(--font-color-default);
-    background: linear-gradient(to top, transparent 0%, hsl(0, 0%, 10%) 50%);
-    border-image: linear-gradient(to top, hsla(0, 0%, 0%, 0) 10%, hsl(50, 25%, 45%) 25%) 1;
-    border-width: 2px;
-    border-style: solid;
-    border-bottom: none; */
-
-
     display: grid;
     grid-template-rows: 3em auto;
     font-family: var(--font-banner);
@@ -45,24 +24,20 @@
 .Banner span {
     font-size: 1.15em;
     color: hsl(50, 0%, 50%);
-    /* color: var(--font-color-default); */
 }
 
 .Banner input {
     font-family: var(--font-labels);
     font-size: 4em;
-
     background: none;
     border: none;
     text-align: center;
     justify-self: center;
     padding-top: 0.1em;
-    /* color: var(--font-color-default); */
     color: hsl(50, 0%, 70%);
 }
 
 .Banner input:focus {
     outline: none;
     color: var(--highlight-color-brown);
-    caret-color: transparent;
 }

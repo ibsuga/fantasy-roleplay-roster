@@ -2,7 +2,7 @@ import InventoryItem from '../InventoryItem/InventoryItem';
 import useItemStore, { itemType } from '../../store/InventoryStore';
 import CreateItemDialog from './components/CreateItemDialog';
 import { useMemo, useState } from "react";
-import { GiChestArmor, GiCrocSword, GiPotionBall, GiHandBag } from "react-icons/gi";
+import { GiChestArmor, GiCrocSword, GiPotionBall, GiHandBag, GiSwordsEmblem } from "react-icons/gi";
 import { FaSearch } from "react-icons/fa";
 import { MdClear } from "react-icons/md";
 import { LuDot } from "react-icons/lu";
@@ -15,6 +15,7 @@ export const InventoryItems = () => {
   //Filter states.
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
   const [containerFilter, setContainerFilter] = useState<number | null>(null);
+  const [equippedFilter, setEquippedFilter] = useState(false);
   const [searchText, setSearchText] = useState('');
   //Sort state
   const [sortMode, setSortMode] = useState<string | null>('new');
@@ -24,8 +25,9 @@ export const InventoryItems = () => {
 
   const [inventoryDialogOpen, setInventoryDialogOpen] = useState(false);
 
-  const [items, containers, addContainer, deleteContainer] = useItemStore((state) => [
+  const [items, equippedItems, containers, addContainer, deleteContainer] = useItemStore((state) => [
     state.items,
+    state.equippedItems,
     state.containers,
     state.addContainer,
     state.deleteContainer
@@ -33,24 +35,29 @@ export const InventoryItems = () => {
 
   const selectedContainer: any = containers.find(container => container.id === containerFilter);
 
+  const equipped_items = items.filter((item: itemType) => equippedItems.includes(item.id))
+
+
   // Filter Items by category or containers.
   let filtered_items;
 
   if (categoryFilter !== null) {
-    filtered_items = items.filter((item: any) => item.category === categoryFilter);
+    filtered_items = items.filter((item: itemType) => item.category === categoryFilter);
   } else if (containerFilter !== null) {
-    filtered_items = items.filter((item: any) => item.container_id == containerFilter);
+    filtered_items = items.filter((item: itemType) => item.container_id == containerFilter);
+  } else if (equippedFilter) {
+    filtered_items = equipped_items;
   } else {
     filtered_items = [...items];
   }
 
   // Further filter items by SearchBar string.
-  const handleChangeSearchtext = (event: any) => {
+  const handleChangeSearchtext = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };
 
   if (searchText) {
-    filtered_items = filtered_items.filter((item: any) => {
+    filtered_items = filtered_items.filter((item: itemType) => {
       const item_name = item.name.toLowerCase();
       const search_string = searchText.toLowerCase();
       return item_name.includes(search_string);
@@ -100,16 +107,23 @@ export const InventoryItems = () => {
     }
   };
 
-  const handleFilterSelect = (category?: string, container?: number) => {
+  const handleFilterSelect = (category?: string, container?: number, equipped?: boolean) => {
     if (category) {
       setCategoryFilter(category);
       setContainerFilter(null);
+      setEquippedFilter(false)
     } else if (container) {
       setCategoryFilter(null);
       setContainerFilter(container);
+      setEquippedFilter(false)
+    } else if (equipped) {
+      setEquippedFilter(true);
+      setCategoryFilter(null);
+      setContainerFilter(null)
     } else {
       setCategoryFilter(null);
       setContainerFilter(null);
+      setEquippedFilter(false)
     }
   };
 
@@ -118,10 +132,12 @@ export const InventoryItems = () => {
       return categoryFilter;
     } else if (containerFilter !== null) {
       return selectedContainer?.label;
+    } else if (equippedFilter) {
+      return 'Equipped Items'
     } else {
       return 'All Items';
     }
-  }, [categoryFilter, containerFilter]);
+  }, [categoryFilter, containerFilter, equippedFilter]);
 
 
   const activeFilterIcon = useMemo(() => {
@@ -133,10 +149,12 @@ export const InventoryItems = () => {
       }
     } else if (containerFilter !== null) {
       return <GiHandBag style={{ color: `#${selectedContainer?.color}` }} />
+    } else if (equippedFilter) {
+      return <GiSwordsEmblem />;
     } else {
       return <IoListSharp />
     }
-  }, [categoryFilter, containerFilter]);
+  }, [categoryFilter, containerFilter, equippedFilter]);
 
 
   return (
@@ -146,9 +164,10 @@ export const InventoryItems = () => {
 
         <span className='spacer'> <LuDot /> </span>
 
-        <span> <GiCrocSword onClick={() => handleFilterSelect('weapon')} /> </span>
-        <span> <GiChestArmor onClick={() => handleFilterSelect('armor')} /> </span>
-        <span> <GiPotionBall onClick={() => handleFilterSelect('items')} /> </span>
+        <span> <GiCrocSword onClick={() => handleFilterSelect('weapon', undefined, false)} /> </span>
+        <span> <GiChestArmor onClick={() => handleFilterSelect('armor', undefined, false)} /> </span>
+        <span> <GiPotionBall onClick={() => handleFilterSelect('items', undefined, false)} /> </span>
+        <span> <GiSwordsEmblem onClick={() => handleFilterSelect(undefined, undefined, true)} /> </span>
 
         <span className='spacer'> <LuDot /> </span>
 

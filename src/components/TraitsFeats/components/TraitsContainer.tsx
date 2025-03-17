@@ -55,9 +55,11 @@ const TraitsContainer = () => {
                 </>
             }
         >
-            {
-                traits.map((feature, index) => <TraitsBadge key={index} id={feature.id} name={feature.name} />)
-            }
+            <>
+                {
+                    traits.map((feature, index) => <TraitsBadge key={index} id={feature.id} name={feature.name} />)
+                }
+            </>
         </FeatureContainer>
     )
 }
