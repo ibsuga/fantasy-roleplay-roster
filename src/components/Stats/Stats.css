@@ -70,6 +70,15 @@
     color: hsl(0, 20%, 80%);
 }
 
+/* SIZE input */
+.Stats .player-characteristics .size-input {
+    font-family: var(--font-default);
+    font-size: 16px;
+    width: 100%;
+    padding-top: 5px;
+}
+
+
 /*CURRENT Input*/
 .Stats .player-health .hit-points>div>input {
     text-align: center;

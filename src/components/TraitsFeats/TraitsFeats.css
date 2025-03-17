@@ -104,6 +104,10 @@
     ;
 }
 
+.armor-proficiency .proficiency-stat input[type='checkbox'] {
+    cursor: pointer;
+}
+
 /* CREATE DIALOG */
 .FeatureDialog {
     display: grid;

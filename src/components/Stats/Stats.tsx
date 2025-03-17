@@ -10,6 +10,8 @@ const Stats = () => {
 
     const [
         stats,
+        size,
+        updateSize,
         armorClass,
         updateArmorClass,
         hitPoints,
@@ -24,6 +26,8 @@ const Stats = () => {
         hasShield,
     ] = useStatsStore((state) => [
         state.stats,
+        state.size,
+        state.updateSize,
         state.armorClass,
         state.updateArmorClass,
         state.hitPoints,
@@ -162,14 +166,13 @@ const Stats = () => {
                         <input type="text" maxLength={2} placeholder='-' value={stats.speed} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateStats("speed", Number(e.target.value))} />
                     </Stat>
 
-                    <Stat header='SIZE' >
-                        <input type="text" maxLength={2} placeholder='-' value={stats.size} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateStats("size", Number(e.target.value))} />
-                    </Stat>
-
                     <Stat header='PERCEPTION' >
                         <input type="text" maxLength={2} placeholder='-' value={stats.perception} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateStats("perception", Number(e.target.value))} />
                     </Stat>
 
+                    <Stat header='SIZE' >
+                        <input className='size-input' type="text" maxLength={10} placeholder='-' value={size} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSize(e.target.value)} />
+                    </Stat>
 
 
                 </div>

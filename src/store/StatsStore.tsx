@@ -13,18 +13,20 @@ export interface ICharacteristic {
     skills: ISkill[]
 }
 
-export type StatName = "initiative" | "speed" | "size" | "perception" | "proficiencyBonus";
+export type StatName = "initiative" | "speed" | "perception" | "proficiencyBonus";
 
 type StatsStore = {
     armorClass: number,
+    size: string,
     hitPoints: { current: number, temp: number, max: number },
     hitDice: { spent: number, max: number },
-    stats: { initiative: number, speed: number, size: number, perception: number, proficiencyBonus: number },
+    stats: { initiative: number, speed: number, perception: number, proficiencyBonus: number },
     characteristics: ICharacteristic[],
     hasHeroicInspiration: boolean,
     hasShield: boolean,
     deathSaves: { successes: number, failures: number },
     updateArmorClass: (armorClass: number) => void,
+    updateSize: (size: string) => void,
     updateHitPoints: (amount: number, type: 'current' | 'temp' | 'max') => void,
     toggleShield: (value: boolean) => void,
     updateHitDice: (amount: number, type: 'spent' | 'max') => void;
@@ -102,7 +104,8 @@ const initialStoreCharacteristicsValue = [
 ];
 
 const useStatsStore = create<StatsStore>((set) => ({
-    armorClass: JSON.parse(localStorage.getItem('ArmorClass') || '-'),
+    armorClass: localStorage.getItem('ArmorClass') ? JSON.parse(localStorage.getItem('ArmorClass') || '-') : '',
+    size: localStorage.getItem('PlayerSize') ? JSON.parse(localStorage.getItem('PlayerSize') || '') : '',
     hitPoints: {
         current: localStorage.getItem('PlayerHitPoints') ? JSON.parse(localStorage.getItem('PlayerHitPoints') || '').current || 0 : 0,
         temp: localStorage.getItem('PlayerHitPoints') ? JSON.parse(localStorage.getItem('PlayerHitPoints') || '').temp || 0 : 0,
@@ -115,7 +118,7 @@ const useStatsStore = create<StatsStore>((set) => ({
     stats: {
         initiative: localStorage.getItem('PlayerStats') ? JSON.parse(localStorage.getItem('PlayerStats') || '').initiative || 0 : 0,
         speed: localStorage.getItem('PlayerStats') ? JSON.parse(localStorage.getItem('PlayerStats') || '').speed || 0 : 0,
-        size: localStorage.getItem('PlayerStats') ? JSON.parse(localStorage.getItem('PlayerStats') || '').size || 0 : 0,
+        // size: localStorage.getItem('PlayerStats') ? JSON.parse(localStorage.getItem('PlayerStats') || '').size || 0 : 0,
         perception: localStorage.getItem('PlayerStats') ? JSON.parse(localStorage.getItem('PlayerStats') || '').perception || 0 : 0,
         proficiencyBonus: localStorage.getItem('PlayerStats') ? JSON.parse(localStorage.getItem('PlayerStats') || '').proficiencyBonus || 0 : 0,
     },
@@ -130,6 +133,10 @@ const useStatsStore = create<StatsStore>((set) => ({
     updateArmorClass: (armorClass) => set(() => {
         localStorage.setItem('ArmorClass', JSON.stringify(armorClass));
         return { armorClass: armorClass };
+    }),
+    updateSize: (size) => set(() => {
+        localStorage.setItem('PlayerSize', JSON.stringify(size));
+        return { size: size };
     }),
     updateHitPoints: (amount, type) => set((state) => {
         let hitPoints = { ...state.hitPoints };
