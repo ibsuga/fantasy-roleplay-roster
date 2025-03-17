@@ -243,12 +243,12 @@
 /* DESCRIPTION */
 .FeatureDialog .dialog-description {
     background-color: hsl(35, 51%, 95%, 0.15);
-    -webkit-mask-image: url(/wfrp4e-roster/src/assets/mask_dlc.png);
+    -webkit-mask-image: url(../../assets/mask_dlc.png);
     -webkit-mask-mode: alpha;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
-    mask-image: url(/wfrp4e-roster/src/assets/mask_dlc.png);
+    mask-image: url(../../assets/mask_dlc.png);
     mask-mode: alpha;
     mask-position: center;
     mask-repeat: no-repeat;

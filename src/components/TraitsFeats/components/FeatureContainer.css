@@ -36,12 +36,12 @@
     font-size: 1em;
     white-space: nowrap;
     height: 1.75em;
-    -webkit-mask-image: url(/wfrp4e-roster/src/assets/mask_dlc.png);
+    -webkit-mask-image: url(../../../assets/mask_dlc.png);
     -webkit-mask-mode: alpha;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
-    mask-image: url(/wfrp4e-roster/src/assets/mask_dlc.png);
+    mask-image: url(../../../assets/mask_dlc.png);
     mask-mode: alpha;
     mask-position: center;
     mask-repeat: no-repeat;
