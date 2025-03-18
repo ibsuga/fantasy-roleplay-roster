@@ -1,9 +1,9 @@
 {
-  "name": "wfrp4e-roster",
+  "name": "fantasy-roleplay-roster",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
-  "homepage": "https://ibsuga.github.io/wfrp4e-roster/",
+  "homepage": "https://ibsuga.github.io/fantasy-roleplay-roster/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
