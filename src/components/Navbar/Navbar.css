@@ -9,7 +9,10 @@
 
 /* NAME */
 .Navbar .character-name {
-    color: var(--font-color-default-highlight)
+    display: flex;
+    color: var(--font-color-default-highlight);
+
+    align-items: center;
 }
 
 .Navbar .character-name input {
@@ -20,6 +23,7 @@
     color: var(--font-color-default-highlight);
     width: 90%;
     transition: 0.5s;
+
 }
 
 .Navbar .character-name input:focus {
@@ -115,6 +119,20 @@
 .Navbar .level-section .character-level .label span {
     font-size: 48px;
 }
+
+/* BACKGROUND */
+
+.CharacterAvatar svg {
+    cursor: pointer;
+    transition: 0.5s;
+    padding-top: 10px;
+}
+
+.CharacterAvatar svg:hover {
+    color: var(--highlight-color-brown-faint);
+}
+
+
 
 /* mobile test */
 

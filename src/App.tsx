@@ -1,14 +1,16 @@
+import './App.css'
 import Character from './pages/Character/Character';
 import Navbar from './components/Navbar/Navbar';
-import background from './assets/young_rathdiin.jpg';
-// import background_b from './assets/bash1.png';
-import './App.css'
+import useNavbarStore from './store/NavbarStore';
 
 
 function App() {
+
+  const characterBackground = useNavbarStore((state) => state.characterBackground);
+
   return (
     <div className="App">
-      <div className="app-bg" style={{ backgroundImage: `url(${background})` }} />
+      <div className="app-bg" style={{ backgroundImage: `url(${characterBackground})` }} />
       <div className="app-content">
         <Navbar />
         <Character />

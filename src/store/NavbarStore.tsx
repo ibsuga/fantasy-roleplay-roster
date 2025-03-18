@@ -3,8 +3,10 @@ import { create } from 'zustand';
 
 type NavbarStore = {
     characterName: string,
+    characterBackground: string,
     characterExperience: { level: number, currentExp: number, startingExp: number, nextLevelExp: number, proficiencyBonus: number },
     updateCharacterName: (name: string) => void,
+    updateCharacterBackground: (url: string) => void;
     updateCharacterExperience: (experience: number) => void,
 }
 
@@ -46,6 +48,7 @@ const initialExperienceValue = {
 
 const useNavbarStore = create<NavbarStore>((set) => ({
     characterName: localStorage.getItem('CharacterName') ? JSON.parse(localStorage.getItem('CharacterName') || '') : '',
+    characterBackground: localStorage.getItem('CharacterBackground') ? JSON.parse(localStorage.getItem('CharacterBackground') || '') : '',
     characterExperience: {
         level: localStorage.getItem('PlayerExperience') ? JSON.parse(localStorage.getItem('PlayerExperience') || '').level : initialExperienceValue.level,
         currentExp: localStorage.getItem('PlayerExperience') ? JSON.parse(localStorage.getItem('PlayerExperience') || '').currentExp : initialExperienceValue.currentExp,
@@ -53,19 +56,18 @@ const useNavbarStore = create<NavbarStore>((set) => ({
         nextLevelExp: localStorage.getItem('PlayerExperience') ? JSON.parse(localStorage.getItem('PlayerExperience') || '').nextLevelExp : initialExperienceValue.nextLevelExp,
         proficiencyBonus: localStorage.getItem('PlayerExperience') ? JSON.parse(localStorage.getItem('PlayerExperience') || '').proficiencyBonus : initialExperienceValue.proficiencyBonus,
     },
-
     updateCharacterName: (name) => set(() => {
         localStorage.setItem('CharacterName', JSON.stringify(name));
         return { characterName: name };
     }),
-
+    updateCharacterBackground: (url) => set(() => {
+        localStorage.setItem('CharacterBackground', JSON.stringify(url));
+        return { characterBackground: url };
+    }),
     updateCharacterExperience: (experience) => set((state) => {
         let characterExperience = { ...state.characterExperience };
-
         const maxLevel = Object.entries(expTable).length;
-
         let lvl = 1;
-
         do {
             characterExperience = {
                 level: lvl,
@@ -76,36 +78,6 @@ const useNavbarStore = create<NavbarStore>((set) => ({
             };
             lvl++;
         } while (experience >= expTable[lvl]?.experience && lvl <= maxLevel);
-
-
-        // for (let lvl = 1; lvl <= maxLevel; lvl++) {
-
-        //     const currentLevel = expTable[lvl];
-        //     const nextLevel = expTable[lvl + 1] || null;
-
-        //     if (lvl === maxLevel || !nextLevel) {
-        //         characterExperience = {
-        //             level: 20,
-        //             currentExp: 355000,
-        //             startingExp: 355000,
-        //             nextLevelExp: 355000,
-        //             proficiencyBonus: 6
-        //         }
-        //         break;
-        //     }
-
-        //     if (experience >= currentLevel.experience && experience < nextLevel.experience) {
-        //         characterExperience = {
-        //             level: lvl,
-        //             currentExp: experience,
-        //             startingExp: currentLevel.experience,
-        //             nextLevelExp: nextLevel.experience,
-        //             proficiencyBonus: currentLevel.proficiencyBonus,
-        //         }
-        //         break;
-        //     }
-        // }
-
         localStorage.setItem('PlayerExperience', JSON.stringify(characterExperience));
         return { characterExperience: characterExperience }
     }),

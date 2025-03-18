@@ -1,5 +1,6 @@
 import './Navbar.css';
 import useNavbarStore from '../../store/NavbarStore';
+import CharacterAvatar from './components/CharacterAvatar';
 
 
 const Navbar = () => {
@@ -19,6 +20,7 @@ const Navbar = () => {
     return (
         <div className='Navbar'>
             <div className='character-name'>
+                <CharacterAvatar />
                 <div className="character-name-shadow">{characterName}</div>
                 <input type="text" placeholder='Adventurer name...' value={characterName} onChange={(e) => updateCharacterName(e.target.value)} />
             </div>
