@@ -10,6 +10,7 @@
 /* NAME */
 .Navbar .character-name {
     display: flex;
+    gap: 0.5em;
     color: var(--font-color-default-highlight);
 
     align-items: center;
